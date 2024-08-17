@@ -1,0 +1,102 @@
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2b2b2b;
+}
+
+.node {
+  position: absolute;
+  background-color: #4CAF50;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+}
+
+.central {
+  z-index: 2;
+}
+
+.top-left {
+  top: 10%;
+  left: 10%;
+}
+
+.top-right {
+  top: 10%;
+  right: 10%;
+}
+
+.middle-right {
+  top: 50%;
+  right: 10%;
+  transform: translateY(-50%);
+}
+
+.bottom-right {
+  bottom: 10%;
+  right: 10%;
+}
+
+.bottom-center {
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bottom-left {
+  bottom: 10%;
+  left: 10%;
+}
+
+.arrow {
+  position: absolute;
+  width: 2px;
+  background-color: white;
+}
+
+.arrow-top-left {
+  top: 20%;
+  left: 20%;
+  height: 150px;
+  transform: rotate(135deg);
+}
+
+.arrow-top-right {
+  top: 20%;
+  right: 20%;
+  height: 150px;
+  transform: rotate(-135deg);
+}
+
+.arrow-middle-right {
+  top: 50%;
+  right: 20%;
+  height: 150px;
+  transform: rotate(-90deg);
+}
+
+.arrow-bottom-right {
+  bottom: 20%;
+  right: 20%;
+  height: 150px;
+  transform: rotate(-45deg);
+}
+
+.arrow-bottom-center {
+  bottom: 20%;
+  left: 50%;
+  height: 150px;
+  transform: translateX(-50%);
+}
+
+.arrow-bottom-left {
+  bottom: 20%;
+  left: 20%;
+  height: 150px;
+  transform: rotate(45deg);
+}
