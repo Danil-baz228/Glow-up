@@ -1,0 +1,88 @@
+.footer {
+    background-color: #f8f9fa;
+    padding: 40px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    border-top: 1px solid #e7e7e7;
+  }
+  
+  .footer-logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .footer-logo-img {
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  .footer-logo-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .footer-section {
+    flex: 1;
+    margin-left: 20px;
+  }
+  
+  .footer-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-section li {
+    margin-bottom: 10px;
+  }
+  
+  .footer-section a {
+    text-decoration: none;
+    color: #666;
+    font-size: 16px;
+  }
+  
+  .footer-section a:hover {
+    color: #007bff;
+  }
+  
+  .footer-icons {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .footer-icons a {
+    text-decoration: none;
+    color: #000;
+    font-size: 24px;
+    margin-right: 15px;
+  }
+  .footer-icons img {
+    height: 30px;
+    margin-right: 15px;
+  }
+  .footer-icons a:hover {
+    color: #007bff;
+  }
+  
+  .footer-payment {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .footer-payment img {
+    height: 30px;
+    margin-right: 15px;
+  }
+

@@ -1,32 +1,36 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import MainLayout from './layouts/MainLayout'; 
-import MainPage from './components/MainPage';
+import MainLayout from './layouts/MainLayout';
+import HomePage from './components/HomePage';  
 import ServiceCatalog from './components/ServiceCatalog';
 import Statistics from './components/Statistics';
 import Reviews from './components/Reviews';
 import QuestionsAnswers from './components/QuestionsAnswers';
 import CurrentTopics from './components/CurrentTopics';
 import AdditionalInfo from './components/AdditionalInfo';
-import ErrorPage from './components/ErrorPage'; 
-import AuthPage from './components/AuthPage'; 
+import ErrorPage from './components/ErrorPage';
+import AuthPage from './components/AuthPage';
+import { AuthProvider } from './components/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const App = () => {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<MainLayout />}>
-          <Route index element={<MainPage />} />
-          <Route path="serviceCatalog" element={<ServiceCatalog />} />
-          <Route path="statistics" element={<Statistics />} />
-          <Route path="reviews" element={<Reviews />} />
-          <Route path="questionsAnswers" element={<QuestionsAnswers />} />
-          <Route path="currentTopics" element={<CurrentTopics />} />
-          <Route path="additionalInfo" element={<AdditionalInfo />} />
-          <Route path="*" element={<ErrorPage />} />
-        </Route>
-        <Route path="/login" element={<AuthPage />} />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<ProtectedRoute><HomePage /></ProtectedRoute>} /> {}
+            <Route path="serviceCatalog" element={<ProtectedRoute><ServiceCatalog /></ProtectedRoute>} />
+            <Route path="statistics" element={<ProtectedRoute><Statistics /></ProtectedRoute>} />
+            <Route path="reviews" element={<ProtectedRoute><Reviews /></ProtectedRoute>} />
+            <Route path="questionsAnswers" element={<ProtectedRoute><QuestionsAnswers /></ProtectedRoute>} />
+            <Route path="currentTopics" element={<ProtectedRoute><CurrentTopics /></ProtectedRoute>} />
+            <Route path="additionalInfo" element={<ProtectedRoute><AdditionalInfo /></ProtectedRoute>} />
+            <Route path="*" element={<ErrorPage />} />
+          </Route>
+          <Route path="/login" element={<AuthPage />} />
+        </Routes>
+      </AuthProvider>
     </Router>
   );
 };

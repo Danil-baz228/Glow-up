@@ -1,0 +1,85 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header-logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header-logo-img {
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  .header-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .header-nav {
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-list {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-list li {
+    margin: 0 15px;
+  }
+  
+  .nav-list a {
+    text-decoration: none;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .nav-list a:hover {
+    color: #007bff;
+  }
+  
+  .header-auth {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header-auth span {
+    margin-right: 15px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .header-auth button {
+    padding: 5px 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .header-auth button:hover {
+    background-color: #0056b3;
+  }
+  
+  .header-auth a {
+    font-size: 16px;
+    color: #007bff;
+  }
+  
+  .header-auth a:hover {
+    color: #0056b3;
+  }
+  
