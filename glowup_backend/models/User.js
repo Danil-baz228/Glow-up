@@ -21,11 +21,11 @@ const User = sequelize.define('User', {
     allowNull: false
   },
   created_at: {
-    type: DataTypes.TIMESTAMP,
+    type: DataTypes.DATE,
     defaultValue: DataTypes.NOW
   },
   last_login: {
-    type: DataTypes.TIMESTAMP
+    type: DataTypes.DATE
   }
 }, {
   timestamps: false,

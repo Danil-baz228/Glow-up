@@ -1,6 +1,5 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db.config');
-const Service = require('./Service');
 
 const Appointment = sequelize.define('Appointment', {
   appointment_id: {
@@ -9,11 +8,11 @@ const Appointment = sequelize.define('Appointment', {
     autoIncrement: true
   },
   date_start: {
-    type: DataTypes.TIMESTAMP,
+    type: DataTypes.DATE,
     allowNull: false
   },
   date_end: {
-    type: DataTypes.TIMESTAMP,
+    type: DataTypes.DATE,
     allowNull: false
   },
   status: {
@@ -31,19 +30,6 @@ const Appointment = sequelize.define('Appointment', {
 }, {
   timestamps: false,
   tableName: 'appointment'
-});
-
-// Define many-to-many relationship with Service
-Appointment.belongsToMany(Service, {
-  through: 'appointment_service',
-  foreignKey: 'appointment_id',
-  otherKey: 'service_id'
-});
-
-Service.belongsToMany(Appointment, {
-  through: 'appointment_service',
-  foreignKey: 'service_id',
-  otherKey: 'appointment_id'
 });
 
 module.exports = Appointment;
