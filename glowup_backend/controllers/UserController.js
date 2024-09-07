@@ -1,6 +1,6 @@
 const User = require('../models/User');
 
-const createUser = async (req, res) => {
+const createUser = async (req, res) => { // TODO: secure password hashing
     try {
         const { email, password, role } = req.body;
         const newUser = await User.create({ email, password, role });
