@@ -12,7 +12,6 @@ import ErrorPage from './components/ErrorPage';
 import AuthPage from './components/AuthPage';
 import { AuthProvider } from './components/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
-import AuthComponent from "./components/AuthComponent";
 
 const App = () => {
   return (
@@ -27,7 +26,6 @@ const App = () => {
             <Route path="questionsAnswers" element={<ProtectedRoute><QuestionsAnswers /></ProtectedRoute>} />
             <Route path="currentTopics" element={<ProtectedRoute><CurrentTopics /></ProtectedRoute>} />
             <Route path="additionalInfo" element={<ProtectedRoute><AdditionalInfo /></ProtectedRoute>} />
-            <Route path="dev" element={<AuthComponent />} />
             <Route path="*" element={<ErrorPage />} />
           </Route>
           <Route path="/login" element={<AuthPage />} />
