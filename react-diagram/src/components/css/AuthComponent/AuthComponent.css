@@ -82,11 +82,33 @@
     border: 0;
     font-size: 14px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-
 }
 
-.auth-form input[type="checkbox"] {
-    margin-right: 10px;
+.auth-form input::placeholder {
+    color: #787878;
+}
+
+.auth-form input:focus {
+    outline: none;
+}
+
+.password-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-input-wrapper input {
+    flex: 1;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
 }
 
 .auth-form form button {
@@ -105,28 +127,61 @@
     background-color: #333;
 }
 
+.passwordRecoveryBox p {
+    padding: 0;
+    margin: 0;
+    color: #787878;
+    margin-bottom: 20px;
+}
+
+.passwordRecoveryBox h2{
+    font-size: 18px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.passwordRecoveryBox form input{
+    margin-bottom: 40px;
+}
+
 .auth-footer {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
-.auth-footer p {
-    margin: 5px 0;
-}
-
-.auth-footer span {
-    color: #007bff;
+.passwordRecoveryLabel{
+    font-size: 14px;
+    margin-bottom: 10px;
     cursor: pointer;
-}
-
-.auth-footer span:hover {
     text-decoration: underline;
 }
 
-.auth-footer p:last-child {
-    margin-top: 15px;
-    font-weight: bold;
+.passwordRecoveryLabel:hover{
+    color: #6495ED;
 }
+
+.continueWith{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.continueWith p{
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.continueWith .socialIcons{
+    display: flex;
+    align-items: center;
+}
+
+.continueWith .socialIcons img{
+    width: 24px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
 
 .checkbox-wrapper-4{
     display: flex;
@@ -146,10 +201,9 @@
     border-radius: 6px;
     overflow: hidden;
     transition: all 0.2s ease;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
 }
 
 .checkbox-wrapper-4 .cbx:not(:last-child) {
@@ -168,13 +222,15 @@
 
 .checkbox-wrapper-4 .cbx span:first-child {
     position: relative;
-    width: 25px;
+    width: 18px;
     height: 18px;
     border-radius: 4px;
     transform: scale(1);
     border: 1px solid #cccfdb;
     transition: all 0.2s ease;
     box-shadow: 0 1px 1px rgba(0, 16, 75, 0.05);
+    flex-shrink: 0;
+    margin-right: 8px;
 }
 
 .checkbox-wrapper-4 .cbx span:first-child svg {
