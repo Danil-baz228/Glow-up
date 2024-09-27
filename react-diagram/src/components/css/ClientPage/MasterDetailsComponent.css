@@ -1,0 +1,11 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.masterDetailsBox{
+    width: 1300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
