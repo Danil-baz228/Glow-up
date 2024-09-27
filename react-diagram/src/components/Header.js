@@ -2,7 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../components/AuthContext';
 import logo from './img/Logo.png'; 
+import logoSmall from './img/logoSmall.png'; 
 import './css/Header.css'; 
+import { FaSearch, FaUser } from 'react-icons/fa'; 
 
 const Header = () => {
   const { user, logout } = useAuth();
@@ -10,29 +12,22 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header-logo">
-        <img src={logo} alt="Beauty Unite Logo" className="header-logo-img" />
-        <h1 className="header-title">Glow up</h1>
+        
+      <Link to="/"><img src={logoSmall} alt="Service 1" /></Link>
       </div>
       <nav className="header-nav">
         <ul className="nav-list">
-          <li><Link to="/">Main Page</Link></li>
-          <li><Link to="/serviceCatalog">Service Catalog</Link></li>
-          <li><Link to="/statistics">Statistics</Link></li>
-          <li><Link to="/reviews">Reviews</Link></li>
-          <li><Link to="/questionsAnswers">Questions & Answers</Link></li>
-          <li><Link to="/currentTopics">Current Topics</Link></li>
-          <li><Link to="/additionalInfo">Additional Info</Link></li>
+          <li><Link to="/serviceCatalog">Каталог послуг</Link></li>
+          <li><Link to="/masters">Майстри</Link></li>
+          <li><Link to="/CurrentTopics">Про нас</Link></li>
         </ul>
       </nav>
-      <div className="header-auth">
-        {user ? (
-          <div>
-            <span>Welcome, {user}!</span>
-            <button onClick={logout}>Logout</button>
-          </div>
-        ) : (
-          <Link to="/login">Login</Link>
-        )}
+      <div className="header-icons">
+        <FaSearch className="icon" />
+        <div className="language-selector">
+          <span>UA</span>
+          <FaUser className="icon" />
+        </div>
       </div>
     </header>
   );
