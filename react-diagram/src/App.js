@@ -39,7 +39,6 @@ const App = () => {
               <Route path="discounts" element={<ClientDiscountsPage />} />
             </Route>
             <Route path="*" element={<ErrorPage />} />
-
           </Route>
           <Route path="/login" element={<AuthPage />} />
         </Routes>
