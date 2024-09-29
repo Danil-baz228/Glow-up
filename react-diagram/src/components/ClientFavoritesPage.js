@@ -62,7 +62,6 @@ const ClientFavoritesPage = () => {
         }
     ]);
 
-
     return (
         <div className={"clientFavoritesPage"}>
             {

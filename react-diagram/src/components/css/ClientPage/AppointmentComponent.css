@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.appointmentBox{
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr 2fr 3fr 3fr 1fr;
+    align-items: center;
+    margin-bottom: 25px;
+    border-radius: 20px;
+    background-color: #D9D9D9;
+    padding: 5px 20px;
+}
+
+.appointmentBox img{
+    grid-column: 1;
+    width: 50px;
+    height: 50px;
+}
+
+.appointmentDate{
+    grid-column: 2;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.masterName{
+    grid-column: 3;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.appointmentRating{
+    grid-column: 4;
+}
+
+.masterMale{
+    color: #7550FF;
+}
+.masterFemale{
+    color: #FF609C;
+}
+
+.masterOccupation{
+    grid-column: 5;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.appointmentCategory{
+    grid-column: 6;
+    font-size: 16px;
+    font-weight: 400;
+    color: #787878;
+}
+
+.appointmentPrice{
+    grid-column: 7;
+    font-size: 16px;
+    font-weight: 600;
+}
