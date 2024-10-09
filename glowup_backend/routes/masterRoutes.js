@@ -1,7 +1,7 @@
 const express = require('express');
 const { getAllMasters, createMaster, deleteMaster, getMasterById, updateMaster, uploadImages, handleImageUpload } = require('../controllers/masterController');
-const Master = require('C:/Programming projects/Диплом React/Glow-up/glowup_backend/models/Master.js');
-const sequelize = require('C:/Programming projects/Диплом React/Glow-up/glowup_backend/config/db.config.js')
+const Master = require('../models/Master.js');
+const sequelize = require('../config/db.config.js')
 
 const router = express.Router();
 
