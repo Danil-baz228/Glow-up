@@ -2,6 +2,7 @@ import React from 'react';
 import './css/HomePage/HomePage.css';
 import phMaster from './img/master.jpg'; 
 import './css/HomePage/Reviews.css';
+import Specialists from './Specialists.js';  
 const HomePage = () => {
   const reviews = [
     {
@@ -90,7 +91,7 @@ const HomePage = () => {
         </div>
         <button className="select-master-btn">Підбрати майстра</button>
       </section>
-      
+      <Specialists /> 
       <section className="how-it-works">
         <h2>Як працює BEAUTY UNITE</h2>
         <ol>
