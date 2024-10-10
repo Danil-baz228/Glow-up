@@ -37,8 +37,7 @@ app.use('/api/salons', salonRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/sales', saleRoutes);
 
-// Setting up a static directory for uploading images
-app.use(express.static(path.join(__dirname, 'react-diagram/public')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 const sequelize = require('./config/db.config');  // Import Sequelize config
 

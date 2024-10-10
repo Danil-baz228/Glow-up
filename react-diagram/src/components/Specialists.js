@@ -40,7 +40,7 @@ const Specialists = () => {
   };
 
   const getImagePath = (avatarUrl) => {
-    return avatarUrl ? avatarUrl.replace(/^react-diagram\/public\//, '/') : '';
+    return avatarUrl ? `/images/masters/${avatarUrl}` : '';
   };
 
   return (
@@ -60,7 +60,9 @@ const Specialists = () => {
                       console.error(`Failed to load image: ${e.target.src}`);
                       e.target.onerror = null;
                       e.target.style.display = 'none';
-                      e.target.nextSibling.style.display = 'flex';
+                      if (e.target.nextElementSibling) {
+                        e.target.nextElementSibling.style.display = 'flex';
+                      }
                     }}
                   />
                 ) : (
