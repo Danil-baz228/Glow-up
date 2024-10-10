@@ -4,6 +4,7 @@ import './css/HomePage/HomePage.css';
 import placeholder from './img/placeholder.jpg'; 
 import placeholder1 from './img/placeholder.png'; 
 import './css/HomePage/Reviews.css';
+import Specialists from './Specialists.js';
 
 const HomePage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -32,7 +33,6 @@ const HomePage = () => {
         </div>
       </header>
 
-      
       <div className={`sticky-header ${isScrolled ? 'fixed' : ''}`}>
         <Header />
       </div>
@@ -65,6 +65,8 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+
+      <Specialists />
 
       <section className="discount-section">
         <h2>Отримайте <span className="highlight">15% знижку</span> на перше замовлення</h2>

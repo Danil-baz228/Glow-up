@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, ENUM } = require('sequelize');
 const sequelize = require('../config/db.config');
 
 const Master = sequelize.define('Master', {
@@ -9,11 +9,11 @@ const Master = sequelize.define('Master', {
   },
   email: {
     type: DataTypes.STRING(255),
-    allowNull: false,
+    allowNull: false, 
     unique: true
   },
   phone: {
-    type: DataTypes.STRING(255),
+    type: DataTypes.STRING(20),
     allowNull: false
   },
   last_name: {
@@ -27,6 +27,10 @@ const Master = sequelize.define('Master', {
   middle_name: {
     type: DataTypes.STRING(255)
   },
+  gender: {
+    type: DataTypes.ENUM('male', 'female', 'other'),
+    allowNull:false
+  },
   date_of_birth: {
     type: DataTypes.DATE
   },
@@ -37,6 +41,12 @@ const Master = sequelize.define('Master', {
   experience: {
     type: DataTypes.DATE,
     allowNull: false
+  },
+  avatar_url: {
+    type: DataTypes.STRING(255)
+  },
+  background_url: {
+    type: DataTypes.STRING(255)
   },
   user_id: {
     type: DataTypes.INTEGER,
