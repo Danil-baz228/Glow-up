@@ -3,10 +3,11 @@ const mysql = require('mysql2');
 const cors = require('cors');
 const path = require('path');
 const jwt = require('jsonwebtoken');
+const multer = require('multer');
 require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 const userRoutes = require('./routes/userRoutes');
 const clientRoutes = require('./routes/clientRoutes');
@@ -19,33 +20,42 @@ const salonRoutes = require('./routes/salonRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 const saleRoutes = require('./routes/saleRoutes');
 
-app.use(cors());
-app.use(express.json());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 
-app.use('/users', userRoutes);
-app.use('/clients', clientRoutes);
-app.use('/masters', masterRoutes);
-app.use('/occupations', occupationRoutes);
-app.use('/services', serviceRoutes);
-app.use('/appointments', appointmentRoutes);
-app.use('/cities', cityRoutes);
-app.use('/salons', salonRoutes);
-app.use('/reviews', reviewRoutes);
-app.use('/sales', saleRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/clients', clientRoutes);
+app.use('/api/masters', masterRoutes);
+app.use('/api/occupations', occupationRoutes);
+app.use('/api/services', serviceRoutes);
+app.use('/api/appointments', appointmentRoutes);
+app.use('/api/cities', cityRoutes);
+app.use('/api/salons', salonRoutes);
+app.use('/api/reviews', reviewRoutes);
+app.use('/api/sales', saleRoutes);
 
-const db = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
-});
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
-db.connect((err) => {
-    if (err) {
-        throw err;
-    }
-    console.log('Connected to database');
-});
+const sequelize = require('./config/db.config');  // Import Sequelize config
+
+// Import "Master" table from bd
+const Master = require('./models/Master');
+
+sequelize.authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+
+    return sequelize.sync({ force: false });
+  })
+  .then(() => {
+    console.log('Database & tables synced!');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
