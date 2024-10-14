@@ -1,16 +1,35 @@
 import React, {useState} from 'react';
+import axios from "axios";
 import './css/AuthComponent/AuthComponent.css';
 import appleIcon from './img/AuthController/icon_apple.png';
 import facebookIcon from './img/AuthController/icon_facebook.png';
 import googleIcon from './img/AuthController/icon_google.png';
 import emailIcon from './img/AuthController/icon_email.png';
 import eyeIcon from './img/AuthController/icon_eye.png';
+import useSignIn from "react-auth-kit/hooks/useSignIn";
+import useAuthUser from "react-auth-kit/hooks/useAuthUser";
+
 
 
 const AuthComponent = ({setIsAuthModalOpen}) => {
     const [authState, setAuthState] = useState('socialNetworksRegistration'); // Can be 'signup', 'login', or 'passwordRecovery'
     const [isModalOpen, setIsModalOpen] = useState(true);
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const [formData, setFormData] = useState({
+        first_name: '',
+        last_name: '',
+        phone: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        date_of_birth: '',
+        role: 'Client',
+    });
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const signIn = useSignIn();
 
     const togglePasswordVisibility = () => {
         setIsPasswordVisible(!isPasswordVisible);
@@ -20,6 +39,60 @@ const AuthComponent = ({setIsAuthModalOpen}) => {
         setIsModalOpen(false);
         setIsAuthModalOpen(false);
     }
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (formData.password !== formData.confirmPassword) {
+            alert('Passwords do not match');
+            return;
+        }
+
+        try {
+            // Send the registration data to your backend
+            const response = await axios.post('http://localhost:5000/auth/register', formData);  // Adjust the endpoint accordingly
+            console.log('Registration successful:', response.data);
+            // Optionally, close the modal or do something after successful registration
+            modalClose();
+        } catch (error) {
+            console.error('Error registering user:', error);
+            alert('Error registering user');
+        }
+    };
+
+    const handleLoginSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            console.log(email, password)
+            const response = await axios.post('http://localhost:5000/auth/login', { login, password });
+            if (response.status === 200 && response.data.token) {
+                console.log(response.data);
+                const isSignInSuccess = signIn({
+                    auth: {
+                        token: response.data.token,
+                        type: 'Bearer'
+                    },
+                    userState: {
+                        username: response.data.username,
+                        role: response.data.role
+                    }
+                });
+                if (isSignInSuccess) {
+                    console.log("User signed in successfully");
+                } else {
+                    console.log("Sign in failed");
+                }
+            }
+        } catch (error) {
+            console.error("Error during authentication:", error);
+        }
+    };
+
 
     const renderForm = () => {
         switch (authState) {
@@ -81,24 +154,73 @@ const AuthComponent = ({setIsAuthModalOpen}) => {
                             <h2 className={"inactive"} onClick={() => setAuthState("login")}>Log in</h2>
                             <h2>Sign up</h2>
                         </div>
-                        <form>
-                            <input type="text" placeholder="First Name"/>
-                            <input type="text" placeholder="Last Name"/>
-                            <input type="tel" placeholder="Phone"/>
-                            <input type="email" placeholder="E-mail*" required/>
-                            <input type="date" placeholder="Date of birth"/>
+                        <form onSubmit={handleSubmit}>
+                            <input
+                                type="text"
+                                name="first_name"
+                                placeholder="First Name"
+                                value={formData.first_name}
+                                onChange={handleInputChange}
+                            />
+                            <input
+                                type="text"
+                                name="last_name"
+                                placeholder="Last Name"
+                                value={formData.last_name}
+                                onChange={handleInputChange}
+                            />
+                            <input
+                                type="tel"
+                                name="phone"
+                                placeholder="Phone"
+                                value={formData.phone}
+                                onChange={handleInputChange}
+                            />
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="E-mail*"
+                                value={formData.email}
+                                onChange={handleInputChange}
+                                required
+                            />
+                            <input
+                                type="date"
+                                name="date_of_birth"
+                                placeholder="Date of birth"
+                                onChange={handleInputChange}
+                                value={formData.date_of_birth}
+                            />
                             <div className="password-input-wrapper">
-                                <input type={isPasswordVisible ? "text" : "password"} placeholder="Password*" required/>
-                                <img src={eyeIcon} alt="Show Password" onClick={togglePasswordVisibility}
-                                     className="eye-icon"/>
+                                <input
+                                    type={isPasswordVisible ? "text" : "password"}
+                                    name="password"
+                                    placeholder="Password*"
+                                    value={formData.password}
+                                    onChange={handleInputChange}
+                                    required
+                                />
+                                <img
+                                    src={eyeIcon}
+                                    alt="Show Password"
+                                    onClick={togglePasswordVisibility}
+                                    className="eye-icon"
+                                />
                             </div>
-                            <input type="password" placeholder="Password confirmation*" required/>
+                            <input
+                                type="password"
+                                name="confirmPassword"
+                                placeholder="Password confirmation*"
+                                value={formData.confirmPassword}
+                                onChange={handleInputChange}
+                                required
+                            />
                             <div className="checkbox-wrapper-4">
-                                <input className="inp-cbx" id="terms" type="checkbox" required/>
+                                <input className="inp-cbx" id="terms" type="checkbox" required />
                                 <label className="cbx" htmlFor="terms">
                                     <span>
                                         <svg width="12px" height="10px">
-                                        <use xlinkHref="#check-4"></use>
+                                            <use xlinkHref="#check-4"></use>
                                         </svg>
                                     </span>
                                     <span>I have read and agree to the terms and conditions of the site </span>
@@ -109,6 +231,16 @@ const AuthComponent = ({setIsAuthModalOpen}) => {
                                     </symbol>
                                 </svg>
                             </div>
+                            <h2 className={"roleSelectionLabel"}>Continue as:</h2>
+                            <select
+                                name="role"
+                                value={formData.role}
+                                onChange={handleInputChange}
+                                className="auth-select"
+                            >
+                                <option value="Client">Client</option>
+                                <option value="Master">Master</option>
+                            </select>
                             <button type="submit">Registration</button>
                         </form>
                     </div>
@@ -117,12 +249,18 @@ const AuthComponent = ({setIsAuthModalOpen}) => {
                 return (
                     <div>
                         <div className="auth-header">
-                            <h2>Log in</h2>
+                        <h2>Log in</h2>
                             <h2 className={"inactive"} onClick={() => setAuthState("signup")}>Sign up</h2>
                         </div>
-                        <form>
-                            <input type="email" placeholder="E-mail*" required/>
-                            <input type="password" placeholder="Password*" required/>
+                        <form onSubmit={handleLoginSubmit}>
+                            <input type="email" placeholder="E-mail*" required
+                                      value={email}
+                                      onChange={(e) => setEmail(e.target.value)}
+                            />
+                            <input type="password" placeholder="Password*" required
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                            />
                             <div className="checkbox-wrapper-4">
                                 <input className="inp-cbx" id="terms" type="checkbox" required/>
                                 <label className="cbx" htmlFor="terms">
