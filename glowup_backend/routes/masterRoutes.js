@@ -1,5 +1,8 @@
 const express = require('express');
-const { getAllMasters, createMaster, deleteMaster, getMasterById, updateMaster, uploadImages, handleImageUpload } = require('../controllers/masterController');
+const { getAllMasters, createMaster, deleteMaster, getMasterById, updateMaster, uploadImages, handleImageUpload,
+    addSalon,
+    removeSalon
+} = require('../controllers/masterController');
 const Master = require('../models/Master.js');
 const sequelize = require('../config/db.config.js')
 
@@ -33,6 +36,8 @@ router.post('/', createMaster);
 router.delete('/:id', deleteMaster);
 router.get('/:id', getMasterById);
 router.put('/:id', updateMaster);
+router.post('/:masterId/salon', addSalon);
+router.delete('/:masterId/salon', removeSalon);
 
 router.post('/:id/upload-images', uploadImages, handleImageUpload);
 

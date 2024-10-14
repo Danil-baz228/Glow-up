@@ -1,4 +1,4 @@
-const Master = require('../models/Master');
+const {Master, Salon} = require('../models/Relations');
 const path = require('path');
 const fs = require('fs');
 const multer = require('multer');
@@ -122,6 +122,54 @@ const deleteMaster = async (req, res) => {
     }
 }
 
+const addSalon = async (req, res) => {
+    try {
+        const { masterId } = req.params;
+        const { salon_id } = req.body;
+
+        const master = await Master.findByPk(masterId);
+        const salon = await Salon.findByPk(salon_id);
+
+        if (!master) {
+            return res.status(404).json({ message: 'Master not found' });
+        }
+
+        if (!salon) {
+            return res.status(404).json({ message: 'Salon not found' });
+        }
+
+        await master.addSalon(salon);
+
+        res.status(200).json({ message: 'Salon added successfully' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+const removeSalon = async (req, res) => {
+    try {
+        const { masterId } = req.params;
+        const { salon_id } = req.body;
+
+        const master = await Master.findByPk(masterId);
+        const salon = await Salon.findByPk(salon_id);
+
+        if (!master) {
+            return res.status(404).json({ message: 'Master not found' });
+        }
+
+        if (!salon) {
+            return res.status(404).json({ message: 'Salon not found' });
+        }
+
+        await master.removeSalon(salon);
+
+        res.status(200).json({ message: 'Salon removed successfully' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 module.exports = {
     getAllMasters,
     getMasterById,
@@ -129,5 +177,7 @@ module.exports = {
     updateMaster,
     deleteMaster,
     uploadImages,
-    handleImageUpload
+    handleImageUpload,
+    addSalon,
+    removeSalon
 }

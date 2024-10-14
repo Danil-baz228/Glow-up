@@ -16,6 +16,10 @@ const Salon = sequelize.define('Salon', {
     type: DataTypes.STRING(255),
     allowNull: false
   },
+  zip_code: {
+    type: DataTypes.STRING(255),
+    allowNull: false
+  },
   city_id: {
     type: DataTypes.INTEGER,
     allowNull: false,

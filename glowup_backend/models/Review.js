@@ -26,12 +26,12 @@ const Review = sequelize.define('Review', {
       key: 'client_id'
     }
   },
-  master_id: {
+  appointment_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'master',
-      key: 'master_id'
+      model: 'appointment',
+      key: 'appointment_id'
     }
   }
 }, {
