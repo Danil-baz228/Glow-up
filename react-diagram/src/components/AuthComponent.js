@@ -7,13 +7,18 @@ import emailIcon from './img/AuthController/icon_email.png';
 import eyeIcon from './img/AuthController/icon_eye.png';
 
 
-const AuthComponent = () => {
+const AuthComponent = ({setIsAuthModalOpen}) => {
     const [authState, setAuthState] = useState('socialNetworksRegistration'); // Can be 'signup', 'login', or 'passwordRecovery'
     const [isModalOpen, setIsModalOpen] = useState(true);
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
     const togglePasswordVisibility = () => {
         setIsPasswordVisible(!isPasswordVisible);
+    }
+
+    const modalClose = () => {
+        setIsModalOpen(false);
+        setIsAuthModalOpen(false);
     }
 
     const renderForm = () => {
@@ -156,15 +161,17 @@ const AuthComponent = () => {
     };
 
     return isModalOpen ? (
-        <div className="auth-container">
-            <div onClick={() => setIsModalOpen(false)} className="close-btn">×</div>
+        <div className="auth-modal">
+            <div className="black-cover" onClick={() => modalClose()}></div>
+            <div className="auth-container">
+                <div onClick={() => modalClose()} className="close-btn">×</div>
 
-            <div className="auth-form">
-                {renderForm()}
-            </div>
+                <div className="auth-form">
+                    {renderForm()}
+                </div>
 
-            <div className="auth-footer">
-            {
+                <div className="auth-footer">
+                    {
                         authState === 'socialNetworksRegistration' || authState === 'socialNetworksLogin' ? (
                             <div className={"termsInfo"}>By continuing, you agree to the privacy policy</div>
                         ) : authState === 'signup' ? (
@@ -180,7 +187,8 @@ const AuthComponent = () => {
                             </>
                         ) : authState === 'login' ? (
                             <>
-                                <div className={"passwordRecoveryLabel"} onClick={() => setAuthState('passwordRecovery')}>
+                                <div className={"passwordRecoveryLabel"}
+                                     onClick={() => setAuthState('passwordRecovery')}>
                                     Forgot Password?
                                 </div>
                                 <div className="continueWith">
@@ -194,9 +202,12 @@ const AuthComponent = () => {
                             </>
                         ) : (
                             <>
-                                <div className={"passwordRecoveryLabel"} onClick={() => setAuthState('signup')}>Return to Sign Up</div>
+                                <div className={"passwordRecoveryLabel"} onClick={() => setAuthState('signup')}>Return
+                                    to Sign Up
+                                </div>
                             </>
                         )}
+                </div>
             </div>
         </div>
     ) : null;

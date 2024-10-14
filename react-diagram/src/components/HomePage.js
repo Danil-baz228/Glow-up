@@ -5,9 +5,11 @@ import placeholder from './img/placeholder.jpg';
 import placeholder1 from './img/placeholder.png'; 
 import './css/HomePage/Reviews.css';
 import Specialists from './Specialists.js';
+import AuthComponent from "./AuthComponent";
 
 const HomePage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +21,10 @@ const HomePage = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  const toggleAuthModal = () => {
+    setIsAuthModalOpen(!isAuthModalOpen);
+  };
 
   return (
     <div className="homepage">
@@ -34,8 +40,12 @@ const HomePage = () => {
       </header>
 
       <div className={`sticky-header ${isScrolled ? 'fixed' : ''}`}>
-        <Header />
+        <Header toggleAuthModal={toggleAuthModal}/>
       </div>
+
+      {isAuthModalOpen && <AuthComponent
+        setIsAuthModalOpen={setIsAuthModalOpen}
+      />}
 
       <section className="statistics-section">
         <div className="stat-item">

@@ -6,7 +6,7 @@ import logoSmall from './img/logoSmall.png';
 import './css/Header.css'; 
 import { FaSearch, FaUser } from 'react-icons/fa'; 
 
-const Header = () => {
+const Header = ({toggleAuthModal}) => {
   const { user, logout } = useAuth();
 
   return (
@@ -26,7 +26,7 @@ const Header = () => {
         <FaSearch className="icon" />
         <div className="language-selector">
           <span>UA</span>
-          <FaUser className="icon" />
+          <FaUser className="icon" onClick={toggleAuthModal}/>
         </div>
       </div>
     </header>

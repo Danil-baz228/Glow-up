@@ -3,7 +3,8 @@ const {createClient} = require('./ClientController');
 const {createMaster} = require('./MasterController');
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
-//TODO: use jwt for authentication
+const jwt = require('jsonwebtoken');
+
 const register = async (req, res) => {
     try{
         const {email, password, role} = req.body;
@@ -15,7 +16,12 @@ const register = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = await createUser({ body: { email, password: hashedPassword, role } }, res);
         if(role === 'client'){
-            await createClient({ body: { email: newUser.email, userId: newUser.id } }, res);
+            await createClient({ body: {
+                email: newUser.email,
+                userId: newUser.id,
+                firstName: req.body.firstName,
+
+            } }, res);
         } else if(role === 'master'){
             await createMaster({ body: { email: newUser.email, userId: newUser.id } }, res);
         }

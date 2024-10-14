@@ -25,7 +25,7 @@ const App = () => {
       <AuthProvider>
         <Routes>
           <Route path="/" element={<MainLayout />}>
-            <Route index element={<ProtectedRoute><HomePage /></ProtectedRoute>} /> {}
+            <Route index element={<HomePage />} /> {}
             <Route path="serviceCatalog" element={<ProtectedRoute><ServiceCatalog /></ProtectedRoute>} />
             <Route path="statistics" element={<ProtectedRoute><Statistics /></ProtectedRoute>} />
             <Route path="reviews" element={<ProtectedRoute><Reviews /></ProtectedRoute>} />

@@ -1,5 +1,27 @@
 /* Styles for the AuthComponent */
 
+.auth-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+.black-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 50% transparent black */
+    z-index: 1; /* Cover should be behind the modal */
+}
+
 .auth-container {
     width: 100%;
     max-width: 350px;
@@ -8,7 +30,8 @@
     padding: 20px;
     border-radius: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    position: relative;
+    position: sticky;
+    z-index: 2;
 }
 
 .auth-header {
