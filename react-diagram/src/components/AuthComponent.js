@@ -69,7 +69,7 @@ const AuthComponent = ({setIsAuthModalOpen}) => {
         e.preventDefault();
         try {
             console.log(email, password)
-            const response = await axios.post('http://localhost:5000/auth/login', { login, password });
+            const response = await axios.post('http://localhost:5000/auth/login', { email, password });
             if (response.status === 200 && response.data.token) {
                 console.log(response.data);
                 const isSignInSuccess = signIn({

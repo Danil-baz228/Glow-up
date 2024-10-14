@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../components/AuthContext';
 import logo from './img/Logo.png'; 
 import logoSmall from './img/logoSmall.png'; 
 import './css/Header.css'; 
@@ -10,12 +9,10 @@ import useAuthUser from 'react-auth-kit/hooks/useAuthUser'
 import useSignOut from "react-auth-kit/hooks/useSignOut";
 
 const Header = ({toggleAuthModal}) => {
-  const { user, logout } = useAuth();
 
     const authUser = useAuthUser();
     const signOut = useSignOut();
 
-    const userName = authUser ? authUser.username : null;
     const handleSignOut = () => {
         signOut();
     };
@@ -40,6 +37,7 @@ const Header = ({toggleAuthModal}) => {
           <span>UA</span>
           <FaUser className="icon" onClick={toggleAuthModal}/>
         </div>
+            <button onClick={handleSignOut}>Sign Out</button>
       </div>
     </header>
   );

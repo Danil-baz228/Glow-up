@@ -10,23 +10,30 @@ import CurrentTopics from './components/CurrentTopics';
 import AdditionalInfo from './components/AdditionalInfo';
 import ErrorPage from './components/ErrorPage';
 import AuthPage from './components/AuthPage';
-import { AuthProvider } from './components/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import ClientLayout from "./layouts/ClientLayout";
 import ClientDetailsPage from "./components/ClientDetailsPage";
 import ClientFavoritesPage from "./components/ClientFavoritesPage";
 import ClientHistoryPage from "./components/ClientHistoryPage";
 import ClientDiscountsPage from "./components/ClientDiscountsPage";
+import AuthProvider from 'react-auth-kit';
+import createStore from "react-auth-kit/createStore";
 
+const store = createStore({
+  authName: '_auth',
+  authType:'cookie',
+  cookieDomain: window.location.hostname,
+  cookieSecure: false
+});
 
 const App = () => {
   return (
+      <AuthProvider store={store}>
     <Router>
-      <AuthProvider>
         <Routes>
           <Route path="/" element={<MainLayout />}>
-            <Route index element={<HomePage />} /> {}
-            <Route path="serviceCatalog" element={<ProtectedRoute><ServiceCatalog /></ProtectedRoute>} />
+            <Route path={""} element={<HomePage />} /> {}
+            <Route path="serviceCatalog" element={<ServiceCatalog />} />
             <Route path="statistics" element={<ProtectedRoute><Statistics /></ProtectedRoute>} />
             <Route path="reviews" element={<ProtectedRoute><Reviews /></ProtectedRoute>} />
             <Route path="questionsAnswers" element={<ProtectedRoute><QuestionsAnswers /></ProtectedRoute>} />
@@ -42,8 +49,8 @@ const App = () => {
           </Route>
           <Route path="/login" element={<AuthPage />} />
         </Routes>
-      </AuthProvider>
     </Router>
+      </AuthProvider>
   );
 };
 
