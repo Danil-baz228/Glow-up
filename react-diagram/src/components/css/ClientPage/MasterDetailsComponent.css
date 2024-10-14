@@ -1,0 +1,150 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.masterDetailsBox{
+    width: 1300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    padding: 40px 0;
+}
+
+.masterDetailsBox .masterImage{
+    width: 310px;
+    height: 310px;
+    border-radius: 50%;
+}
+
+.favoriteButton{
+    color: white;
+    border: 0;
+    border-radius: 8px;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    margin: 0 35px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.favoriteButton img{
+    width: 30px;
+    height: 30px;
+}
+
+.masterInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.masterName{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.masterOccupation{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.masterCategories{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.masterCategory{
+    color: #787878;
+    background-color: #D9D9D9;
+    border-radius: 30px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.masterAdditionalInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.masterRatingBox{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.masterRating{
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.reviewsCount{
+    color: #787878;
+    font-size: 14px;
+}
+
+.masterAddress{
+    display: flex;
+    align-items: center;
+}
+
+.masterAddress .navIcon{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.masterAddress .masterSalon{
+    font-size: 14px;
+    color: #787878;
+    text-decoration: underline;
+}
+
+.masterButtonBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 60px;
+}
+
+.masterButtonBox .masterButtonMale{
+    padding: 15px 65px;
+    background-color: #7550FF;
+    color: white;
+    font-size: 18px;
+    border: 0;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.masterButtonBox .masterButtonMale:hover{
+    background-color: #5A3CFF;
+}
+
+.masterButtonBox .masterButtonFemale{
+    padding: 15px 65px;
+    background-color: #FF609C;
+    color: white;
+    font-size: 18px;
+    border: 0;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.masterButtonBox .masterButtonFemale:hover{
+    background-color: #FF4D7A;
+}
