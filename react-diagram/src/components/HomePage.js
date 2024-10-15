@@ -12,9 +12,7 @@ const HomePage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
-    const authUser = useAuthUser();
-
-    const role = authUser ? authUser.role : "guest";
+  const authUser = useAuthUser();
 
 
   useEffect(() => {
@@ -53,14 +51,6 @@ const HomePage = () => {
         setIsAuthModalOpen={setIsAuthModalOpen}
       />}
 
-      {console.log(role)}
-      {
-        role == "Client" ?
-          <h1>Client</h1> : role == "master" ?
-            <h1>Master</h1> : role == "guest" ?
-                <h1>Guest</h1> : <h1>Admin</h1>
-      }
-
       <section className="statistics-section">
         <div className="stat-item">
           <h2>1235</h2>
@@ -92,24 +82,28 @@ const HomePage = () => {
 
       <Specialists />
 
-      <section className="discount-section">
-        <h2>Отримайте <span className="highlight">15% знижку</span> на перше замовлення</h2>
-        <input type="email" placeholder="Введіть вашу email адресу" />
-        <button className="submit-button">Отримати</button>
-      </section>
+      {!authUser && (
+          <>
+            <section className="discount-section">
+              <h2>Отримайте <span className="highlight">15% знижку</span> на перше замовлення</h2>
+              <input type="email" placeholder="Введіть вашу email адресу" />
+              <button className="submit-button">Отримати</button>
+            </section>
 
-      <section className="info-section">
-        <div className="info-card">
-          <h3>Для клієнтів</h3>
-          <p>Ми допоможемо вам знайти свого майстра для ідеального образу.</p>
-          <button className="info-button">Веб-кабінет клієнта</button>
-        </div>
-        <div className="info-card">
-          <h3>Для майстрів</h3>
-          <p>Станьте частиною нашої спільноти майстрів.</p>
-          <button className="info-button">Веб-кабінет майстра</button>
-        </div>
-      </section>
+            <section className="info-section">
+              <div className="info-card">
+                <h3>Для клієнтів</h3>
+                <p>Ми допоможемо вам знайти свого майстра для ідеального образу.</p>
+                <button className="info-button">Веб-кабінет клієнта</button>
+              </div>
+              <div className="info-card">
+                <h3>Для майстрів</h3>
+                <p>Станьте частиною нашої спільноти майстрів.</p>
+                <button className="info-button">Веб-кабінет майстра</button>
+              </div>
+            </section>
+          </>
+      )}
     </div>
   );
 };

@@ -28,6 +28,7 @@ const AuthComponent = ({setIsAuthModalOpen}) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [validationError, setValidationError] = useState(false);
 
     const signIn = useSignIn();
 
@@ -45,9 +46,10 @@ const AuthComponent = ({setIsAuthModalOpen}) => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = async (e) => {
+    const handleRegistrationSubmit = async (e) => {
         e.preventDefault();
 
+        formData.role = formData.role.toLowerCase();
         if (formData.password !== formData.confirmPassword) {
             alert('Passwords do not match');
             return;
@@ -84,8 +86,11 @@ const AuthComponent = ({setIsAuthModalOpen}) => {
                 });
                 if (isSignInSuccess) {
                     console.log("User signed in successfully");
+                    modalClose();
+                    window.location.reload();
                 } else {
                     console.log("Sign in failed");
+                    setValidationError(true);
                 }
             }
         } catch (error) {
@@ -154,7 +159,7 @@ const AuthComponent = ({setIsAuthModalOpen}) => {
                             <h2 className={"inactive"} onClick={() => setAuthState("login")}>Log in</h2>
                             <h2>Sign up</h2>
                         </div>
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={handleRegistrationSubmit}>
                             <input
                                 type="text"
                                 name="first_name"
@@ -262,7 +267,7 @@ const AuthComponent = ({setIsAuthModalOpen}) => {
                                         onChange={(e) => setPassword(e.target.value)}
                             />
                             <div className="checkbox-wrapper-4">
-                                <input className="inp-cbx" id="terms" type="checkbox" required/>
+                                <input className="inp-cbx" id="terms" type="checkbox"/>
                                 <label className="cbx" htmlFor="terms">
                                     <span>
                                         <svg width="12px" height="10px">
