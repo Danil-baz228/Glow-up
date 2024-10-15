@@ -8,12 +8,11 @@ import Specialists from './Specialists.js';
 import AuthComponent from "./AuthComponent";
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser'
 
-const HomePage = () => {
+const HomePage = ({toggleAuthModal}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   const authUser = useAuthUser();
-
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,10 +24,6 @@ const HomePage = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  const toggleAuthModal = () => {
-    setIsAuthModalOpen(!isAuthModalOpen);
-  };
 
   return (
     <div className="homepage">
@@ -46,10 +41,6 @@ const HomePage = () => {
       <div className={`sticky-header ${isScrolled ? 'fixed' : ''}`}>
         <Header toggleAuthModal={toggleAuthModal}/>
       </div>
-
-      {isAuthModalOpen && <AuthComponent
-        setIsAuthModalOpen={setIsAuthModalOpen}
-      />}
 
       <section className="statistics-section">
         <div className="stat-item">

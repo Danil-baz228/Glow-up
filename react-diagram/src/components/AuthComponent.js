@@ -80,6 +80,7 @@ const AuthComponent = ({setIsAuthModalOpen}) => {
                         type: 'Bearer'
                     },
                     userState: {
+                        id: response.data.id,
                         username: response.data.username,
                         role: response.data.role
                     }

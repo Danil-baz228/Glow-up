@@ -63,3 +63,29 @@
 .clientHeader a.active{
     border-bottom: solid 2px black;
 }
+
+.notAuthorizedMessage{
+    font-size: 36px;
+    font-weight: 700;
+    color: #ff0000;
+    margin: 50px 0;
+}
+
+.clientLayoutLoginButton{
+    padding: 15px 0;
+    width: 180px;
+    border: solid 1px black;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 20px 0;
+    background-color: #000;
+    color: #fff;
+    transition: 0.3s all ease;
+}
+
+.clientLayoutLoginButton:hover{
+    background-color: #333;
+    color: #fff;
+}

@@ -105,6 +105,25 @@ const getFavoriteMasters = async (req, res) => {
     }
 };
 
+//getClientByUserId
+
+const getClientByUserId = async (req, res) => {
+    try {
+        const client = await Client.findOne({
+            where: {
+                user_id: req.params.userId
+            }
+        });
+        if (!client) {
+            res.status(404).json({ message: 'Client not found' });
+        } else {
+            res.status(200).json(client);
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 
 
 module.exports = {
@@ -115,5 +134,6 @@ module.exports = {
     deleteClient,
     addFavoriteMaster,
     removeFavoriteMaster,
-    getFavoriteMasters
+    getFavoriteMasters,
+    getClientByUserId
 }

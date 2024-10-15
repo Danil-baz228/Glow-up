@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const bcrypt = require('bcrypt');
 
 const createUser = async (req, res) => { // TODO: secure password hashing
     try {
@@ -34,7 +35,15 @@ const updateUser = async (req, res) => {
         const { id } = req.params;
         const { email, password, role } = req.body;
         const user = await User.findByPk(id);
-        await user.update({ email, password, role });
+
+        if (email) user.email = email;
+        if (password) {
+            const hashedPassword = await bcrypt.hash(password, 10);
+            user.password = hashedPassword;
+        }
+        if (role) user.role = role;
+
+        await user.save();
         res.status(200).json(user);
     } catch (error) {
         res.status(500).json({ message: error.message });

@@ -2,7 +2,8 @@ const express = require('express');
 const { getAllClients, createClient, deleteClient, getClientById, updateClient,
     getFavoriteMasters,
     addFavoriteMaster,
-    removeFavoriteMaster
+    removeFavoriteMaster,
+    getClientByUserId
 } = require('../controllers/clientController');
 
 const router = express.Router();
@@ -15,5 +16,6 @@ router.put('/:id', updateClient);
 router.get('/:clientId/favorite-master', getFavoriteMasters);
 router.post('/:clientId/favorite-master', addFavoriteMaster);
 router.delete('/:clientId/favorite-master', removeFavoriteMaster);
+router.get('/userId/:userId', getClientByUserId);
 
 module.exports = router;
