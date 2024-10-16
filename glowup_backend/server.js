@@ -41,9 +41,6 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 
 const sequelize = require('./config/db.config');  // Import Sequelize config
 
-// Import "Master" table from bd
-const Master = require('./models/Master');
-
 sequelize.authenticate()
   .then(() => {
     console.log('Connection has been established successfully.');

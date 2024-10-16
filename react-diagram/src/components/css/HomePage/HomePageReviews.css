@@ -1,0 +1,166 @@
+.homepage-reviews-container {
+  text-align: center;
+  padding: 0px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.homepage-reviews-title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-top: 66px;
+  color: #333;
+}
+
+.homepage-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 0px;
+  justify-content: center
+}
+
+.homepage-review-item-grid {
+  display: grid;
+  grid-template-columns: 70px 1fr; /* Первый столбец для аватара, второй для текста */
+  grid-template-rows: repeat(3, auto); /* Три строки для имени, звезд и комментария */
+  gap: 10px; /* Отступы между элементами */
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.homepage-review-avatar-container {
+  width: 70px;
+  height: 70px;
+  grid-row: 1 / 3; /* Занимает две строки */
+  grid-column: 1 / 2; /* Занимает первый столбец */
+  margin-bottom: 10px;
+  position: relative;
+}
+
+
+.homepage-review-avatar-container::before {
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: -9px;
+  right: -9px;
+  bottom: -9px;
+  border-radius: 50%;
+  border: 9px solid transparent;
+  border-top-color: currentColor;
+  border-right-color: currentColor;
+  border-bottom-color: currentColor;
+  transform: rotate(140deg);
+}
+
+.homepage-review-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;    
+}
+
+.homepage-review-initials {
+  font-size: 24px;
+  color: #333;
+  font-weight: bold;
+  position: relative;
+}
+
+.homepage-review-name {
+  grid-row: 1 / 2; /* Занимает первую строку */
+  grid-column: 2 / 3; /* Занимает второй столбец */
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  display: grid;
+  place-items: center; /* Выровнять по нижнему краю */
+  align-items: end;
+}
+
+.homepage-review-stars {
+  grid-row: 2 / 3; /* Занимает вторую строку */
+  grid-column: 2 / 3; /* Занимает второй столбец */
+  color: #ccea2e;
+  font-size: 20px;
+}
+
+.homepage-review-comment {
+  grid-row: 3 / 4; /* Занимает третью строку */
+  grid-column: 1 / 3; /* Занимает оба столбца */
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+  text-align: start;
+}
+
+.homepage-review-navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.homepage-nav-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #BCBCBC;
+  margin: 0 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.homepage-nav-dot.active {
+  width: 15px;
+  height: 15px;
+  background-color: #7550ff;
+}
+
+.homepage-next-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  padding: 0;
+}
+
+.homepage-next-button-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: #7550ff 3px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.homepage-next-button-arrow {
+  color: #7550ff;
+  font-size: 32px;
+  margin-bottom: 3px;
+}
+
+.circle-female {
+  color: #f472b6;
+}
+
+.circle-male {
+  color: #60a5fa;
+}
+
+@media (max-width: 768px) {
+  .homepage-reviews-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .homepage-reviews-grid {
+    grid-template-columns: 1fr;
+  }
+}

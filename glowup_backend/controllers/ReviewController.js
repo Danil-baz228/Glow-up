@@ -1,13 +1,21 @@
 const Review = require('../models/Review');
+const Client = require('../models/Client');
 
 const getAllReviews = async (req, res) => {
     try {
-        const reviews = await Review.findAll();
-        res.status(200).json(reviews);
+      const reviews = await Review.findAll({
+        include: [
+          {
+            model: Client, // Подключаем модель Client
+            as: 'client',  // Это должно соответствовать alias из belongsTo
+          }
+        ]
+      });
+      res.status(200).json(reviews);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+      res.status(500).json({ message: error.message });
     }
-}
+  }
 
 const getReviewById = async (req, res) => {
     try {
