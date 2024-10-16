@@ -54,7 +54,7 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { email, password, rememberMe } = req.body;
 
         // Find user by email
         const user = await User.findOne({ where: { email } });
@@ -70,9 +70,11 @@ const login = async (req, res) => {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
 
+        const tokenExpiration = rememberMe ? (60 * 60 * 24 * 7) : (60 * 60);
+
         // Generate JWT token
         const token = jwt.sign(
-            { id: user.id, email: user.email, role: user.role, exp: Math.floor(Date.now() / 1000) + (60 * 60) }, // You can add any additional data here
+            { id: user.id, email: user.email, role: user.role, exp: Math.floor(Date.now() / 1000) + tokenExpiration }, // You can add any additional data here
             `${process.env.JWT_SECRET_KEY}`
         );
 

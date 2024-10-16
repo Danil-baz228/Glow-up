@@ -1,52 +1,25 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import "./css/ClientPage/ClientHistoryPage.css";
 import AppointmentComponent from "./AppointmentComponent";
+import axios from "axios";
+import {useOutletContext} from "react-router-dom";
 
 const ClientHistoryPage = () => {
-    const [appointments, setAppointments] = useState([
-        {
-            "appointment_id": 1,
-            "date": "2023-10-01T10:00:00Z",
-            "Master": {
-                "first_name": "John",
-                "last_name": "Doe",
-                "gender": "male",
-                "Occupation": {
-                    "name": "Hair Stylist"
-                }
-            },
-            "Review": {
-                "rating": 4
-            },
-            "Service": {
-                "Category": {
-                    "name": "Haircut"
-                },
-                "price": "50.00"
-            }
-        },
-        {
-            "appointment_id": 2,
-            "date": "2023-10-02T14:00:00Z",
-            "Master": {
-                "first_name": "Jane",
-                "last_name": "Smith",
-                "gender": "female",
-                "Occupation": {
-                    "name": "Nail Technician"
-                }
-            },
-            "Review": {
-                "rating": 5
-            },
-            "Service": {
-                "Category": {
-                    "name": "Manicure"
-                },
-                "price": "30.00"
-            }
+    const [appointments, setAppointments] = useState([]);
+    const {currentClient} = useOutletContext();
+
+    useEffect(() => {
+        if(currentClient) {
+            axios.get(`http://localhost:5000/api/appointments/client/${currentClient.client_id}`)
+                .then(response => {
+                    setAppointments(response.data);
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         }
-    ]);
+    }, []);
 
     return (
         <div className={"clientHistoryPage"}>

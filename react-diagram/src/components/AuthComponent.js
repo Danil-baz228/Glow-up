@@ -28,6 +28,7 @@ const AuthComponent = ({setIsAuthModalOpen}) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [rememberMe, setRememberMe] = useState(false);
     const [validationError, setValidationError] = useState(false);
 
     const signIn = useSignIn();
@@ -71,7 +72,7 @@ const AuthComponent = ({setIsAuthModalOpen}) => {
         e.preventDefault();
         try {
             console.log(email, password)
-            const response = await axios.post('http://localhost:5000/auth/login', { email, password });
+            const response = await axios.post('http://localhost:5000/auth/login', { email, password, rememberMe });
             if (response.status === 200 && response.data.token) {
                 console.log(response.data);
                 const isSignInSuccess = signIn({
@@ -268,7 +269,7 @@ const AuthComponent = ({setIsAuthModalOpen}) => {
                                         onChange={(e) => setPassword(e.target.value)}
                             />
                             <div className="checkbox-wrapper-4">
-                                <input className="inp-cbx" id="terms" type="checkbox"/>
+                                <input className="inp-cbx" id="terms" type="checkbox" checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)}/>
                                 <label className="cbx" htmlFor="terms">
                                     <span>
                                         <svg width="12px" height="10px">
