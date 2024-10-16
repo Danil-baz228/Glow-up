@@ -1,13 +1,14 @@
 .specialists-container {
   text-align: center;
   padding: 20px;
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .specialists-title {
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 28px;
+  font-weight: 600;
   margin-bottom: 30px;
+  color: #333;
 }
 
 .specialists-grid {
@@ -90,7 +91,7 @@
 }
 
 .circle-other {
-  color: #4ade80;
+  color: #d1ec53;
 }
 
 .circle-default {
@@ -98,7 +99,7 @@
 }
 
 .circle-more {
-  color: #a3e635;
+  color: #d1ec53;
 }
 
 .more-specialists {
