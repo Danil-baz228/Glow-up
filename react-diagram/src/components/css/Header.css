@@ -1,5 +1,5 @@
 .header {
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Легкая тень для разделения хедера от остальной страницы */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,17 +14,17 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background-color: white; /* Меняем фон на белый */
-  color: black; /* Меняем цвет текста на черный */
+  background-color: white;
+  color: black; 
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .header.fixed .nav-list a {
-  color: black; /* Меняем цвет ссылок на черный */
+  color: black;
 }
 
 .header.fixed .icon, .header.fixed .language-selector {
-  color: black; /* Меняем цвет иконок и текста выбора языка */
+  color: black;
 }
 
 .header-logo {

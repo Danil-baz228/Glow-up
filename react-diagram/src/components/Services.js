@@ -10,19 +10,19 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const Services = () => {
-  const [activeSlide, setActiveSlide] = useState(0); // Отслеживание активного слайда
+  const [activeSlide, setActiveSlide] = useState(0); 
 
   const settings = {
     infinite: true,
     speed: 500,
-    slidesToShow: 3, // Отображаем 3 слайда
+    slidesToShow: 3, 
     slidesToScroll: 1,
     centerMode: true,
-    centerPadding: "20px", // Отступы для боковых слайдов
-    afterChange: current => setActiveSlide(current), // Обновляем активный слайд
+    centerPadding: "20px", 
+    afterChange: current => setActiveSlide(current), 
     responsive: [
       {
-        breakpoint: 768, // Адаптивность для мобильных
+        breakpoint: 768,
         settings: {
           slidesToShow: 1,
           centerMode: true,
