@@ -5,6 +5,7 @@ import placeholder from './img/placeholder.jpg';
 import placeholder1 from './img/placeholder.png'; 
 import './css/HomePage/Reviews.css';
 import Specialists from './Specialists.js';
+import HomePageReviews from './HomePageReviews.js';
 import AuthComponent from "./AuthComponent";
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser'
 
@@ -90,8 +91,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      <Specialists />
-
       <section className="discount-section">
         <h2>Отримайте <span className="highlight">15% знижку</span> на перше замовлення</h2>
         <input type="email" placeholder="Введіть вашу email адресу" />
@@ -110,7 +109,12 @@ const HomePage = () => {
           <button className="info-button">Веб-кабінет майстра</button>
         </div>
       </section>
+
+      <Specialists />
+      <HomePageReviews />
+
     </div>
+
   );
 };
 

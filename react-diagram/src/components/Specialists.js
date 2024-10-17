@@ -46,7 +46,7 @@ const Specialists = () => {
   return (
     <div className="specialists-container">
       <h2 className="specialists-title">Specialists</h2>
-      <div className="specialists-grid">
+      <div className="specialists-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', maxWidth: '600px', margin: '0 auto' }}>
         {masters.map((master, index) => (
           <div key={index} className="specialist-item">
             <div className={`specialist-avatar-container ${getCircleColor(master.gender)}`}>
