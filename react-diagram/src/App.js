@@ -6,12 +6,14 @@ import ServiceCatalog from './components/ServiceCatalog';
 import Statistics from './components/Statistics';
 import Reviews from './components/Reviews';
 import QuestionsAnswers from './components/QuestionsAnswers';
-import CurrentTopics from './components/CurrentTopics';
+import CurrentTopics from './components/AboutUs';
 import AdditionalInfo from './components/AdditionalInfo';
 import ErrorPage from './components/ErrorPage';
 import AuthPage from './components/AuthPage';
 import { AuthProvider } from './components/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 const App = () => {
   return (

@@ -1,48 +1,52 @@
 import React from 'react';
-import imgMasterCard from './img/mastercard.png'; 
-import imgVisa from './img/visa.png'; 
-import logo from './img/Logo.png'; 
-import logoInstagram from './img/instagram.png'; 
-import logoFacebook from './img/facebook.png'; 
-import logoTelegram from './img/telegram.png'; 
-import './css/Footer.css';  
+import logoInstagram from './img/instagram.png';
+import logoTelegram from './img/telegram.png';
+import './css/Footer.css';
+
+import { useLocation } from 'react-router-dom';
+
 
 const Footer = () => {
+  const location = useLocation(); 
+
+  
+  const footerClass = location.pathname === '/' ? 'footer footer-purple' : location.pathname === '/CurrentTopics' ? 'footer footer-black' : 'footer';
+
   return (
-    <footer className="footer">
-      <div className="footer-logo">
-        <img src={logo} alt="Beauty Unite Logo" className="footer-logo-img" />
-        <h2 className="footer-logo-text">Glow up</h2>
-      </div>
-      <div className="footer-section">
-        <h3 className="footer-title">Сторінки</h3>
+    <footer className={footerClass}>
+      <div className="footer-column">
         <ul>
-          <li><a href="/allMasters">Усі майстри</a></li>
-          <li><a href="/popularTopics">Популярні теми</a></li>
-          <li><a href="/blog">Блог</a></li>
+          <li><a href="/catalog">Catalog of services</a></li>
+          <li><a href="/specialists">Specialists</a></li>
+          <li><a href="/blog">Blog</a></li>
         </ul>
       </div>
-      <div className="footer-section">
-        <h3 className="footer-title">Юридична інформація</h3>
+
+      <div className="footer-column">
         <ul>
-          <li><a href="/privacyPolicy">Політика конфіденційності</a></li>
-          <li><a href="/termsOfUse">Правила користування сайтом</a></li>
+          <li><a href="/faq">Questions and answers</a></li>
+          <li><a href="/settings">Settings</a></li>
+          <li><a href="/404">404</a></li>
         </ul>
       </div>
-      <div className="footer-section">
-        <h3 className="footer-title">Зв'язатися з нами</h3>
+
+      <div className="footer-column">
         <ul>
-          <li><a href="mailto:hello@beautyunite.me">hello@beautyunite.me</a></li>
-          <li className="footer-icons">
-            <a href="https://www.instagram.com/"><img src={logoInstagram} alt="Instagram" /></a>
-            <a href="https://www.facebook.com/"><img src={logoFacebook} alt="Facebook" /></a>
-            <a href="https://web.telegram.org/a/"><img src={logoTelegram} alt="Telegram" /></a>
-          </li>
-          <li className="footer-payment">
-            <img src={imgMasterCard} alt="Mastercard" />
-            <img src={imgVisa} alt="Visa" />
-          </li>
+          <li><a href="/about">About us</a></li>
+          <li><a href="/account">Account</a></li>
+          <li><a href="/history">History</a></li>
+          <li><a href="/favorites">Favorites</a></li>
         </ul>
+      </div>
+
+      <div className="footer-column contact-info">
+        <p>E-mail: <a href="mailto:glow_up@gmail.com">glow_up@gmail.com</a></p>
+        <p>Phone: 987-654-3210</p>
+        <div className="footer-icons">
+          <a href="https://www.instagram.com/"><img src={logoInstagram} alt="Instagram" /></a>
+          <a href="https://web.telegram.org/"><img src={logoTelegram} alt="Telegram" /></a>
+          <a href="tel:987-654-3210"><img src={logoTelegram} alt="Phone" /></a>
+        </div>
       </div>
     </footer>
   );

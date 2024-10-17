@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import Header from './Header'; 
+import Services from './Services'; 
 import './css/HomePage/HomePage.css';
-import placeholder from './img/placeholder.jpg'; 
+import teamRow from './img/Spec.png'; 
 import placeholder1 from './img/placeholder.png'; 
-import './css/HomePage/Reviews.css';
+
 
 const HomePage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 200); 
+      setIsScrolled(window.scrollY > 600);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -21,23 +22,21 @@ const HomePage = () => {
 
   return (
     <div className="homepage">
-      
-      <header className={`main-header ${isScrolled ? 'hidden' : ''}`}>
+      <header className={`main-header ${isScrolled ? 'hidden' : 'fade-in'}`}>
         <img src={placeholder1} alt="Service 1" />
-        <h1>Ласкаво просимо до Glow up!</h1>
-        <p>Знайдіть свого майстра</p>
-        <div className="header-buttons">
+        <h1 className="fade-in">Ласкаво просимо до Glow up!</h1>
+        <p className="fade-in">Знайдіть свого майстра</p>
+        <div className="header-buttons fade-in">
           <button className="primary-button">Підібрати майстра</button>
           <button className="secondary-button">Усі майстри</button>
         </div>
       </header>
 
-      
-      <div className={`sticky-header ${isScrolled ? 'fixed' : ''}`}>
-        <Header />
+      <div className={`sticky-header ${isScrolled ? 'fixed slide-in' : ''}`}>
+        <Header isScrolled={isScrolled} />
       </div>
 
-      <section className="statistics-section">
+      <section className="statistics-section fade-in">
         <div className="stat-item">
           <h2>1235</h2>
           <p>Майстрів</p>
@@ -52,27 +51,17 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className="services-section">
-        <h2>Послуги</h2>
-        <div className="services">
-          <div className="service-card">
-            <img src={placeholder} alt="Service 1" />
-            <p>Esthetician</p>
-          </div>
-          <div className="service-card">
-            <img src={placeholder} alt="Service 2" />
-            <p>Massage Therapist</p>
-          </div>
-        </div>
-      </section>
+      
+      <Services />
+      
 
-      <section className="discount-section">
+      <section className="discount-section fade-in">
         <h2>Отримайте <span className="highlight">15% знижку</span> на перше замовлення</h2>
         <input type="email" placeholder="Введіть вашу email адресу" />
         <button className="submit-button">Отримати</button>
       </section>
 
-      <section className="info-section">
+      <section className="info-section fade-in">
         <div className="info-card">
           <h3>Для клієнтів</h3>
           <p>Ми допоможемо вам знайти свого майстра для ідеального образу.</p>
@@ -84,6 +73,12 @@ const HomePage = () => {
           <button className="info-button">Веб-кабінет майстра</button>
         </div>
       </section>
+
+      <div className="team-section">
+        <div className="team-row fade-in">
+          <img src={teamRow} alt="Anastasiya and Andriy" className="team-row-img" />
+        </div>
+      </div>
     </div>
   );
 };
