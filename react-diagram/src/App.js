@@ -18,6 +18,7 @@ import ClientHistoryPage from "./components/ClientHistoryPage";
 import ClientDiscountsPage from "./components/ClientDiscountsPage";
 import AuthProvider from 'react-auth-kit';
 import createStore from "react-auth-kit/createStore";
+import SpecialistsSearchPage from './components/SpecialistsSearchPage';
 
 const store = createStore({
   authName: '_auth',
@@ -34,6 +35,7 @@ const App = () => {
           <Route path="/" element={<MainLayout />}>
             <Route path={""} element={<HomePage />} /> {}
             <Route path="serviceCatalog" element={<ServiceCatalog />} />
+            <Route path="masters" element={<SpecialistsSearchPage />} />
             <Route path="statistics" element={<ProtectedRoute><Statistics /></ProtectedRoute>} />
             <Route path="reviews" element={<ProtectedRoute><Reviews /></ProtectedRoute>} />
             <Route path="questionsAnswers" element={<ProtectedRoute><QuestionsAnswers /></ProtectedRoute>} />

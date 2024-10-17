@@ -1,5 +1,6 @@
 const { DataTypes, ENUM } = require('sequelize');
 const sequelize = require('../config/db.config');
+const Occupation = require('./Occupation');
 
 const Master = sequelize.define('Master', {
   master_id: {
@@ -57,5 +58,7 @@ const Master = sequelize.define('Master', {
   timestamps: false,
   tableName: 'master'
 });
+
+Master.belongsTo(Occupation, { foreignKey: 'occupation_id' });
 
 module.exports = Master;
