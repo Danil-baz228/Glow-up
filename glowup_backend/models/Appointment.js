@@ -26,6 +26,14 @@ const Appointment = sequelize.define('Appointment', {
       model: 'client',
       key: 'client_id'
     }
+  },
+  service_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'service',
+      key: 'service_id'
+    }
   }
 }, {
   timestamps: false,

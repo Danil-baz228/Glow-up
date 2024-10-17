@@ -11,7 +11,15 @@ const City = sequelize.define('City', {
     type: DataTypes.STRING(255),
     allowNull: false,
     unique: true
-  }
+  },
+    state_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'state',
+        key: 'state_id'
+      }
+    }
 }, {
   timestamps: false,
   tableName: 'city'

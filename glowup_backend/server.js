@@ -19,12 +19,13 @@ const cityRoutes = require('./routes/cityRoutes');
 const salonRoutes = require('./routes/salonRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 const saleRoutes = require('./routes/saleRoutes');
+const postRoutes = require('./routes/postRoutes');
+const stateRoutes = require('./routes/stateRoutes');
+const categoryRoutes = require('./routes/categoryRoutes');
+const authRoutes = require('./routes/authRoutes');
 
-app.use(cors({
-  origin: 'http://localhost:3000',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-}));
+app.use(cors());
+app.use(express.json());
 
 app.use('/api/users', userRoutes);
 app.use('/api/clients', clientRoutes);
@@ -36,6 +37,11 @@ app.use('/api/cities', cityRoutes);
 app.use('/api/salons', salonRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/sales', saleRoutes);
+app.use('/api/posts', postRoutes);
+app.use('/api/states', stateRoutes);
+app.use('/api/categories', categoryRoutes);
+app.use('/auth', authRoutes);
+
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 

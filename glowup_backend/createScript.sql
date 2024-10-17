@@ -8,7 +8,8 @@ CREATE TABLE IF NOT EXISTS user (
     password VARCHAR(255) NOT NULL,
     role VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    last_login TIMESTAMP
+    last_login TIMESTAMP,
+    avatar_url VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS client (
@@ -38,9 +39,6 @@ CREATE TABLE IF NOT EXISTS master (
     middle_name VARCHAR(255),
     gender ENUM('male', 'female', 'other') NOT NULL,
     date_of_birth DATE,
-    education VARCHAR(1000) NOT NULL,
-    experience DATE NOT NULL,
-    avatar_url VARCHAR(255),
     background_url VARCHAR(255),
     user_id INT NOT NULL,
     occupation_id INT NOT NULL,
@@ -48,13 +46,41 @@ CREATE TABLE IF NOT EXISTS master (
     FOREIGN KEY (occupation_id) REFERENCES occupation(occupation_id)
 );
 
+CREATE TABLE IF NOT EXISTS favorite_master (
+    client_id INT NOT NULL,
+    master_id INT NOT NULL,
+    FOREIGN KEY (client_id) REFERENCES client(client_id),
+    FOREIGN KEY (master_id) REFERENCES master(master_id),
+    PRIMARY KEY (client_id, master_id)
+);
+
+CREATE TABLE IF NOT EXISTS post (
+    post_id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    text TEXT NOT NULL,
+    order_index INT NOT NULL,
+    image_links JSON,
+    master_id INT NOT NULL,
+    FOREIGN KEY (master_id) REFERENCES master(master_id)
+);
+
+CREATE TABLE IF NOT EXISTS category (
+    category_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL UNIQUE
+);
+
 CREATE TABLE IF NOT EXISTS service (
     service_id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL UNIQUE,
-    description VARCHAR(1000),
+    title VARCHAR(255) NOT NULL UNIQUE,
+    description VARCHAR(280),
+    benefits VARCHAR(250),
+    contraindications VARCHAR(280),
     price DECIMAL(10, 2) NOT NULL,
     duration INT NOT NULL,
+    image_url VARCHAR(255),
+    category_id INT NOT NULL,
     master_id INT NOT NULL,
+    FOREIGN KEY (category_id) REFERENCES category(category_id),
     FOREIGN KEY (master_id) REFERENCES master(master_id)
 );
 
@@ -64,31 +90,34 @@ CREATE TABLE IF NOT EXISTS appointment (
     date_end TIMESTAMP NOT NULL,
     status VARCHAR(255) NOT NULL,
     client_id INT NOT NULL,
-    FOREIGN KEY (client_id) REFERENCES client(client_id)
+    service_id INT NOT NULL,
+    FOREIGN KEY (client_id) REFERENCES client(client_id),
+    FOREIGN KEY (service_id) REFERENCES service(service_id)
 );
 
-CREATE TABLE IF NOT EXISTS appointment_service (
-    appointment_id INT NOT NULL,
-    service_id INT NOT NULL,
-    FOREIGN KEY (appointment_id) REFERENCES appointment(appointment_id),
-    FOREIGN KEY (service_id) REFERENCES service(service_id),
-    PRIMARY KEY (appointment_id, service_id)
+
+CREATE TABLE IF NOT EXISTS state (
+    state_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS city (
     city_id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL UNIQUE
+    name VARCHAR(255) NOT NULL UNIQUE,
+    state_id INT NOT NULL,
+    FOREIGN KEY (state_id) REFERENCES state(state_id)
 );
 
 CREATE TABLE IF NOT EXISTS salon (
     salon_id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL UNIQUE,
     address VARCHAR(255) NOT NULL,
+    zip_code VARCHAR(255) NOT NULL,
     city_id INT NOT NULL,
     FOREIGN KEY (city_id) REFERENCES city(city_id)
 );
 
-CREATE TABLE IF NOT EXISTS salon_master (
+CREATE TABLE IF NOT EXISTS master_salon (
     salon_id INT NOT NULL,
     master_id INT NOT NULL,
     FOREIGN KEY (salon_id) REFERENCES salon(salon_id),
@@ -110,12 +139,11 @@ CREATE TABLE IF NOT EXISTS sale (
 
 CREATE TABLE IF NOT EXISTS review (
     review_id INT PRIMARY KEY AUTO_INCREMENT,
-    text VARCHAR(1000) NOT NULL,
-    rating DECIMAL(2, 1) NOT NULL,
+    rating INT NOT NULL,
+    comment VARCHAR(300) NOT NULL,
+    date TIMESTAMP NOT NULL,
     client_id INT NOT NULL,
-    master_id INT NOT NULL,
-    service_id INT,
+    appointment_id INT NOT NULL,
     FOREIGN KEY (client_id) REFERENCES client(client_id),
-    FOREIGN KEY (master_id) REFERENCES master(master_id),
-    FOREIGN KEY (service_id) REFERENCES service(service_id)
+    FOREIGN KEY (appointment_id) REFERENCES appointment(appointment_id)
 );

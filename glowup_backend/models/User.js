@@ -26,6 +26,9 @@ const User = sequelize.define('User', {
   },
   last_login: {
     type: DataTypes.DATE
+  },
+  avatar_url: {
+    type: DataTypes.STRING(255)
   }
 }, {
   timestamps: false,

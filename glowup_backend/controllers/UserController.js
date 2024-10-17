@@ -4,7 +4,7 @@ const createUser = async (req, res) => { // TODO: secure password hashing
     try {
         const { email, password, role } = req.body;
         const newUser = await User.create({ email, password, role });
-        res.status(201).json(newUser);
+        return newUser;
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

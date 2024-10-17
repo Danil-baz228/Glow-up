@@ -6,9 +6,17 @@ import placeholder1 from './img/placeholder.png';
 import './css/HomePage/Reviews.css';
 import Specialists from './Specialists.js';
 import HomePageReviews from './HomePageReviews.js';
+import AuthComponent from "./AuthComponent";
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser'
 
 const HomePage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
+    const authUser = useAuthUser();
+
+    const role = authUser ? authUser.role : "guest";
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,6 +28,10 @@ const HomePage = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  const toggleAuthModal = () => {
+    setIsAuthModalOpen(!isAuthModalOpen);
+  };
 
   return (
     <div className="homepage">
@@ -35,8 +47,20 @@ const HomePage = () => {
       </header>
 
       <div className={`sticky-header ${isScrolled ? 'fixed' : ''}`}>
-        <Header />
+        <Header toggleAuthModal={toggleAuthModal}/>
       </div>
+
+      {isAuthModalOpen && <AuthComponent
+        setIsAuthModalOpen={setIsAuthModalOpen}
+      />}
+
+      {console.log(role)}
+      {
+        role == "Client" ?
+          <h1>Client</h1> : role == "master" ?
+            <h1>Master</h1> : role == "guest" ?
+                <h1>Guest</h1> : <h1>Admin</h1>
+      }
 
       <section className="statistics-section">
         <div className="stat-item">

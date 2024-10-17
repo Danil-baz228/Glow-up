@@ -34,17 +34,6 @@ const Master = sequelize.define('Master', {
   date_of_birth: {
     type: DataTypes.DATE
   },
-  education: {
-    type: DataTypes.STRING(1000),
-    allowNull: false
-  },
-  experience: {
-    type: DataTypes.DATE,
-    allowNull: false
-  },
-  avatar_url: {
-    type: DataTypes.STRING(255)
-  },
   background_url: {
     type: DataTypes.STRING(255)
   },

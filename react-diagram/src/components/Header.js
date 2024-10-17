@@ -1,13 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../components/AuthContext';
 import logo from './img/Logo.png'; 
 import logoSmall from './img/logoSmall.png'; 
 import './css/Header.css'; 
-import { FaSearch, FaUser } from 'react-icons/fa'; 
+import { FaSearch, FaUser } from 'react-icons/fa';
 
-const Header = () => {
-  const { user, logout } = useAuth();
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser'
+import useSignOut from "react-auth-kit/hooks/useSignOut";
+
+const Header = ({toggleAuthModal}) => {
+
+    const authUser = useAuthUser();
+    const signOut = useSignOut();
+
+    const handleSignOut = () => {
+        signOut();
+    };
+
 
   return (
     <header className="header">
@@ -26,8 +35,9 @@ const Header = () => {
         <FaSearch className="icon" />
         <div className="language-selector">
           <span>UA</span>
-          <FaUser className="icon" />
+          <FaUser className="icon" onClick={toggleAuthModal}/>
         </div>
+            <button onClick={handleSignOut}>Sign Out</button>
       </div>
     </header>
   );
