@@ -3,6 +3,7 @@ import {NavLink, Outlet} from "react-router-dom";
 import './ClientLayout.css';
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import axios from "axios";
+import {FaPencil} from "react-icons/fa6";
 
 const ClientLayout = ({toggleAuthModal}) => {
     const authUser = useAuthUser();
@@ -13,6 +14,7 @@ const ClientLayout = ({toggleAuthModal}) => {
     const [currentClient, setCurrentClient] = useState(null);
 
     const [isUpdateRequired, setIsUpdateRequired] = useState(false);
+    const [avatarFile, setAvatarFile] = useState(null);
 
     useEffect(() => {
         axios.get(`http://localhost:5000/api/users/${authUserId}`)
@@ -33,13 +35,56 @@ const ClientLayout = ({toggleAuthModal}) => {
         setIsUpdateRequired(false);
     }, [authUserId, isUpdateRequired]);
 
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            setAvatarFile(file);
+            uploadAvatar(file);
+        }
+    };
+
+    const uploadAvatar = async (file) => {
+        const formData = new FormData();
+        formData.append('avatar', file);
+
+        try {
+            const response = await axios.post(
+                `http://localhost:5000/api/users/upload-avatar/${authUserId}`,
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                }
+            );
+            setIsUpdateRequired(true);
+            window.location.reload();
+        } catch (error) {
+            console.error('Error uploading avatar:', error);
+        }
+    };
+
     return (
         <div className={"clientLayout"}>
             <div className="clientTitle">
                 {
                     authUser && currentClient ?
                         <>
-                            <img src="" alt=""/>
+                            <img
+                                src={currentUser ? `http://localhost:5000${currentUser.avatar_url}` : '/default-avatar.png'}
+                                alt="Avatar"
+                                className="clientAvatar"
+                            />
+                            <FaPencil className="editAvatarIcon"
+                                        onClick={() => document.getElementById('avatarInput').click()}
+                            />
+                            <input
+                                type="file"
+                                id="avatarInput"
+                                onChange={handleFileChange}
+                                style={{display: 'none'}}
+                                accept="image/*"
+                            />
                             <h2 className={"clientName"}>{currentClient.last_name} {currentClient.first_name}</h2>
                         </>
                         : null
