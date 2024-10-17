@@ -33,6 +33,16 @@ const ClientDetailsPage = () => {
                 });
         }
         setIsPasswordChanged(false);
+        setFormData(
+            {
+                clientName: '',
+                clientEmail: '',
+                clientPhone: '',
+                clientAddress: '',
+                clientPassword: '',
+                clientPasswordRepeat: ''
+            }
+        );
     }, [isPasswordChanged]);
 
     const togglePasswordVisibility = () => {
@@ -70,8 +80,9 @@ const ClientDetailsPage = () => {
             .catch((error) => {
                 console.log(error);
             });
-
-        handleReset(e);
+        if (formData.clientPassword.trim() === '') {
+            handleReset(e);
+        }
     }
 
     const handleReset = (e) => {

@@ -17,6 +17,7 @@
     width: 310px;
     height: 310px;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .favoriteButton{

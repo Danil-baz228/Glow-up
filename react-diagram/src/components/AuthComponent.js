@@ -93,9 +93,13 @@ const AuthComponent = ({setIsAuthModalOpen}) => {
                 } else {
                     console.log("Sign in failed");
                     setValidationError(true);
+                    setTimeout(() => setValidationError(false), 3000);
                 }
             }
         } catch (error) {
+            console.log("Sign in failed");
+            setValidationError(true);
+            setTimeout(() => setValidationError(false), 3000);
             console.error("Error during authentication:", error);
         }
     };
@@ -261,15 +265,30 @@ const AuthComponent = ({setIsAuthModalOpen}) => {
                         </div>
                         <form onSubmit={handleLoginSubmit}>
                             <input type="email" placeholder="E-mail*" required
-                                      value={email}
-                                      onChange={(e) => setEmail(e.target.value)}
+                                   value={email}
+                                   onChange={(e) => setEmail(e.target.value)}
+                                   className={validationError ? "error" : ""}
                             />
-                            <input type="password" placeholder="Password*" required
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                            />
+                            <div className="password-input-wrapper">
+                                <input
+                                    type={isPasswordVisible ? "text" : "password"}
+                                    name="password"
+                                    placeholder="Password*"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                    className={validationError ? "error" : ""}
+                                />
+                                <img
+                                    src={eyeIcon}
+                                    alt="Show Password"
+                                    onClick={togglePasswordVisibility}
+                                    className="eye-icon"
+                                />
+                            </div>
                             <div className="checkbox-wrapper-4">
-                                <input className="inp-cbx" id="terms" type="checkbox" checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)}/>
+                                <input className="inp-cbx" id="terms" type="checkbox" checked={rememberMe}
+                                       onChange={(e) => setRememberMe(e.target.checked)}/>
                                 <label className="cbx" htmlFor="terms">
                                     <span>
                                         <svg width="12px" height="10px">
