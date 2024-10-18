@@ -28,6 +28,8 @@ const AuthComponent = ({setIsAuthModalOpen}) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [rememberMe, setRememberMe] = useState(false);
+    const [validationError, setValidationError] = useState(false);
 
     const signIn = useSignIn();
 
@@ -45,9 +47,10 @@ const AuthComponent = ({setIsAuthModalOpen}) => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = async (e) => {
+    const handleRegistrationSubmit = async (e) => {
         e.preventDefault();
 
+        formData.role = formData.role.toLowerCase();
         if (formData.password !== formData.confirmPassword) {
             alert('Passwords do not match');
             return;
@@ -69,7 +72,7 @@ const AuthComponent = ({setIsAuthModalOpen}) => {
         e.preventDefault();
         try {
             console.log(email, password)
-            const response = await axios.post('http://localhost:5000/auth/login', { email, password });
+            const response = await axios.post('http://localhost:5000/auth/login', { email, password, rememberMe });
             if (response.status === 200 && response.data.token) {
                 console.log(response.data);
                 const isSignInSuccess = signIn({
@@ -78,17 +81,25 @@ const AuthComponent = ({setIsAuthModalOpen}) => {
                         type: 'Bearer'
                     },
                     userState: {
+                        id: response.data.id,
                         username: response.data.username,
                         role: response.data.role
                     }
                 });
                 if (isSignInSuccess) {
                     console.log("User signed in successfully");
+                    modalClose();
+                    window.location.reload();
                 } else {
                     console.log("Sign in failed");
+                    setValidationError(true);
+                    setTimeout(() => setValidationError(false), 3000);
                 }
             }
         } catch (error) {
+            console.log("Sign in failed");
+            setValidationError(true);
+            setTimeout(() => setValidationError(false), 3000);
             console.error("Error during authentication:", error);
         }
     };
@@ -154,7 +165,7 @@ const AuthComponent = ({setIsAuthModalOpen}) => {
                             <h2 className={"inactive"} onClick={() => setAuthState("login")}>Log in</h2>
                             <h2>Sign up</h2>
                         </div>
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={handleRegistrationSubmit}>
                             <input
                                 type="text"
                                 name="first_name"
@@ -254,15 +265,30 @@ const AuthComponent = ({setIsAuthModalOpen}) => {
                         </div>
                         <form onSubmit={handleLoginSubmit}>
                             <input type="email" placeholder="E-mail*" required
-                                      value={email}
-                                      onChange={(e) => setEmail(e.target.value)}
+                                   value={email}
+                                   onChange={(e) => setEmail(e.target.value)}
+                                   className={validationError ? "error" : ""}
                             />
-                            <input type="password" placeholder="Password*" required
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                            />
+                            <div className="password-input-wrapper">
+                                <input
+                                    type={isPasswordVisible ? "text" : "password"}
+                                    name="password"
+                                    placeholder="Password*"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                    className={validationError ? "error" : ""}
+                                />
+                                <img
+                                    src={eyeIcon}
+                                    alt="Show Password"
+                                    onClick={togglePasswordVisibility}
+                                    className="eye-icon"
+                                />
+                            </div>
                             <div className="checkbox-wrapper-4">
-                                <input className="inp-cbx" id="terms" type="checkbox" required/>
+                                <input className="inp-cbx" id="terms" type="checkbox" checked={rememberMe}
+                                       onChange={(e) => setRememberMe(e.target.checked)}/>
                                 <label className="cbx" htmlFor="terms">
                                     <span>
                                         <svg width="12px" height="10px">

@@ -1,7 +1,7 @@
 const {createUser} = require('./UserController');
 const {createClient} = require('./ClientController');
 const {createMaster} = require('./MasterController');
-const User = require('../models/User');
+const {User, Client} = require('../models/Relations');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -54,7 +54,7 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { email, password, rememberMe } = req.body;
 
         // Find user by email
         const user = await User.findOne({ where: { email } });
@@ -62,15 +62,19 @@ const login = async (req, res) => {
             return res.status(404).json({ message: 'User not found' });
         }
 
+        const client = await Client.findOne({ where: { user_id: user.user_id } });
+
         // Check if password is valid
         const validPassword = await bcrypt.compare(password, user.password);
         if (!validPassword) {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
 
+        const tokenExpiration = rememberMe ? (60 * 60 * 24 * 7) : (60 * 60);
+
         // Generate JWT token
         const token = jwt.sign(
-            { id: user.id, email: user.email, role: user.role, exp: Math.floor(Date.now() / 1000) + (60 * 60) }, // You can add any additional data here
+            { id: user.id, email: user.email, role: user.role, exp: Math.floor(Date.now() / 1000) + tokenExpiration }, // You can add any additional data here
             `${process.env.JWT_SECRET_KEY}`
         );
 
@@ -78,7 +82,8 @@ const login = async (req, res) => {
             token: token,
             id: user.user_id,
             email: user.email,
-            role: user.role
+            role: user.role,
+            username: client ? `${client.last_name} ${client.first_name}` : null
         });
     } catch (error) {
         res.status(500).json({ message: error.message });

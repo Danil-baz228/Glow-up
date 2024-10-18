@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS post (
     title VARCHAR(255) NOT NULL,
     text TEXT NOT NULL,
     order_index INT NOT NULL,
-    image_links JSON,
+    image_links VARCHAR(2000),
     master_id INT NOT NULL,
     FOREIGN KEY (master_id) REFERENCES master(master_id)
 );

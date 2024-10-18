@@ -98,6 +98,10 @@ City.hasMany(Salon, {
     foreignKey: 'city_id'
 });
 
+Salon.belongsTo(City, {
+    foreignKey: 'city_id'
+});
+
 State.hasMany(City, {
     foreignKey: 'state_id'
 });

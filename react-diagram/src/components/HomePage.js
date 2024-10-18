@@ -9,14 +9,11 @@ import HomePageReviews from './HomePageReviews.js';
 import AuthComponent from "./AuthComponent";
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser'
 
-const HomePage = () => {
+const HomePage = ({toggleAuthModal}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
-    const authUser = useAuthUser();
-
-    const role = authUser ? authUser.role : "guest";
-
+  const authUser = useAuthUser();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,10 +25,6 @@ const HomePage = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  const toggleAuthModal = () => {
-    setIsAuthModalOpen(!isAuthModalOpen);
-  };
 
   return (
     <div className="homepage">
@@ -49,18 +42,6 @@ const HomePage = () => {
       <div className={`sticky-header ${isScrolled ? 'fixed' : ''}`}>
         <Header toggleAuthModal={toggleAuthModal}/>
       </div>
-
-      {isAuthModalOpen && <AuthComponent
-        setIsAuthModalOpen={setIsAuthModalOpen}
-      />}
-
-      {console.log(role)}
-      {
-        role == "Client" ?
-          <h1>Client</h1> : role == "master" ?
-            <h1>Master</h1> : role == "guest" ?
-                <h1>Guest</h1> : <h1>Admin</h1>
-      }
 
       <section className="statistics-section">
         <div className="stat-item">
@@ -90,7 +71,8 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-
+        {!authUser && (
+            <>
       <section className="discount-section">
         <h2>Отримайте <span className="highlight">15% знижку</span> на перше замовлення</h2>
         <input type="email" placeholder="Введіть вашу email адресу" />
@@ -109,12 +91,11 @@ const HomePage = () => {
           <button className="info-button">Веб-кабінет майстра</button>
         </div>
       </section>
-
-      <Specialists />
-      <HomePageReviews />
-
+            </>
+        )}
+        <Specialists />
+        <HomePageReviews />
     </div>
-
   );
 };
 
