@@ -1,15 +1,16 @@
-import React, {useState} from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import HomePage from './components/HomePage';  
 import ServiceCatalog from './components/ServiceCatalog';
 import Statistics from './components/Statistics';
 import Reviews from './components/Reviews';
 import QuestionsAnswers from './components/QuestionsAnswers';
-import CurrentTopics from './components/CurrentTopics';
+import CurrentTopics from './components/AboutUs';
 import AdditionalInfo from './components/AdditionalInfo';
 import ErrorPage from './components/ErrorPage';
 import AuthPage from './components/AuthPage';
+import { LanguageProvider } from './components/LanguageContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import ClientLayout from "./layouts/ClientLayout";
 import ClientDetailsPage from "./components/ClientDetailsPage";
@@ -19,6 +20,8 @@ import ClientDiscountsPage from "./components/ClientDiscountsPage";
 import AuthProvider from 'react-auth-kit';
 import createStore from "react-auth-kit/createStore";
 import SpecialistsSearchPage from './components/SpecialistsSearchPage';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const store = createStore({
   authName: '_auth',
@@ -26,6 +29,17 @@ const store = createStore({
   cookieDomain: window.location.hostname,
   cookieSecure: false
 });
+
+// Компонент для прокрутки на верх
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
 
 const App = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -37,6 +51,8 @@ const App = () => {
   return (
       <AuthProvider store={store}>
     <Router>
+        <LanguageProvider>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<MainLayout isAuthModalOpen={isAuthModalOpen} setIsAuthModalOpen={setIsAuthModalOpen} toggleAuthModal={toggleAuthModal}/>}>
             <Route path={""} element={<HomePage toggleAuthModal={toggleAuthModal}/>} /> {}
@@ -57,6 +73,7 @@ const App = () => {
           </Route>
           <Route path="/login" element={<AuthPage />} />
         </Routes>
+        </LanguageProvider>
     </Router>
       </AuthProvider>
   );
