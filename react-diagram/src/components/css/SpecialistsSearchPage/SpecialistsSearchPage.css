@@ -83,6 +83,7 @@
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 20px;
+  margin-top: 10px;
   text-align: center;
 }
 
@@ -99,7 +100,7 @@
   border: 1px solid #e0e0e0;
   background-color: #f7f7f7;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
@@ -134,6 +135,14 @@
   margin-top: 20px;
 }
 
+/* Specialists grid */
+.specialists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 20px;
+}
+
 /* Specialist card */
 .specialist-card {
   padding: 20px;
@@ -142,27 +151,29 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   background-color: white;
   transition: all 0.3s ease;
-  height: 150px; /* Фиксируем высоту карточек */
+  height: 200px; /* Ensure equal height for all cards */
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Равномерное распределение элементов */
-  align-items: stretch;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  overflow: hidden; /* Prevent content from overflowing the card */
 }
 
 /* Header specialist */
 .specialist-header {
   display: flex;
+  flex-direction: column;
   align-items: center;
   margin-bottom: 15px;
 }
 
-/* Avatar */
 .specialist-avatar {
   width: 80px;
   height: 80px;
   border-radius: 50%;
   overflow: hidden;
-  margin-right: 15px;
+  margin-bottom: 10px;
 }
 
 .avatar-image {
@@ -189,16 +200,16 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align: left; /* Выравнивание по левому краю */
+  text-align: center;
 }
 
 .specialist-name {
   font-weight: bold;
-  font-size: 16px;  /* Уменьшаем шрифт */
+  font-size: 16px;
   margin-bottom: 5px;
-  white-space: nowrap;  /* Не переносить текст на новую строку */
-  overflow: hidden;     /* Обрезка длинных имен */
-  text-overflow: ellipsis;  /* Добавляем "..." для длинных имен */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .specialist-occupation {
@@ -207,21 +218,27 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-bottom: 10px;
 }
 
 /* Specialist footer */
 .specialist-footer {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
+  width: 100%;
+  font-size: 14px;
+  white-space: nowrap; /* Prevent text from wrapping to new line */
+}
+
+.specialist-rating, .specialist-price {
+  white-space: nowrap;  /* Prevent line breaks */
+  overflow: hidden;      /* Prevent overflowing */
+  text-overflow: ellipsis; /* Add ellipsis if text is too long */
 }
 
 .specialist-rating {
   display: flex;
   align-items: center;
-  font-size: 14px; /* Уменьшаем шрифт */
-  color: #333;
 }
 
 .star-icon {
@@ -231,12 +248,33 @@
 
 .specialist-price {
   font-weight: bold;
-  font-size: 16px; /* Уменьшаем шрифт */
   color: #333;
 }
 
-/* Добавляем выравнивание текста по центру для всех карточек */
-.specialist-card {
-  text-align: center;
+/* Fix long text overflowing from cards */
+.specialist-info h3, 
+.specialist-info p {
+  max-width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
+.clear-button {
+  position: absolute;
+  right: 29%; /* Измените это значение, чтобы подвинуть крестик левее */
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #999; /* Цвет крестика */
+  font-size: 20px; /* Размер крестика */
+  display: none; /* По умолчанию скрыть */
+  display: block;
+}
+
+.search-container:hover .clear-button,
+.my-location-container:hover .clear-button {
+  display: block; /* Показывать при наведении на контейнер */
+}

@@ -6,7 +6,7 @@ const SpecialistsSearchPage = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [location, setLocation] = useState('');  // Поле для локации осталось
+  const [location, setLocation] = useState('');
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -27,7 +27,6 @@ const SpecialistsSearchPage = () => {
 
   const handleSearch = async () => {
     const categoriesParam = selectedCategories.length > 0 ? selectedCategories.join(',') : '';
-    // Убрали locationParam из запроса к бэкенду
     try {
       const response = await fetch(`/api/masters/search?term=${searchTerm}&categories=${categoriesParam}`);
       if (!response.ok) {
@@ -41,7 +40,6 @@ const SpecialistsSearchPage = () => {
   };
 
   const handleLocationSearch = () => {
-    // Оставлено для логики работы с локацией, но без связи с бэкендом
     console.log('Fetch user location logic here');
   };
 
@@ -53,11 +51,19 @@ const SpecialistsSearchPage = () => {
     );
   };
 
+  const clearSearch = () => {
+    setSearchTerm('');
+  };
+
+  const clearLocation = () => {
+    setLocation('');
+  };
+
   return (
     <div className="container">
       <h1 className="title">All specialists</h1>
       
-      <div className="search-container" placeholder="Find a specialist by name?">
+      <div className="search-container">
         <input 
           type="text" 
           placeholder="Find a specialist by name" 
@@ -69,6 +75,11 @@ const SpecialistsSearchPage = () => {
           Search
           <span className="search-icon"> &nbsp;⌕</span>
         </button>
+        {searchTerm && (
+          <button onClick={clearSearch} className="clear-button">
+            &times; {/* Символ крестика */}
+          </button>
+        )}
       </div>
 
       <div className="categories-container">
@@ -98,45 +109,47 @@ const SpecialistsSearchPage = () => {
         <button onClick={handleLocationSearch} className="my-location-button">
           My location
         </button>
+        {location && (
+          <button onClick={clearLocation} className="clear-button">
+            &times; {/* Символ крестика */}
+          </button>
+        )}
       </div>
 
       <div className="specialists-grid">
-  {specialists.map((specialist) => (
-    <div key={specialist.master_id} className="specialist-card">
-      <div className="specialist-header">
-        <div className="specialist-avatar">
-          {specialist.avatar_url ? (
-            <img
-              src={`/images/masters/${specialist.avatar_url}`}
-              alt={`${specialist.first_name} ${specialist.last_name}`}
-              className="avatar-image"
-            />
-          ) : (
-            <div className="avatar-initials">
-              {specialist.first_name[0]}{specialist.last_name[0]}
+        {specialists.map((specialist) => (
+          <div key={specialist.master_id} className="specialist-card">
+            <div className="specialist-header">
+              <div className="specialist-avatar">
+                {specialist.avatar_url ? (
+                  <img
+                    src={`/images/masters/${specialist.avatar_url}`}
+                    alt={`${specialist.first_name} ${specialist.last_name}`}
+                    className="avatar-image"
+                  />
+                ) : (
+                  <div className="avatar-initials">
+                    {specialist.first_name[0]}{specialist.last_name[0]}
+                  </div>
+                )}
+              </div>
+              <div className="specialist-info">
+                <h3 className="specialist-name">{specialist.first_name} {specialist.last_name}</h3>
+                <p className="specialist-occupation">
+                  {specialist.Occupation ? specialist.Occupation.name : 'Occupation not found'}
+                </p>
+              </div>
             </div>
-          )}
-        </div>
-        <div className="specialist-info">
-          <h3 className="specialist-name">{specialist.first_name} {specialist.last_name}</h3>
-          
-          {/* Проверка на наличие occupation */}
-          <p className="specialist-occupation">
-            {specialist.Occupation ? specialist.Occupation.name : 'Occupation not found'}
-          </p>
-        </div>
+            <div className="specialist-footer">
+              <div className="specialist-rating">
+                <span className="star-icon">★</span>
+                <span>{specialist.rating || 'No rating available'}</span>
+              </div>
+              <span className="specialist-price">${specialist.price || 'Price not available'}</span>
+            </div>
+          </div>
+        ))}
       </div>
-      <div className="specialist-footer">
-        <div className="specialist-rating">
-          <span className="star-icon">★</span>
-          <span>{specialist.rating || 'No rating available'}</span>
-        </div>
-        <span className="specialist-price">${specialist.price || 'Price not available'}</span>
-      </div>
-    </div>
-  ))}
-</div>
-
     </div>
   );
 };

@@ -63,6 +63,7 @@ router.get('/random/5', async (req, res) => {
       const masters = await Master.findAll({
           order: sequelize.random(),
           limit: 5,
+          attributes: ['master_id', 'first_name', 'last_name', 'avatar_url', 'gender'],
       });
       
       console.log('Fetched masters:', masters);

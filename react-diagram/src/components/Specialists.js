@@ -39,21 +39,21 @@ const Specialists = () => {
     return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
   };
 
-  const getImagePath = (avatarUrl) => {
-    return avatarUrl ? `/images/masters/${avatarUrl}` : '';
+  const getImagePath = (avatarUrl, masterId) => {
+    return avatarUrl ? `/images/masters/${masterId}/${avatarUrl}` : '';
   };
-
+  
   return (
     <div className="specialists-container">
       <h2 className="specialists-title">Specialists</h2>
-      <div className="specialists-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', maxWidth: '600px', margin: '0 auto' }}>
+      <div className="specialists-grid">
         {masters.map((master, index) => (
           <div key={index} className="specialist-item">
             <div className={`specialist-avatar-container ${getCircleColor(master.gender)}`}>
-              <div className="specialist-avatar">
+              <div className="specialist-avatar-homepage">
                 {master.avatar_url ? (
                   <img
-                    src={getImagePath(master.avatar_url)}
+                    src={getImagePath(master.avatar_url, master.master_id)}  // Используем master.master_id
                     alt={`${master.first_name} ${master.last_name}`}
                     className="specialist-image"
                     onError={(e) => {
@@ -77,7 +77,7 @@ const Specialists = () => {
         ))}
         <div className="specialist-item">
           <div className="specialist-avatar-container circle-more">
-            <div className="specialist-avatar">
+            <div className="specialist-avatar-homepage">
               <span className="more-specialists">+{totalMasters-5}</span>
             </div>
           </div>
@@ -85,6 +85,7 @@ const Specialists = () => {
       </div>
     </div>
   );
+  
 };
 
 export default Specialists;
