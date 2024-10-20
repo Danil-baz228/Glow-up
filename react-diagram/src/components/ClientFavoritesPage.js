@@ -1,9 +1,12 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import "./css/ClientPage/ClientFavoritesPage.css";
 import MasterDetailsComponent from "./MasterDetailsComponent";
+import {useOutletContext} from "react-router-dom";
+import axios from "axios";
 
 const ClientFavoritesPage = () => {
-    const [favorites, setFavorites] = useState([
+    const {currentUser, currentClient, setIsUpdateRequired} = useOutletContext();
+    /*const [favorites, setFavorites] = useState([
         {
             id: 1,
             first_name: "John",
@@ -60,7 +63,22 @@ const ClientFavoritesPage = () => {
                 address: "456 Elm St"
             }
         }
-    ]);
+    ]);*/
+
+    const [favorites, setFavorites] = useState([]);
+    
+    useEffect(() => {
+        if (currentClient) {
+            axios.get(`http://localhost:5000/api/clients/${currentClient.client_id}/favorite-master`)
+                .then((response) => {
+                    setFavorites(response.data);
+                    console.log(response.data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    }, [currentClient]);
 
     return (
         <div className={"clientFavoritesPage"}>
@@ -70,7 +88,7 @@ const ClientFavoritesPage = () => {
                             {
                                 favorites.map((favorite, index) => {
                                     return (
-                                        <MasterDetailsComponent id={index} master={favorite}/>
+                                        <MasterDetailsComponent key={index} master={favorite}/>
                                     );
                                 })
                             }

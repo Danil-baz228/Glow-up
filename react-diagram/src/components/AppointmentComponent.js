@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { format } from 'date-fns';
 import "./css/ClientPage/AppointmentComponent.css";
 import checkIcon from "./img/ClientPage/icon_checkmark.png";
+import axios from "axios";
 
 const AppointmentComponent = ({appointment}) => {
-    const formattedDate = format(new Date(appointment.date), 'dd.MM.yyyy');
+    const formattedDate = format(new Date(appointment.date_start), 'dd.MM.yyyy');
+    const [hoverRating, setHoverRating] = useState(null);
+    const rating = appointment.Review ? appointment.Review.rating : 0;
 
     return (
         <div className={"appointmentBox"}>
@@ -19,7 +22,7 @@ const AppointmentComponent = ({appointment}) => {
                             xmlns="http://www.w3.org/2000/svg"
                             width="20"
                             height="20"
-                            fill={index < appointment.Review.rating ? `#CCEA2E` : "#969696"}
+                            fill={index < rating ? `#CCEA2E` : "#969696"}
                             stroke="#CCEA2E"
                             viewBox="0 0 24 24"
                         >
