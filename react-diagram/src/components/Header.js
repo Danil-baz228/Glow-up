@@ -49,7 +49,7 @@ const Header = ({toggleAuthModal, isScrolled}) => {
                 </ul>
             </nav>
             <div className="header-icons">
-                <FaSearch className="icon"/>
+                <Link to="/masters"><FaSearch className="icon"/></Link>
                 <div className="language-selector"  onClick={toggleLanguage}>
                     <span>{language}</span>
                 </div>

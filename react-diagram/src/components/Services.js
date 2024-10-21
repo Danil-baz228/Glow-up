@@ -45,7 +45,7 @@ const Services = () => {
         {slides.map((slide, index) => (
           <div
             key={index}
-            className={`slide ${index === activeSlide ? 'activeSlide' : 'inactive'}`} // Применение классов
+            className={`slide ${index === activeSlide ? 'activeSlide' : 'inactive'}`}
           >
             <div className="image-container">
               <div className="image-wrapper">

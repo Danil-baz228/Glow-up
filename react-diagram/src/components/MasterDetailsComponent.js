@@ -1,10 +1,31 @@
-import React, {useMemo} from 'react';
+import React, { useMemo } from 'react';
 import "./css/ClientPage/MasterDetailsComponent.css";
 import navigationIcon from "./img/ClientPage/icon_navigation.png";
 import heartIcon from "./img/ClientPage/icon_heart.png";
+import { useLanguage } from './LanguageContext';
 
-const MasterDetailsComponent = ({master}) => {
+const MasterDetailsComponent = ({ master }) => {
+    const { language } = useLanguage();
     const roundedRating = useMemo(() => Math.round(master.avgRating), [master.avgRating]);
+
+    // Translations
+    const translations = {
+        UA: {
+            reviews: "{{count}} відгуки",
+            noReviews: "Ще немає відгуків",
+            open: "Відкрити",
+        },
+        EN: {
+            reviews: "{{count}} reviews",
+            noReviews: "No reviews yet",
+            open: "Open",
+        },
+    };
+
+    // Get the appropriate text based on the current language
+    const reviewsText = master?.reviewsCount
+        ? translations[language].reviews.replace("{{count}}", master.reviewsCount)
+        : translations[language].noReviews;
 
     return (
         <div className={"masterDetailsBox"}>
@@ -19,11 +40,9 @@ const MasterDetailsComponent = ({master}) => {
                 </div>
                 <div className="masterCategories">
                     {
-                        master.categories.slice(0, 4).map((category, index) => {
-                            return (
-                                <div key={index} className="masterCategory">{category.name}</div>
-                            );
-                        })
+                        master.categories.slice(0, 4).map((category, index) => (
+                            <div key={index} className="masterCategory">{category.name}</div>
+                        ))
                     }
                 </div>
             </div>
@@ -32,7 +51,7 @@ const MasterDetailsComponent = ({master}) => {
                     <div className="masterRating">{master.avgRating}</div>
                     <div className="starRatingBox">
                         <div className="starRating">
-                            {Array.from({length: 5}, (_, index) => (
+                            {Array.from({ length: 5 }, (_, index) => (
                                 <svg
                                     key={index}
                                     xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +66,7 @@ const MasterDetailsComponent = ({master}) => {
                                 </svg>
                             ))}
                         </div>
-                        <div className="reviewsCount">{master.reviewsCount + " reviews"}</div>
+                        <div className="reviewsCount">{reviewsText}</div>
                     </div>
                 </div>
                 <div className="masterAddress">
@@ -57,7 +76,7 @@ const MasterDetailsComponent = ({master}) => {
             </div>
             <div className="masterButtonBox">
                 <button className={master.gender === "male" ? "masterButtonMale" : "masterButtonFemale"}>
-                    Open
+                    {translations[language].open}
                 </button>
             </div>
         </div>
