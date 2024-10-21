@@ -4,47 +4,49 @@ const {createMaster} = require('./MasterController');
 const {User, Client} = require('../models/Relations');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
+
+const sendVerificationEmail = async (email, code) => {
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: "shumejko.sasha@gmail.com",
+            pass: 'vtsywmesziqxxnda'
+        }
+    });
+
+    const mailOptions = {
+        from: "shumejko.sasha@gmail.com",
+        to: email,
+        subject: 'GlowUp verification code',
+        text: `Your verification code is: ${code}`
+    };
+
+    await transporter.sendMail(mailOptions);
+};
 
 const register = async (req, res) => {
     try {
         const { email, password, role } = req.body;
 
-        // Check if user exists
+
         const existingUser = await User.findOne({ where: { email } });
         if (existingUser) {
             return res.status(400).json({ message: 'Email already exists' });
         }
-
-        // Hash password
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Create the user
-        const newUser = await createUser({ body: { email, password: hashedPassword, role } });
+        const verificationCode = Math.floor(100000 + Math.random() * 900000);
 
-        // Create a client or master based on role
-        if (role === 'client') {
-            await createClient({ body: {
-                    email: newUser.email,
-                    phone: req.body.phone,
-                    last_name: req.body.last_name,
-                    first_name: req.body.first_name,
-                    date_of_birth: req.body.date_of_birth,
-                    user_id: newUser.user_id,
-                }});
-        } else if (role === 'master') {
-            await createMaster({ body: {
-                    email: newUser.email,
-                    phone: req.body.phone,
-                    last_name: req.body.last_name,
-                    first_name: req.body.first_name,
-                    gender: "other",
-                    date_of_birth: req.body.date_of_birth,
-                    occupation_id: 1,
-                    user_id: newUser.user_id,
-                }});
-        }
+        const newUser = {
+            email,
+            password: hashedPassword,
+            role,
+            verificationCode
+        };
 
-        // Send success response
+        await sendVerificationEmail(email, verificationCode);
+
         res.status(201).json({ message: "Registration successful", user: newUser });
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -90,7 +92,42 @@ const login = async (req, res) => {
     }
 };
 
+const verifyEmail = async (req, res) => {
+    try {
+        const { email, password, role } = req.body;
+
+        const newUser = await createUser({ body: { email, password, role } });
+
+        if (role === 'client') {
+            await createClient({ body: {
+                    email: newUser.email,
+                    phone: req.body.phone,
+                    last_name: req.body.last_name,
+                    first_name: req.body.first_name,
+                    date_of_birth: req.body.date_of_birth,
+                    user_id: newUser.user_id,
+                }});
+        } else if (role === 'master') {
+            await createMaster({ body: {
+                    email: newUser.email,
+                    phone: req.body.phone,
+                    last_name: req.body.last_name,
+                    first_name: req.body.first_name,
+                    gender: "other",
+                    date_of_birth: req.body.date_of_birth,
+                    occupation_id: 1,
+                    user_id: newUser.user_id,
+                }});
+        }
+
+        res.status(200).json({ message: 'Email verified successfully', newUser });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 module.exports = {
     register,
-    login
-}
+    login,
+    verifyEmail
+};

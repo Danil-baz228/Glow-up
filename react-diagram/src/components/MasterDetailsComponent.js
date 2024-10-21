@@ -1,16 +1,34 @@
-import React, {useMemo} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import "./css/ClientPage/MasterDetailsComponent.css";
 import navigationIcon from "./img/ClientPage/icon_navigation.png";
 import heartIcon from "./img/ClientPage/icon_heart.png";
+import useAuthUser from "react-auth-kit/hooks/useAuthUser";
+import axios from "axios";
 
 const MasterDetailsComponent = ({master}) => {
     const roundedRating = useMemo(() => Math.round(master.avgRating), [master.avgRating]);
+
+    const authUser = useAuthUser();
+
+    const authUserId = authUser ? authUser.id : null;
+
+    const removeFavoriteMaster = async () => {
+        axios.delete(`http://localhost:5000/api/clients/${authUserId}/favorite-master`, {
+            data: {masterId: master.id}
+        })
+            .then(() => {
+                console.log("Master removed from favorites");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
 
     return (
         <div className={"masterDetailsBox"}>
             <img className={"masterImage"} src="https://media.istockphoto.com/id/1399565382/photo/young-happy-mixed-race-businessman-standing-with-his-arms-crossed-working-alone-in-an-office.jpg?s=612x612&w=0&k=20&c=buXwOYjA_tjt2O3-kcSKqkTp2lxKWJJ_Ttx2PhYe3VM=" alt=""/>
             <div className="favoriteButton">
-                <img className={"heartIcon"} src={heartIcon} alt=""/>
+                <img className={"heartIcon"} src={heartIcon} alt="" onClick={removeFavoriteMaster}/>
             </div>
             <div className="masterInfo">
                 <div className="masterTitle">
