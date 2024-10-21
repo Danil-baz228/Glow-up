@@ -48,35 +48,35 @@ const App = () => {
     };
 
     return (
-        <AuthProvider store={store}>
-            <Router>
-                <LanguageProvider>
-                    <ScrollToTop/>
-                    <Routes>
-                        <Route path="/" element={<MainLayout isAuthModalOpen={isAuthModalOpen}
-                                                             setIsAuthModalOpen={setIsAuthModalOpen}
-                                                             toggleAuthModal={toggleAuthModal}/>}>
-                            <Route path={""} element={<HomePage toggleAuthModal={toggleAuthModal}/>}/> {}
-                            <Route path="serviceCatalog" element={<ServiceCatalog/>}/>
-                            <Route path="masters" element={<SpecialistsSearchPage/>}/>
-                            <Route path="statistics" element={<Statistics/>}/>
-                            <Route path="reviews" element={<Reviews/>}/>
-                            <Route path="questionsAnswers" element={<QuestionsAnswers/>}/>
-                            <Route path="currentTopics" element={<AboutUs/>}/>
-                            <Route path="additionalInfo" element={<AdditionalInfo/>}/>
-                            <Route path="/account" element={<ClientLayout toggleAuthModal={toggleAuthModal}/>}>
-                                <Route path="details" element={<ClientDetailsPage/>}/>
-                                <Route path="favorites" element={<ClientFavoritesPage/>}/>
-                                <Route path="history" element={<ClientHistoryPage/>}/>
-                                <Route path="discounts" element={<ClientDiscountsPage/>}/>
+        <LanguageProvider>
+            <AuthProvider store={store}>
+                <Router>
+                        <ScrollToTop/>
+                        <Routes>
+                            <Route path="/" element={<MainLayout isAuthModalOpen={isAuthModalOpen}
+                                                                 setIsAuthModalOpen={setIsAuthModalOpen}
+                                                                 toggleAuthModal={toggleAuthModal}/>}>
+                                <Route path={""} element={<HomePage toggleAuthModal={toggleAuthModal}/>}/> {}
+                                <Route path="serviceCatalog" element={<ServiceCatalog/>}/>
+                                <Route path="masters" element={<SpecialistsSearchPage/>}/>
+                                <Route path="statistics" element={<Statistics/>}/>
+                                <Route path="reviews" element={<Reviews/>}/>
+                                <Route path="questionsAnswers" element={<QuestionsAnswers/>}/>
+                                <Route path="currentTopics" element={<AboutUs/>}/>
+                                <Route path="additionalInfo" element={<AdditionalInfo/>}/>
+                                <Route path="/account" element={<ClientLayout toggleAuthModal={toggleAuthModal}/>}>
+                                    <Route path="details" element={<ClientDetailsPage/>}/>
+                                    <Route path="favorites" element={<ClientFavoritesPage/>}/>
+                                    <Route path="history" element={<ClientHistoryPage/>}/>
+                                    <Route path="discounts" element={<ClientDiscountsPage/>}/>
+                                </Route>
+                                <Route path="*" element={<ErrorPage/>}/>
                             </Route>
-                            <Route path="*" element={<ErrorPage/>}/>
-                        </Route>
-                        <Route path="/login" element={<AuthPage/>}/>
-                    </Routes>
-                </LanguageProvider>
-            </Router>
-        </AuthProvider>
+                            <Route path="/login" element={<AuthPage/>}/>
+                        </Routes>
+                </Router>
+            </AuthProvider>
+        </LanguageProvider>
     );
 };
 

@@ -1,15 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import {NavLink, Outlet} from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { NavLink, Outlet } from 'react-router-dom';
 import './ClientLayout.css';
-import useAuthUser from "react-auth-kit/hooks/useAuthUser";
-import axios from "axios";
-import {FaPencil} from "react-icons/fa6";
-import {useLanguage} from '../components/LanguageContext'; // Импортируем контекст языка
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
+import axios from 'axios';
+import { FaPencil } from 'react-icons/fa6';
+import { useLanguage } from '../components/LanguageContext';
 
-const ClientLayout = ({toggleAuthModal}) => {
+const ClientLayout = ({ toggleAuthModal }) => {
     const authUser = useAuthUser();
     const authUserId = authUser ? authUser.id : null;
-    const userName = authUser ? authUser.name : null;
 
     const [currentUser, setCurrentUser] = useState(null);
     const [currentClient, setCurrentClient] = useState(null);
@@ -37,11 +36,12 @@ const ClientLayout = ({toggleAuthModal}) => {
         setIsUpdateRequired(false);
     }, [authUserId, isUpdateRequired]);
 
+    // Функция для загрузки аватара
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
             setAvatarFile(file);
-            uploadAvatar(file);
+            uploadAvatar(file); // вызываем функцию загрузки файла
         }
     };
 
@@ -60,7 +60,7 @@ const ClientLayout = ({toggleAuthModal}) => {
                 }
             );
             setIsUpdateRequired(true);
-            window.location.reload();
+            window.location.reload(); // Обновляем страницу после загрузки
         } catch (error) {
             console.error('Error uploading avatar:', error);
         }
@@ -86,34 +86,31 @@ const ClientLayout = ({toggleAuthModal}) => {
         }
     };
 
-    // Проверяем, что language существует и содержится в texts
-    const currentText = texts[language] || texts['en']; // Устанавливаем английский язык по умолчанию, если language не определен
+
+    const currentText = texts[language] || texts['en'];
 
     return (
         <div className={"clientLayout"}>
             <div className="clientTitle">
-                {
-                    authUser && currentClient ?
-                        <>
-                            <img
-                                src={currentUser ? `http://localhost:5000${currentUser.avatar_url}` : '/default-avatar.png'}
-                                alt="Avatar"
-                                className="clientAvatar"
-                            />
-                            <FaPencil className="editAvatarIcon"
-                                      onClick={() => document.getElementById('avatarInput').click()}
-                            />
-                            <input
-                                type="file"
-                                id="avatarInput"
-                                onChange={handleFileChange}
-                                style={{display: 'none'}}
-                                accept="image/*"
-                            />
-                            <h2 className={"clientName"}>{currentClient.last_name} {currentClient.first_name}</h2>
-                        </>
-                        : null
-                }
+                {authUser && currentClient && (
+                    <>
+                        <img
+                            src={currentUser ? `http://localhost:5000${currentUser.avatar_url}` : '/default-avatar.png'}
+                            alt="Avatar"
+                            className="clientAvatar"
+                        />
+                        <FaPencil className="editAvatarIcon"
+                                  onClick={() => document.getElementById('avatarInput').click()} />
+                        <input
+                            type="file"
+                            id="avatarInput"
+                            onChange={handleFileChange} // Добавили обработчик изменения файла
+                            style={{ display: 'none' }}
+                            accept="image/*"
+                        />
+                        <h2 className={"clientName"}>{currentClient.last_name} {currentClient.first_name}</h2>
+                    </>
+                )}
             </div>
             <div className="clientHeader">
                 <NavLink to={"details"} className={"clientNavigationButton"}>{currentText.myDetails}</NavLink>
@@ -121,12 +118,16 @@ const ClientLayout = ({toggleAuthModal}) => {
                 <NavLink to={"history"} className={"clientNavigationButton"}>{currentText.history}</NavLink>
                 <NavLink to={"discounts"} className={"clientNavigationButton"}>{currentText.discounts}</NavLink>
             </div>
-            {authUser ? <Outlet context={{ currentUser, currentClient, setIsUpdateRequired }} /> :
+            {authUser ? (
+                <Outlet context={{ currentUser, currentClient, setIsUpdateRequired }} />
+            ) : (
                 <>
                     <div className={"notAuthorizedMessage"}>{currentText.notAuthorized}</div>
-                    <button className={"clientLayoutLoginButton"} onClick={toggleAuthModal}>{currentText.logIn}</button>
+                    <button className={"clientLayoutLoginButton"} onClick={toggleAuthModal}>
+                        {currentText.logIn}
+                    </button>
                 </>
-            }
+            )}
         </div>
     );
 };
