@@ -19,6 +19,7 @@ import ClientDiscountsPage from "./components/ClientDiscountsPage";
 import AuthProvider from 'react-auth-kit';
 import createStore from "react-auth-kit/createStore";
 import SpecialistsSearchPage from './components/SpecialistsSearchPage';
+import MasterLocationPage from "./components/MasterLocationPage";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -76,6 +77,7 @@ const App = () => {
                             <Route path="*" element={<ErrorPage/>}/>
                         </Route>
                         <Route path="/login" element={<AuthPage/>}/>
+                        <Route path="/dev" element={<MasterLocationPage/>}/>
                     </Routes>
                 </LanguageProvider>
             </Router>
