@@ -1,0 +1,171 @@
+/* Основная стилизация */
+.about-container {
+    width: 80%;
+    margin: 0 auto;
+    font-family: 'Poppins', sans-serif;
+}
+
+.add-about-btn {
+    padding: 12px 24px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    width: 1200px;
+    cursor: pointer;
+    text-align: center;
+    margin-right: -400px;
+    margin-left: -190px;
+}
+
+section {
+    background-color: #fff;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgb(0, 0, 0);
+    width: 1150px;
+    margin-left: -180px;
+}
+
+h2 {
+    color: #222;
+    margin-bottom: 15px;
+}
+
+p {
+    color: #555;
+}
+
+.image-gallery, .certifications-gallery {
+    display: flex;
+    gap: 20px;
+}
+
+.image-gallery img, .certifications-gallery img {
+    width: 550px;
+    height: auto;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.image-gallery img{
+    width: 500px;
+    height: 407px;
+    object-fit: cover;
+}
+.certifications-gallery img {
+    width: 370px;
+    height: 407px;
+    object-fit: cover;
+}
+
+.equipment-gallery img {
+    width: 1150px;
+    height: auto;
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.controls {
+    margin-top: 20px;
+}
+
+.controls button {
+    font-family: 'Poppins', sans-serif;
+    padding: 10px 15px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+    background-color: transparent;
+    color: black;
+    border: 1px solid black;
+}
+
+.controls button:hover, .delete:hover {
+    background-color: black;
+    color: white;
+}
+
+.icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
+/* Стилизация модального окна */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+/* Стилизация модального окна */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-content {
+    position: relative;
+    padding: 20px; /* Отступ в 2 см вокруг изображения */
+    background-color: white; /* Белый фон модального окна */
+    border-radius: 8px;
+    max-width: 25%; /* Ограничиваем максимальную ширину окна */
+    max-height: 80%; /* Ограничиваем максимальную высоту окна */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box; /* Учитываем padding в общих размерах */
+}
+
+.modal-image {
+    width: auto;
+    height: auto;
+    max-width: 100%; /* Изображение подстраивается под ширину модального окна */
+    max-height: 100%; /* Ограничиваем высоту изображения */
+    object-fit: contain; /* Поддерживаем пропорции изображения */
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: white;
+    color: black;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.close-button:hover {
+    background-color: black;
+    color: white;
+}

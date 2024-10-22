@@ -3,6 +3,7 @@ import './ProfilePage.css'; // Подключение стилей
 import profilePhoto from 'C:/Users/user/Desktop/Master_Final/client/src/assets/profile-photo.png';
 import background from 'C:/Users/user/Desktop/Master_Final/client/src/assets/background.png';
 import Services from './Services';
+import About from './About';
 import ImageGrid from './ImageGrid';
 const ProfilePage = () => {
   const [activeSection, setActiveSection] = useState('portfolio'); // Состояние активной секции
@@ -59,7 +60,7 @@ const ProfilePage = () => {
       case 'reviews':
         return <div>Reviews Section</div>;
       case 'about':
-        return <div>About Section</div>;
+        return <About/>;
       case 'location':
         return <div>Location Section</div>;
       default:
