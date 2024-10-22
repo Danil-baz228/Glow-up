@@ -16,6 +16,7 @@ const Header = ({toggleAuthModal, isScrolled}) => {
     const signOut = useSignOut();
 
     const userName = authUser ? authUser.username : null;
+    const userRole = authUser ? authUser.role : null;
 
     const handleSignOut = () => {
         signOut();
@@ -59,7 +60,7 @@ const Header = ({toggleAuthModal, isScrolled}) => {
                     </>
                     :
                     <>
-                        <Link className="userInfo" to="/account/details">
+                        <Link className="userInfo" to={userRole === 'client' ? '/account/details' : '/master/location'}>
                             <div className="userInfo">
                                 <span className={'usernameTextBox'}>{userName}</span>
                                 <FaUser className="icon"/>

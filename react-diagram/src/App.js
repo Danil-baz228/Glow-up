@@ -70,6 +70,9 @@ const App = () => {
                                 <Route path="history" element={<ClientHistoryPage/>}/>
                                 <Route path="discounts" element={<ClientDiscountsPage/>}/>
                             </Route>
+                            <Route path="/master" element={<ClientLayout toggleAuthModal={toggleAuthModal}/>}>
+                                <Route path="location" element={<ClientDetailsPage/>}/>
+                            </Route>
                             <Route path="*" element={<ErrorPage/>}/>
                         </Route>
                         <Route path="/login" element={<AuthPage/>}/>
