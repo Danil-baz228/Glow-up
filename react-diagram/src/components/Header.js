@@ -18,6 +18,8 @@ const Header = ({toggleAuthModal, isScrolled}) => {
     const userName = authUser ? authUser.username : null;
     const userRole = authUser ? authUser.role : null;
 
+    console.log(authUser, userName, userRole);
+
     const handleSignOut = () => {
         signOut();
         window.location.reload();
@@ -60,7 +62,7 @@ const Header = ({toggleAuthModal, isScrolled}) => {
                     </>
                     :
                     <>
-                        <Link className="userInfo" to={userRole === 'client' ? '/account/details' : '/master/location'}>
+                        <Link className="userInfo" to={userRole === 'client' ? '/account/details' : '/dev'}>
                             <div className="userInfo">
                                 <span className={'usernameTextBox'}>{userName}</span>
                                 <FaUser className="icon"/>

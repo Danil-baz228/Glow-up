@@ -96,7 +96,9 @@ const verifyEmail = async (req, res) => {
     try {
         const { email, password, role } = req.body;
 
-        const newUser = await createUser({ body: { email, password, role } });
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const newUser = await createUser({ body: { email, password: hashedPassword, role } });
 
         if (role === 'client') {
             await createClient({ body: {
