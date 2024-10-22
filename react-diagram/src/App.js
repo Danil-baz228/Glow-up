@@ -21,6 +21,7 @@ import createStore from "react-auth-kit/createStore";
 import SpecialistsSearchPage from './components/SpecialistsSearchPage';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Blog from "./components/Blog";
 
 const store = createStore({
     authName: '_auth',
@@ -70,6 +71,7 @@ const App = () => {
                                     <Route path="history" element={<ClientHistoryPage/>}/>
                                     <Route path="discounts" element={<ClientDiscountsPage/>}/>
                                 </Route>
+                                <Route path="blog" element={<Blog/>}/>
                                 <Route path="*" element={<ErrorPage/>}/>
                             </Route>
                             <Route path="/login" element={<AuthPage/>}/>

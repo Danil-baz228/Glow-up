@@ -8,10 +8,12 @@ import HomePageReviews from './HomePageReviews.js';
 import placeholder1 from './img/placeholder.png';
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 import { useLanguage } from './LanguageContext';
+import preloadVideo from './startAnimation/ShotAnim.mp4';
 
 const HomePage = ({toggleAuthModal}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false); // Состояние для контроля загрузки
   const authUser = useAuthUser();
   const { language } = useLanguage();
 
@@ -65,12 +67,31 @@ const HomePage = ({toggleAuthModal}) => {
     };
   }, []);
 
+  useEffect(() => {
+    // Симулируем загрузку контента
+    const timer = setTimeout(() => {
+      setIsLoaded(true); // Через 3 секунды контент становится доступным
+    }, 6000);
+    return () => clearTimeout(timer);
+  }, []);
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  if (!isLoaded) {
+    return (
+        <div className="preloader-container">
+          <video autoPlay muted className="preloader-video">
+            <source src={preloadVideo} type="video/mp4" />
+          </video>
+        </div>
+    );
+  }
+
   return (
       <div className="homepage">
+        {/* Ваш основной контент */}
         <div className="header-container">
           <header className={`main-header ${isScrolled ? 'hidden' : 'fade-in'}`}>
             <div className="component-header">
@@ -83,28 +104,25 @@ const HomePage = ({toggleAuthModal}) => {
               </div>
             </div>
           </header>
-
           <div className={`sticky-header ${isScrolled ? 'fixed slide-in' : ''}`}>
             <Header toggleAuthModal={toggleAuthModal} isScrolled={isScrolled}/>
-            <div className="hamburger" onClick={toggleMenu}>
-              <div className="bar"></div>
-              <div className="bar"></div>
-              <div className="bar"></div>
-            </div>
-            {isMenuOpen && (
-                <nav className="dropdown-menu">
-                  <ul>
-                    <li>Menu Item 1</li>
-                    <li>Menu Item 2</li>
-                    <li>Menu Item 3</li>
-                  </ul>
-                </nav>
-            )}
           </div>
         </div>
-
-
-
+        <div className="hamburger" onClick={toggleMenu}>
+          <div className="bar"></div>
+          <div className="bar"></div>
+          <div className="bar"></div>
+        </div>
+        {isMenuOpen && (
+            <nav className="dropdown-menu">
+              <ul>
+                <li>Menu Item 1</li>
+                <li>Menu Item 2</li>
+                <li>Menu Item 3</li>
+              </ul>
+            </nav>
+        )}
+        {/* Остальной контент */}
         <section className="statistics-section fade-in">
           <div className="stat-item">
             <h2>1235</h2>
@@ -127,7 +145,6 @@ const HomePage = ({toggleAuthModal}) => {
                 <input type="email" placeholder={translations[language].emailPlaceholder} />
                 <button className="submit-button">{translations[language].getButton}</button>
               </section>
-
               <section className="info-section fade-in">
                 <div className="info-card">
                   <h3>{translations[language].forClients}</h3>
@@ -142,7 +159,6 @@ const HomePage = ({toggleAuthModal}) => {
               </section>
             </>
         )}
-
         <Specialists />
         <HomePageReviews />
       </div>
