@@ -13,6 +13,10 @@
   color: #ffffff; 
 }
 
+.footer-purple a:hover{
+  color: black;
+}
+
 .footer-black {
   background-color: #1e1e1e; 
   color: #d4ff00;
@@ -33,7 +37,7 @@
   color: inherit; 
 }
 
-.footer-column a:hover {
+.footer-black a:hover {
   color: #fff;
 }
 

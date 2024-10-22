@@ -328,5 +328,27 @@
   background-color: #333;
 }
 
+.loading-placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Высота экрана */
+  background-color: #f0f0f0; /* Легкий серый фон */
+  color: #333; /* Темный цвет текста */
+  font-size: 24px; /* Размер текста */
+  font-family: 'Arial', sans-serif;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  animation: blink 1.5s ease-in-out infinite;
+}
 
+@keyframes blink {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
 
