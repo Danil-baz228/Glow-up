@@ -10,8 +10,11 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
 
+}
+.masterDetailsBox{
+    background: white;
+}
 .clientFavoritesPage h1{
     font-size: 36px;
     font-weight: 400;
