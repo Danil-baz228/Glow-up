@@ -1,0 +1,73 @@
+.blog-page {
+
+    padding: 140px 120px;
+}
+
+.blog-header {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.blog-articles {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: minmax(200px, auto);
+    gap: 20px;
+    padding: 0 40px; /* Отступы по бокам */
+}
+
+/* Настраиваем сетку, как на изображении */
+.blog-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+/* Первые два поста занимают по 3 колонки */
+.blog-card-1, .blog-card-2 {
+    grid-column: span 3;
+}
+
+/* Следующие три поста занимают по 2 колонки */
+.blog-card-3, .blog-card-4, .blog-card-5 {
+    grid-column: span 2;
+}
+
+/* Последние два поста снова занимают по 3 колонки */
+.blog-card-6, .blog-card-7 {
+    grid-column: span 3;
+}
+
+.blog-card img {
+    width: 100%;
+    height: auto;
+}
+
+.blog-content {
+    padding: 15px;
+}
+
+.blog-content h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.blog-content h4 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #666;
+}
+
+.blog-content p {
+    font-size: 1em;
+    margin-bottom: 20px;
+}
+
+.blog-content a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}

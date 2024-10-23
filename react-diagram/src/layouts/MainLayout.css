@@ -2,11 +2,11 @@
 .layout-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Минимальная высота для контейнера */
+    min-height: 100vh;
 }
 
 main {
-    flex: 1; /* Позволяет основному контенту занимать всё оставшееся пространство */
+    flex: 1;
 }
 
 .headerclas {

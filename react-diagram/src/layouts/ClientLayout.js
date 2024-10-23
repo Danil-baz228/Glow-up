@@ -15,7 +15,7 @@ const ClientLayout = ({ toggleAuthModal }) => {
     const [isUpdateRequired, setIsUpdateRequired] = useState(false);
     const [avatarFile, setAvatarFile] = useState(null);
 
-    const { language } = useLanguage(); // Получаем текущий язык из контекста
+    const { language } = useLanguage();
 
     useEffect(() => {
         axios.get(`http://localhost:5000/api/users/${authUserId}`)
@@ -104,7 +104,7 @@ const ClientLayout = ({ toggleAuthModal }) => {
                         <input
                             type="file"
                             id="avatarInput"
-                            onChange={handleFileChange} // Добавили обработчик изменения файла
+                            onChange={handleFileChange}
                             style={{ display: 'none' }}
                             accept="image/*"
                         />
