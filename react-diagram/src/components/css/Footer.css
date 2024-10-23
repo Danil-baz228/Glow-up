@@ -1,4 +1,5 @@
 .footer {
+  border: 1px solid #1C1C1C;
   padding: 40px;
   display: flex;
   justify-content: space-between;
@@ -9,11 +10,21 @@
 }
 
 .footer-purple {
+
   background-color: #8e6efd; 
   color: #ffffff; 
 }
 
 .footer-purple a:hover{
+  color: black;
+}
+
+.footer-white{
+  background-color: #ffffff;
+  color: #8e6efd;
+}
+
+.footer-white a:hover{
   color: black;
 }
 

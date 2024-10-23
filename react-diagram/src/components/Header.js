@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from './LanguageContext';
 import logo from './img/Logo.png';
 import logoSmall from './img/logoSmall.png';
@@ -15,14 +15,18 @@ const Header = ({ toggleAuthModal, isScrolled }) => {
 
     const authUser = useAuthUser();
     const signOut = useSignOut();
-
+    const location = useLocation();
     const userName = authUser ? authUser.username : null;
 
     const handleSignOut = () => {
         signOut();
         window.location.reload();
     };
+    let headerClass = 'header';
 
+    if (location.pathname === '/blog') {
+        headerClass = 'header fixed';
+    }
     const translations = {
         UA: {
             catalog: 'Каталог послуг',
@@ -37,7 +41,7 @@ const Header = ({ toggleAuthModal, isScrolled }) => {
     };
 
     return (
-        <header className={`header ${isScrolled ? 'fixed' : ''}`}>
+        <header className={`${headerClass} ${isScrolled ? 'fixed' : ''}`}>
             <div className="header-logo">
                 <Link to="/"><img src={logoSmall} alt="Service 1" /></Link>
             </div>

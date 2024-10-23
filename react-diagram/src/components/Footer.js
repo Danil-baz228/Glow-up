@@ -8,9 +8,13 @@ const Footer = () => {
   const location = useLocation();
   const { language } = useLanguage();
 
-  const footerClass = location.pathname === '/'
-      ? 'footer footer-purple'
-      : 'footer footer-black';
+  let footerClass = 'footer footer-black';
+
+  if (location.pathname === '/') {
+    footerClass = 'footer footer-purple';
+  } else if (location.pathname === '/blog') {
+    footerClass = 'footer footer-white';
+  }
 
   const translations = {
     UA: {
@@ -61,7 +65,7 @@ const Footer = () => {
 
         <div className="footer-column">
           <ul>
-            <li><a href="/about">{translations[language].about}</a></li>
+            <li><a href="/CurrentTopics">{translations[language].about}</a></li>
             <li><a href="/account">{translations[language].account}</a></li>
             <li><a href="/history">{translations[language].history}</a></li>
             <li><a href="/favorites">{translations[language].favorites}</a></li>
