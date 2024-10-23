@@ -28,13 +28,10 @@ const MasterLocationPage = () => {
     });
 
     const geocodeAddress = (address) => {
-        console.log("geocode")
         const fullAddress = `${address.streetAddress}, ${address.cityName}, ${address.stateName}, ${address.zipCode}`;
         const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(fullAddress)}&key=AIzaSyB2rFDD5t6wHQeHrVwozz3P3fFY1QRAtkQ`;
-        console.log(fullAddress)
         axios.get(geocodingUrl)
             .then((response) => {
-                console.log(response.data.results)
                 if (response.data.results.length > 0) {
                     const location = response.data.results[0].geometry.location;
                     setMapCenter(location);  // Set map center to geocoded location
@@ -54,10 +51,10 @@ const MasterLocationPage = () => {
             .then((response) => {
                 setAddress(response.data);
                 geocodeAddress({
-                    streetAddress: "459 Essex St",
-                    cityName: "Millburn",
-                    stateName: "New Jersey",
-                    zipCode: "07041"
+                    streetAddress: response.data.address,
+                    cityName: response.data.City.name,
+                    stateName: response.data.City.State.name,
+                    zipCode: response.data.zip_code
                 });
             })
             .catch((error) => {
@@ -67,7 +64,6 @@ const MasterLocationPage = () => {
 
     const handleOpenModal = () => {
         setIsModalOpen(true);
-        console.log(address.City.name)
         setNewAddress({
             salonName: address.name || '',
             zipCode: address.zip_code || '',
@@ -83,12 +79,12 @@ const MasterLocationPage = () => {
 
     const handleSaveAddress = () => {
         const addressData = {
-            salonName: newAddress.salonName,
-            zipCode: newAddress.zipCode,
+            name: newAddress.salonName,
+            zip_code: newAddress.zipCode,
             stateName: newAddress.stateName,
             cityName: newAddress.cityName,
-            streetAddress: newAddress.streetAddress,
-            master_id: currentMaster.master_id
+            address: newAddress.streetAddress,
+            master_id: 1
         };
 
         if (address.salon_id) {
@@ -97,6 +93,14 @@ const MasterLocationPage = () => {
                 .then((response) => {
                     setAddress(response.data);
                     setIsModalOpen(false);
+                    geocodeAddress(
+                        {
+                            streetAddress: response.data.address,
+                            cityName: response.data.City.name,
+                            stateName: response.data.City.State.name,
+                            zipCode: response.data.zip_code
+                        }
+                    )
                 })
                 .catch((error) => {
                     console.log('Error updating salon:', error);
@@ -107,6 +111,14 @@ const MasterLocationPage = () => {
                 .then((response) => {
                     setAddress(response.data.salon);
                     setIsModalOpen(false);
+                    geocodeAddress(
+                        {
+                            streetAddress: response.data.salon.address,
+                            cityName: response.data.salon.City.name,
+                            stateName: response.data.salon.City.State.name,
+                            zipCode: response.data.salon.zip_code
+                        }
+                    )
                 })
                 .catch((error) => {
                     console.log('Error saving new salon:', error);
