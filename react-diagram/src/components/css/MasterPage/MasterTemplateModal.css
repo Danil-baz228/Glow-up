@@ -1,0 +1,157 @@
+/* Общий стиль модального окна */ 
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    font-family: 'Poppins', sans-serif;
+}
+
+.modal-content {
+    background: white;
+    padding: 18px; /* Уменьшаем внутренний отступ, чтобы лучше использовать пространство */
+    border-radius: 10px;
+    width: 13000px; /* Увеличиваем ширину */
+    height: auto; /* Убираем фиксированную высоту, чтобы контент мог увеличиваться */
+    max-width: 90%; /* Увеличиваем максимальную ширину, чтобы адаптировалось под разные экраны */
+    max-height: 101%; /* Ограничиваем максимальную высоту, чтобы окно не выходило за пределы экрана */
+    overflow-y: auto; /* Добавляем прокрутку, если содержимое превышает высоту */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Заголовок */
+h2 {
+    font-size: 28px;  /* Увеличиваем размер заголовка */
+    margin-bottom: 80px; /* Уменьшаем отступ, чтобы лучше использовать пространство */
+}
+
+/* Контейнер для рамок */
+.template-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 30px;  /* Увеличиваем расстояние между рамками */
+    width: 100%;
+    height: auto; /* Убираем фиксированную высоту */
+    max-height: 600px; /* Увеличиваем высоту контейнера, если нужно */
+    overflow-y: auto; /* Добавляем прокрутку, если содержимое превышает высоту */
+}
+
+/* Рамки для шаблонов */
+.template-frame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px; /* Увеличиваем внутренний отступ рамок */
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 150px; /* Увеличиваем высоту рамки */
+    width:550px;
+}
+
+/* Цвета для рамок */
+.pink {
+    background-color: #FF609C;
+}
+
+.yellow {
+    background-color: #CCEA2E;
+}
+
+.blue {
+    background-color: #7550FF;
+}
+
+.black {
+    background-color: #1C1C1C;
+    color: white;
+}
+
+/* Заголовок рамки */
+.headline {
+    font-size: 22px; /* Увеличиваем размер шрифта в рамке */
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    margin-right: auto;
+}
+
+/* Описание */
+.description {
+    font-size: 16px;  /* Увеличиваем размер описания */
+    margin-top: 10px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    margin-right: auto;
+}
+
+/* Плейсхолдер изображения */
+.gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 105px;
+    height: 105px;
+    background: rgb(255, 255, 255);
+    border-radius: 10px;
+    margin: 10px; /* Добавляем отступ между иконками */
+}
+
+.gallery {
+    display: flex;
+    gap: 10px; /* Расстояние между иконками */
+    justify-content: center;
+    align-items: center;
+}
+
+.gallery img {
+    width: 50px;  /* Увеличиваем размер иконки */
+    height: 50px;
+}
+
+/* Информация для контактов */
+.contact-info {
+    text-align: center;
+    margin-top: auto;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Иконки соцсетей */
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.social-icons img {
+    width: 24px;
+    height: 24px;
+}
+
+/* Кнопка "Далее" */
+.next-button {
+    font-family: 'Poppins', sans-serif;
+    padding: 10px 15px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+    background-color: transparent;
+    color: black;
+    border: 1px solid black;
+}
+
+.next-button:hover {background-color: black;
+    color: white;
+}
