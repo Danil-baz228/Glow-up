@@ -12,6 +12,7 @@ const MasterLocationPage = () => {
     };
 
     const [address, setAddress] = useState({});
+    const [states, setStates] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [newAddress, setNewAddress] = useState({
         salonName: '',
@@ -20,10 +21,10 @@ const MasterLocationPage = () => {
         cityName: '',
         streetAddress: '',
     });
-    const [mapCenter, setMapCenter] = useState({ lat: 40.7128, lng: -74.0060 });
+    const [mapCenter, setMapCenter] = useState({lat: 40.7128, lng: -74.0060});
     const [markerPosition, setMarkerPosition] = useState(null);
 
-    const { isLoaded } = useJsApiLoader({
+    const {isLoaded} = useJsApiLoader({
         googleMapsApiKey: "AIzaSyDlWzlBtLizMbDDFSeR-iBaCsmTL89BM6o", // Replace with your API Key
     });
 
@@ -44,7 +45,7 @@ const MasterLocationPage = () => {
     };
 
     useEffect(() => {
-        if(!currentMaster){
+        if (!currentMaster) {
             currentMaster = {master_id: 1};
         }
         axios.get(`http://localhost:5000/api/salons/master/${currentMaster.master_id}`)
@@ -62,8 +63,19 @@ const MasterLocationPage = () => {
             });
     }, [currentMaster]);
 
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/states')
+            .then((response) => {
+                setStates(response.data);
+            })
+            .catch((error) => {
+                console.log('Error fetching states:', error);
+            });
+    }, []);
+
     const handleOpenModal = () => {
         setIsModalOpen(true);
+        console.log(address)
         setNewAddress({
             salonName: address.name || '',
             zipCode: address.zip_code || '',
@@ -96,8 +108,8 @@ const MasterLocationPage = () => {
                     geocodeAddress(
                         {
                             streetAddress: response.data.address,
-                            cityName: response.data.City.name,
-                            stateName: response.data.City.State.name,
+                            cityName: addressData.cityName,
+                            stateName: addressData.stateName,
                             zipCode: response.data.zip_code
                         }
                     )
@@ -142,7 +154,7 @@ const MasterLocationPage = () => {
                         center={mapCenter}
                         zoom={15}
                     >
-                        {markerPosition && <Marker position={markerPosition} />}
+                        {markerPosition && <Marker position={markerPosition}/>}
                     </GoogleMap>
                 )}
                 <div className="map-marker">
@@ -169,21 +181,21 @@ const MasterLocationPage = () => {
                         <div className="form-group">
                             <label>State</label>
                             <select
-                                name="state"
+                                name="stateName"
                                 value={newAddress.stateName}
                                 onChange={handleInputChange}
                             >
                                 <option value="">Select state</option>
-                                <option value="New York">New York</option>
-                                <option value="California">California</option>
-                                {/* Add more states as needed */}
+                                {states.map((state) => (
+                                    <option key={state.id} value={state.name}>{state.name}</option>
+                                ))}
                             </select>
                         </div>
                         <div className="form-group">
                             <label>City</label>
                             <input
                                 type="text"
-                                name="city"
+                                name="cityName"
                                 value={newAddress.cityName}
                                 onChange={handleInputChange}
                             />
