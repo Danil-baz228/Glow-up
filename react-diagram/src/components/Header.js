@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from './LanguageContext';
 import logo from './img/Logo.png';
 import logoSmall from './img/logoSmall.png';
+import vidlogo from './startAnimation/vidlog.gif';
+import vidlogoWhite from './startAnimation/white.gif';
 import './css/Header.css';
 import { FaSearch, FaUser, FaSignInAlt, FaSignOutAlt, FaBars } from 'react-icons/fa';
 
@@ -43,7 +45,10 @@ const Header = ({ toggleAuthModal, isScrolled }) => {
     return (
         <header className={`${headerClass} ${isScrolled ? 'fixed' : ''}`}>
             <div className="header-logo">
-                <Link to="/"><img src={logoSmall} alt="Service 1" /></Link>
+                <Link to="/"><img
+                    src={(isScrolled || location.pathname === '/blog') ? vidlogoWhite : vidlogo}
+                    alt="Service 1 Logo"
+                /></Link>
             </div>
 
             {/* Кнопка гамбургера */}

@@ -55,12 +55,12 @@ const Services = () => {
           >
             <div className="image-container">
               <div className="image-wrapper">
-                <Link to="/blog"><img src={slide.images[0]} alt={slide.title1} className="slider-image" ></img></Link>
-                <h3 className="text-container">{slide.title1}</h3>
+                <img src={slide.images[0]} alt={slide.title1} className="slider-image" ></img>
+                <Link to="/blog"><h3 className="text-container">{slide.title1}</h3></Link>
               </div>
               <div className="image-wrapper">
-                <Link to="/blog"><img src={slide.images[1]} alt={slide.title2} className="slider-image" /></Link>
-                <h3 className="text-container">{slide.title2}</h3>
+                <img src={slide.images[1]} alt={slide.title2} className="slider-image" />
+                <Link to="/blog"><h3 className="text-container">{slide.title2}</h3></Link>
               </div>
             </div>
           </div>
