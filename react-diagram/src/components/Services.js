@@ -59,7 +59,7 @@ const Services = () => {
                 <h3 className="text-container">{slide.title1}</h3>
               </div>
               <div className="image-wrapper">
-                <img src={slide.images[1]} alt={slide.title2} className="slider-image" />
+                <Link to="/blog"><img src={slide.images[1]} alt={slide.title2} className="slider-image" /></Link>
                 <h3 className="text-container">{slide.title2}</h3>
               </div>
             </div>
