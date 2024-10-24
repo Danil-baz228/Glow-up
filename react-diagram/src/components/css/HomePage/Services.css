@@ -6,7 +6,13 @@
   margin: auto;
   overflow: hidden;
 }
-
+.services-title{
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: #333;
+}
 /* Контейнер для слайдов */
 .slide {
   padding: 30px;

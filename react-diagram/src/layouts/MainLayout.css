@@ -1,4 +1,16 @@
-.hederclas {
+/* MainLayout.css */
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+}
+
+main {
+    flex: 1;
+}
+
+.headerclas {
     position: fixed;
     top: 0;
     left: 0;

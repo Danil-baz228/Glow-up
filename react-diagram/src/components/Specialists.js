@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './css/HomePage/Specialists.css';
+import { useLanguage } from './LanguageContext'; // Importing the useLanguage hook
 
 const Specialists = () => {
+  const { language } = useLanguage(); // Get the current language from the context
   const [masters, setMasters] = useState([]);
   const [totalMasters, setTotalMasters] = useState(0);
 
@@ -39,51 +41,63 @@ const Specialists = () => {
     return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
   };
 
-  const getImagePath = (avatarUrl) => {
-    return avatarUrl ? `/images/masters/${avatarUrl}` : '';
+  const getImagePath = (avatarUrl, masterId) => {
+    return avatarUrl ? `/images/masters/${masterId}/${avatarUrl}` : '';
+  };
+
+  // Translations for the page
+  const translations = {
+    UA: {
+      title: "Спеціалісти",
+      moreSpecialists: "",
+    },
+    EN: {
+      title: "Specialists",
+      moreSpecialists: "",
+    },
   };
 
   return (
-    <div className="specialists-container">
-      <h2 className="specialists-title">Specialists</h2>
-      <div className="specialists-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', maxWidth: '600px', margin: '0 auto' }}>
-        {masters.map((master, index) => (
-          <div key={index} className="specialist-item">
-            <div className={`specialist-avatar-container ${getCircleColor(master.gender)}`}>
-              <div className="specialist-avatar">
-                {master.avatar_url ? (
-                  <img
-                    src={getImagePath(master.avatar_url)}
-                    alt={`${master.first_name} ${master.last_name}`}
-                    className="specialist-image"
-                    onError={(e) => {
-                      console.error(`Failed to load image: ${e.target.src}`);
-                      e.target.onerror = null;
-                      e.target.style.display = 'none';
-                      if (e.target.nextElementSibling) {
-                        e.target.nextElementSibling.style.display = 'flex';
-                      }
-                    }}
-                  />
-                ) : (
-                  <div className="specialist-initials">
-                    {getInitials(master.first_name, master.last_name)}
+      <div className="specialists-container">
+        <h2 className="specialists-title">{translations[language].title}</h2>
+        <div className="specialists-grid">
+          {masters.map((master, index) => (
+              <div key={index} className="specialist-item">
+                <div className={`specialist-avatar-container ${getCircleColor(master.gender)}`}>
+                  <div className="specialist-avatar-homepage">
+                    {master.avatar_url ? (
+                        <img
+                            src={getImagePath(master.avatar_url, master.master_id)}  // Используем master.master_id
+                            alt={`${master.first_name} ${master.last_name}`}
+                            className="specialist-image"
+                            onError={(e) => {
+                              console.error(`Failed to load image: ${e.target.src}`);
+                              e.target.onerror = null;
+                              e.target.style.display = 'none';
+                              if (e.target.nextElementSibling) {
+                                e.target.nextElementSibling.style.display = 'flex';
+                              }
+                            }}
+                        />
+                    ) : (
+                        <div className="specialist-initials">
+                          {getInitials(master.first_name, master.last_name)}
+                        </div>
+                    )}
                   </div>
-                )}
+                </div>
+                <div className="specialist-name">{master.first_name} {master.last_name}</div>
               </div>
-            </div>
-            <div className="specialist-name">{master.first_name} {master.last_name}</div>
-          </div>
-        ))}
-        <div className="specialist-item">
-          <div className="specialist-avatar-container circle-more">
-            <div className="specialist-avatar">
-              <span className="more-specialists">+{totalMasters-5}</span>
+          ))}
+          <div className="specialist-item">
+            <div className="specialist-avatar-container circle-more">
+              <div className="specialist-avatar-homepage">
+                <span className="more-specialists">+{totalMasters - 5} {translations[language].moreSpecialists}</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

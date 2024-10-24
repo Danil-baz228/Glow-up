@@ -1,0 +1,108 @@
+.clientServicesPage {
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.addService {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #F2F2F2;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.addService button {
+    background-color: #F2F2F2;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.addService button:hover {
+    background-color: #e0e0e0;
+}
+
+/* Стили для списка услуг */
+.serviceList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.serviceItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #f2f2f2;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+}
+
+.serviceItem:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.serviceInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.serviceName {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.servicePrice {
+    font-size: 16px;
+    font-weight: bold;
+    color: #4caf50;
+}
+
+.addButton {
+    background-color: #f7f7f7;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.addButton:hover {
+    background-color: #e0e0e0;
+}
+
+/* Пагинация */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    border: none;
+    background-color: #f7f7f7;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: background-color 0.3s;
+}
+
+.pagination button:hover {
+    background-color: #e0e0e0;
+}
+
+.pagination .active {
+    background-color: #4caf50;
+    color: white;
+}

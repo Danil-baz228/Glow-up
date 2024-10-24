@@ -20,9 +20,12 @@ import AuthProvider from 'react-auth-kit';
 import createStore from "react-auth-kit/createStore";
 import SpecialistsSearchPage from './components/SpecialistsSearchPage';
 import MasterLocationPage from "./components/MasterLocationPage";
+import MasterServicePage from './components/MasterServicePage';
+import MasterPortfolioPage from './components/MasterPortfolioPage';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import MasterLayout from "./layouts/MasterLayout";
+import Blog from "./components/Blog";
 
 const store = createStore({
     authName: '_auth',
@@ -75,6 +78,7 @@ const App = () => {
                             <Route path="/master" element={<MasterLayout/>}>
                                 <Route path="location" element={<MasterLocationPage/>}/>
                             </Route>
+                            <Route path="blog" element={<Blog/>}/>
                             <Route path="*" element={<ErrorPage/>}/>
                         </Route>
                         <Route path="/login" element={<AuthPage/>}/>

@@ -4,8 +4,10 @@ import navigationIcon from "./img/ClientPage/icon_navigation.png";
 import heartIcon from "./img/ClientPage/icon_heart.png";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import axios from "axios";
+import { useLanguage } from './LanguageContext';
 
-const MasterDetailsComponent = ({master}) => {
+const MasterDetailsComponent = ({ master }) => {
+    const { language } = useLanguage();
     const roundedRating = useMemo(() => Math.round(master.avgRating), [master.avgRating]);
 
     const authUser = useAuthUser();
@@ -24,6 +26,25 @@ const MasterDetailsComponent = ({master}) => {
             });
     }
 
+    // Translations
+    const translations = {
+        UA: {
+            reviews: "{{count}} відгуки",
+            noReviews: "Ще немає відгуків",
+            open: "Відкрити",
+        },
+        EN: {
+            reviews: "{{count}} reviews",
+            noReviews: "No reviews yet",
+            open: "Open",
+        },
+    };
+
+    // Get the appropriate text based on the current language
+    const reviewsText = master?.reviewsCount
+        ? translations[language].reviews.replace("{{count}}", master.reviewsCount)
+        : translations[language].noReviews;
+
     return (
         <div className={"masterDetailsBox"}>
             <img className={"masterImage"} src="https://media.istockphoto.com/id/1399565382/photo/young-happy-mixed-race-businessman-standing-with-his-arms-crossed-working-alone-in-an-office.jpg?s=612x612&w=0&k=20&c=buXwOYjA_tjt2O3-kcSKqkTp2lxKWJJ_Ttx2PhYe3VM=" alt=""/>
@@ -37,11 +58,9 @@ const MasterDetailsComponent = ({master}) => {
                 </div>
                 <div className="masterCategories">
                     {
-                        master.categories.slice(0, 4).map((category, index) => {
-                            return (
-                                <div key={index} className="masterCategory">{category.name}</div>
-                            );
-                        })
+                        master.categories.slice(0, 4).map((category, index) => (
+                            <div key={index} className="masterCategory">{category.name}</div>
+                        ))
                     }
                 </div>
             </div>
@@ -50,7 +69,7 @@ const MasterDetailsComponent = ({master}) => {
                     <div className="masterRating">{master.avgRating}</div>
                     <div className="starRatingBox">
                         <div className="starRating">
-                            {Array.from({length: 5}, (_, index) => (
+                            {Array.from({ length: 5 }, (_, index) => (
                                 <svg
                                     key={index}
                                     xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +84,7 @@ const MasterDetailsComponent = ({master}) => {
                                 </svg>
                             ))}
                         </div>
-                        <div className="reviewsCount">{master.reviewsCount + " reviews"}</div>
+                        <div className="reviewsCount">{reviewsText}</div>
                     </div>
                 </div>
                 <div className="masterAddress">
@@ -75,7 +94,7 @@ const MasterDetailsComponent = ({master}) => {
             </div>
             <div className="masterButtonBox">
                 <button className={master.gender === "male" ? "masterButtonMale" : "masterButtonFemale"}>
-                    Open
+                    {translations[language].open}
                 </button>
             </div>
         </div>

@@ -1,14 +1,44 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import eyeIcon from "./img/AuthController/icon_eye.png";
 import './css/ClientPage/ClientDetailsPage.css';
-import {useOutletContext} from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import axios from "axios";
+import { useLanguage } from './LanguageContext';
 
 const ClientDetailsPage = () => {
-    const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
-    const {currentUser, currentClient, setIsUpdateRequired} = useOutletContext();
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const { currentUser, currentClient, setIsUpdateRequired } = useOutletContext();
     const [isPasswordChanged, setIsPasswordChanged] = useState(false);
     const [isModalSuccessVisible, setIsModalSuccessVisible] = useState(false);
+
+    const { language } = useLanguage();
+
+    const translations = {
+        UA: {
+            name: 'Ваше ім\'я та прізвище',
+            email: 'Ваш Email',
+            newPassword: 'Новий пароль',
+            repeatPassword: 'Повторіть новий пароль',
+            phone: 'Ваш номер телефону',
+            address: 'Ваша адреса',
+            cancel: 'Скасувати',
+            save: 'Зберегти',
+            passwordMismatch: 'Паролі не співпадають',
+            changesSaved: 'Зміни збережено',
+        },
+        EN: {
+            name: 'Your First Name and Last Name',
+            email: 'Your Email',
+            newPassword: 'New password',
+            repeatPassword: 'Repeat new password',
+            phone: 'Your phone number',
+            address: 'Your address',
+            cancel: 'Cancel',
+            save: 'Save',
+            passwordMismatch: 'Passwords do not match',
+            changesSaved: 'Changes saved',
+        }
+    };
 
     const [formData, setFormData] = useState({
         clientName: '',
@@ -21,7 +51,6 @@ const ClientDetailsPage = () => {
 
     useEffect(() => {
         if (isPasswordChanged) {
-            console.log('password changed');
             axios.put(`http://localhost:5000/api/users/${currentUser.user_id}`, {
                 password: formData.clientPassword
             })
@@ -33,24 +62,22 @@ const ClientDetailsPage = () => {
                 });
         }
         setIsPasswordChanged(false);
-        setFormData(
-            {
-                clientName: '',
-                clientEmail: '',
-                clientPhone: '',
-                clientAddress: '',
-                clientPassword: '',
-                clientPasswordRepeat: ''
-            }
-        );
+        setFormData({
+            clientName: '',
+            clientEmail: '',
+            clientPhone: '',
+            clientAddress: '',
+            clientPassword: '',
+            clientPasswordRepeat: ''
+        });
     }, [isPasswordChanged]);
 
     const togglePasswordVisibility = () => {
         setIsPasswordVisible(!isPasswordVisible);
-    }
+    };
 
     const handleInputChange = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
             [name]: value
@@ -59,7 +86,6 @@ const ClientDetailsPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('submit');
         if (!checkPasswords()) {
             return;
         }
@@ -83,7 +109,7 @@ const ClientDetailsPage = () => {
         if (formData.clientPassword.trim() === '') {
             handleReset(e);
         }
-    }
+    };
 
     const handleReset = (e) => {
         e.preventDefault();
@@ -95,74 +121,73 @@ const ClientDetailsPage = () => {
             clientPassword: '',
             clientPasswordRepeat: ''
         });
-    }
+    };
 
     const checkPasswords = () => {
-        const {clientPassword, clientPasswordRepeat} = formData;
+        const { clientPassword, clientPasswordRepeat } = formData;
 
         if (clientPassword.trim() !== '') {
             if (clientPassword !== clientPasswordRepeat) {
-                alert('Passwords do not match');
+                alert(translations[language].passwordMismatch);
                 return false;
             }
             setIsPasswordChanged(true);
-            console.log('Passwords match');
         }
         return true;
-    }
+    };
 
     return (
-        <div className={"clientDetailsPage"}>
+        <div className="clientDetailsPage">
             <form onSubmit={handleSubmit}>
-                <div className="clientFormLabel">Your First Name and Last name</div>
-                <input name={"clientName"} type="text"
+                <div className="clientFormLabel">{translations[language].name}</div>
+                <input name="clientName" type="text"
                        value={formData.clientName}
                        placeholder={currentClient ? `${currentClient.last_name} ${currentClient.first_name}` : ""}
                        onChange={handleInputChange}
                 />
-                <div className="clientFormLabel">Your Email</div>
-                <input name={"clientEmail"} type="email"
+                <div className="clientFormLabel">{translations[language].email}</div>
+                <input name="clientEmail" type="email"
                        value={formData.clientEmail}
                        placeholder={currentClient ? currentClient.email : ""}
                        onChange={handleInputChange}
                 />
-                <div className="clientFormLabel">New password</div>
+                <div className="clientFormLabel">{translations[language].newPassword}</div>
                 <div className="password-input-wrapper">
-                    <input name={"clientPassword"} type={isPasswordVisible ? "text" : "password"}
+                    <input name="clientPassword" type={isPasswordVisible ? "text" : "password"}
                            value={formData.clientPassword}
                            onChange={handleInputChange}
                     />
-                    <img src={eyeIcon} alt="Show Password" onClick={togglePasswordVisibility} className="eye-icon"/>
+                    <img src={eyeIcon} alt="Show Password" onClick={togglePasswordVisibility} className="eye-icon" />
                 </div>
-                <div className={"clientFormLabel"}>Repeat new password</div>
+                <div className="clientFormLabel">{translations[language].repeatPassword}</div>
                 <div className="password-input-wrapper">
-                    <input name={"clientPasswordRepeat"} type={isPasswordVisible ? "text" : "password"}
+                    <input name="clientPasswordRepeat" type={isPasswordVisible ? "text" : "password"}
                            value={formData.clientPasswordRepeat}
                            onChange={handleInputChange}
                     />
-                    <img src={eyeIcon} alt="Show Password" onClick={togglePasswordVisibility} className="eye-icon"/>
+                    <img src={eyeIcon} alt="Show Password" onClick={togglePasswordVisibility} className="eye-icon" />
                 </div>
-                <div className="clientFormLabel">Your phone number</div>
-                <input name={"clientPhone"} type="tel"
+                <div className="clientFormLabel">{translations[language].phone}</div>
+                <input name="clientPhone" type="tel"
                        value={formData.clientPhone}
                        placeholder={currentClient ? currentClient.phone : ""}
                        onChange={handleInputChange}
                 />
-                <div className="clientFormLabel">Your address</div>
-                <input name={"clientAddress"} type="text"
+                <div className="clientFormLabel">{translations[language].address}</div>
+                <input name="clientAddress" type="text"
                        value={formData.clientAddress}
                        placeholder={currentClient ? currentClient.address : ""}
                        onChange={handleInputChange}
                 />
                 <div className="clientDetailsFormButtons">
-                    <button type="reset" onClick={handleReset}>Cancel</button>
-                    <button type="submit">Save</button>
+                    <button type="reset" onClick={handleReset}>{translations[language].cancel}</button>
+                    <button type="submit">{translations[language].save}</button>
                 </div>
             </form>
             {isModalSuccessVisible && (
                 <div className="modal-overlay">
                     <div className="modal">
-                        <p>Changes saved</p>
+                        <p>{translations[language].changesSaved}</p>
                     </div>
                 </div>
             )}

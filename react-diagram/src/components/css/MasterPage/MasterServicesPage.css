@@ -1,0 +1,73 @@
+.clientServicesPage {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.addServiceButton {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: white;
+    border: 1px solid #1C1C1C;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.addServiceButton:hover {
+    background-color: #e0e0e0;
+}
+
+.serviceList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.serviceCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F2F2F2;
+    /*border: 2px dashed #c4c4c4;*/
+    border-radius: 20px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+}
+
+.serviceCard:hover {
+    border-color: #000;
+}
+
+.serviceDetails {
+    flex-grow: 1;
+    margin-right: 15px;
+}
+
+.serviceName {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.servicePrice {
+    font-size: 16px;
+    color: #333;
+}
+
+.addServiceIcon {
+    font-size: 24px;
+    color: #000;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.addServiceIcon:hover {
+    transform: scale(1.1);
+}
