@@ -34,12 +34,18 @@ const store = createStore({
     cookieSecure: false
 });
 
+
+
+
+
 // Компонент для прокрутки на верх
 const ScrollToTop = () => {
-    const {pathname} = useLocation();
+    const { pathname } = useLocation();
 
     useEffect(() => {
-        window.scrollTo(0, 0);
+        if (!pathname.startsWith('/master') && !pathname.startsWith('/account')) {
+            window.scrollTo(0, 0);
+        }
     }, [pathname]);
 
     return null;
