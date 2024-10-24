@@ -50,7 +50,7 @@ const MasterLayout = () => {
                 </div>
                 <div className="profile-info">
                     <h2>
-                        {currentMaster ? `${first_name} ${last_name}` : 'Загрузка...'}
+                        {currentMaster ? `${currentMaster.first_name} ${currentMaster.last_name}` : 'Загрузка...'}
                     </h2>
                     <span>Esthetician</span>
                     <div className="profile-actions">
@@ -60,29 +60,7 @@ const MasterLayout = () => {
                     </div>
                 </div>
             </div>
-            <div className="masterTitle">
-                {
-                    authUser && currentMaster ? (
-                        <>
-                            <img
-                                src={currentUser ? `http://localhost:5000${currentUser.avatar_url}` : '/default-avatar.png'}
-                                alt="Avatar"
-                                className="clientAvatar"
-                            />
-                            <FaPencil className="editAvatarIcon"
-                                      onClick={() => document.getElementById('avatarInput').click()}
-                            />
-                            <input
-                                type="file"
-                                id="avatarInput"
-                                style={{ display: 'none' }}
-                                accept="image/*"
-                            />
-                            <h2 className={"clientName"}>{currentMaster.last_name} {currentMaster.first_name}</h2>
-                        </>
-                    ) : null
-                }
-            </div>
+
             <div className="masterHeader">
                 <NavLink to={"portfolio"} className={"masterNavigationButton"}>Portfolio</NavLink>
                 <NavLink to={"services"} className={"masterNavigationButton"}>Services</NavLink>
