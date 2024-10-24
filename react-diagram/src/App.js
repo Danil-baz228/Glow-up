@@ -20,6 +20,7 @@ import AuthProvider from 'react-auth-kit';
 import createStore from "react-auth-kit/createStore";
 import SpecialistsSearchPage from './components/SpecialistsSearchPage';
 import MasterServicePage from './components/MasterServicePage';
+import MasterPortfolioPage from './components/MasterPortfolioPage';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Blog from "./components/Blog";
@@ -72,6 +73,7 @@ const App = () => {
                                     <Route path="history" element={<ClientHistoryPage/>}/>
                                     <Route path="discounts" element={<ClientDiscountsPage/>}/>
                                     <Route path="discounts1" element={<MasterServicePage/>}/>
+                                    <Route path="discounts2" element={<MasterPortfolioPage/>}/>
                                 </Route>
                                 <Route path="blog" element={<Blog/>}/>
                                 <Route path="*" element={<ErrorPage/>}/>

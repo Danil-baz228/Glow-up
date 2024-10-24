@@ -46,27 +46,28 @@ const Services = () => {
   ];
 
   return (
-    <div className="slider-container">
-      <Slider {...settings}>
-        {slides.map((slide, index) => (
-          <div
-            key={index}
-            className={`slide ${index === activeSlide ? 'activeSlide' : 'inactive'}`}
-          >
-            <div className="image-container">
-              <div className="image-wrapper">
-                <img src={slide.images[0]} alt={slide.title1} className="slider-image" ></img>
-                <Link to="/blog"><h3 className="text-container">{slide.title1}</h3></Link>
+      <div className="slider-container">
+        <h2 className="services-title">Services</h2>
+        <Slider {...settings}>
+          {slides.map((slide, index) => (
+              <div
+                  key={index}
+                  className={`slide ${index === activeSlide ? 'activeSlide' : 'inactive'}`}
+              >
+                <div className="image-container">
+                  <div className="image-wrapper">
+                    <img src={slide.images[0]} alt={slide.title1} className="slider-image"></img>
+                    <Link to="/blog"><h3 className="text-container">{slide.title1}</h3></Link>
+                  </div>
+                  <div className="image-wrapper">
+                    <img src={slide.images[1]} alt={slide.title2} className="slider-image"/>
+                    <Link to="/blog"><h3 className="text-container">{slide.title2}</h3></Link>
+                  </div>
+                </div>
               </div>
-              <div className="image-wrapper">
-                <img src={slide.images[1]} alt={slide.title2} className="slider-image" />
-                <Link to="/blog"><h3 className="text-container">{slide.title2}</h3></Link>
-              </div>
-            </div>
-          </div>
-        ))}
-      </Slider>
-    </div>
+          ))}
+        </Slider>
+      </div>
   );
 };
 
