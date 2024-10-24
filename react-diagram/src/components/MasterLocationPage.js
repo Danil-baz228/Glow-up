@@ -5,7 +5,7 @@ import {useOutletContext} from "react-router-dom";
 import {GoogleMap, Marker, useJsApiLoader} from "@react-google-maps/api";
 
 const MasterLocationPage = () => {
-    let currentMaster = useOutletContext();
+    let {currentMaster} = useOutletContext();
     const mapContainerStyle = {
         width: "100%",
         height: "400px",
@@ -46,22 +46,25 @@ const MasterLocationPage = () => {
     };
 
     useEffect(() => {
-        if (!currentMaster) {
-            currentMaster = {master_id: 1};
-        }
-        axios.get(`http://localhost:5000/api/salons/master/${currentMaster.master_id}`)
-            .then((response) => {
-                setAddress(response.data);
-                geocodeAddress({
-                    streetAddress: response.data.address,
-                    cityName: response.data.City.name,
-                    stateName: response.data.City.State.name,
-                    zipCode: response.data.zip_code
+        if (currentMaster) {
+            axios.get(`http://localhost:5000/api/salons/master/${currentMaster.master_id}`)
+                .then((response) => {
+                    setAddress(response.data);
+                    geocodeAddress({
+                        streetAddress: response.data.address,
+                        cityName: response.data.City.name,
+                        stateName: response.data.City.State.name,
+                        zipCode: response.data.zip_code
+                    });
+                })
+                .catch((error) => {
+                    if(error.response.status === 404) {
+                        setAddress({});
+                    } else {
+                        console.log('Error fetching salon:', error);
+                    }
                 });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        }
     }, [currentMaster]);
 
     useEffect(() => {
@@ -76,14 +79,16 @@ const MasterLocationPage = () => {
 
     const handleOpenModal = () => {
         setIsModalOpen(true);
-        console.log(address)
-        setNewAddress({
-            salonName: address.name || '',
-            zipCode: address.zip_code || '',
-            stateName: address.City.State.name || '',
-            cityName: address.City.name || '',
-            streetAddress: address.address || '',
-        });
+        console.log(address);
+        if (address != null) {
+            setNewAddress({
+                salonName: address.name || '',
+                zipCode: address.zip_code || '',
+                stateName: address.City && address.City.State ? address.City.State.name : '',
+                cityName: address.City ? address.City.name : '',
+                streetAddress: address.address || '',
+            });
+        }
     };
 
     const handleCloseModal = () => {
@@ -97,7 +102,7 @@ const MasterLocationPage = () => {
             stateName: newAddress.stateName,
             cityName: newAddress.cityName,
             address: newAddress.streetAddress,
-            master_id: 1
+            master_id: currentMaster.master_id,
         };
 
         if (address.salon_id) {
@@ -122,14 +127,25 @@ const MasterLocationPage = () => {
             axios
                 .post(`http://localhost:5000/api/addresses/save`, addressData)
                 .then((response) => {
-                    setAddress(response.data.salon);
+                    const result = response.data.result;
+                    setAddress({
+                        name: result.name,
+                        address: result.address,
+                        zip_code: result.zip_code,
+                        City: {
+                            name: result.city,
+                            State: {
+                                name: result.state
+                            }
+                        }
+                    });
                     setIsModalOpen(false);
                     geocodeAddress(
                         {
-                            streetAddress: response.data.salon.address,
-                            cityName: response.data.salon.City.name,
-                            stateName: response.data.salon.City.State.name,
-                            zipCode: response.data.salon.zip_code
+                            streetAddress: response.data.result.address,
+                            cityName: response.data.result.city,
+                            stateName: response.data.result.state,
+                            zipCode: response.data.result.zip_code
                         }
                     )
                 })
@@ -170,6 +186,15 @@ const MasterLocationPage = () => {
                     <div className="modalMasterLocation">
                         <button className="close-button" onClick={handleCloseModal}>×</button>
                         <h2>Add address</h2>
+                        <div className="form-group">
+                            <label>Salon name</label>
+                            <input
+                                type="text"
+                                name="salonName"
+                                value={newAddress.salonName}
+                                onChange={handleInputChange}
+                            />
+                        </div>
                         <div className="form-group">
                             <label>ZIP code</label>
                             <input

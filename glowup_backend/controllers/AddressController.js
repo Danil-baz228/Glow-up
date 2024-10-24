@@ -23,8 +23,16 @@ const saveMasterAddress = async (req, res) => {
             city_id: city.city_id
         });
 
+        const result = {
+            name: salon.name,
+            address: salon.address,
+            zip_code: salon.zip_code,
+            city: city.name,
+            state: state.name
+        }
+
         await master.addSalon(salon);
-        res.status(200).json({ message: 'Address saved successfully', salon });
+        res.status(200).json({ message: 'Address saved successfully', result });
     } catch (error) {
         console.error('Error saving address:', error);
         res.status(500).json({ message: 'An error occurred while saving the address', error });

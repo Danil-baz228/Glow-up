@@ -172,7 +172,7 @@ const removeSalon = async (req, res) => {
 
 const getMasterByUserId = async (req, res) => {
     try {
-        const master = await Master.findOne({ where: { userId: req.params.userId } });
+        const master = await Master.findOne({ where: { user_id: req.params.userId } });
         if (!master) {
             res.status(404).json({ message: 'Master not found' });
         } else {
