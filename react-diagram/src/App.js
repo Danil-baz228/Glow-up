@@ -76,6 +76,8 @@ const App = () => {
                                 <Route path="discounts" element={<ClientDiscountsPage/>}/>
                             </Route>
                             <Route path="/master" element={<MasterLayout/>}>
+                                <Route path="portfolio" element={<MasterPortfolioPage/>}/>
+                                <Route path="services" element={<MasterServicePage/>}/>
                                 <Route path="location" element={<MasterLocationPage/>}/>
                             </Route>
                             <Route path="blog" element={<Blog/>}/>

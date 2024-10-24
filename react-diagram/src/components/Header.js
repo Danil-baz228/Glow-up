@@ -76,7 +76,7 @@ const Header = ({ toggleAuthModal, isScrolled }) => {
                     </>
                 ) : (
                     <>
-                        <Link className="userInfo" to={userRole === 'client' ? '/account/details' : '/dev'}>
+                        <Link className="userInfo" to={userRole === 'client' ? '/account/details' : '/master/portfolio'}>
                             <div className="userInfo">
                                 <span className={'usernameTextBox'}>{userName}</span>
                                 <FaUser className="icon" />
