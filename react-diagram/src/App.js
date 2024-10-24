@@ -22,6 +22,7 @@ import SpecialistsSearchPage from './components/SpecialistsSearchPage';
 import MasterLocationPage from "./components/MasterLocationPage";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import MasterLayout from "./layouts/MasterLayout";
 
 const store = createStore({
     authName: '_auth',
@@ -71,8 +72,8 @@ const App = () => {
                                 <Route path="history" element={<ClientHistoryPage/>}/>
                                 <Route path="discounts" element={<ClientDiscountsPage/>}/>
                             </Route>
-                            <Route path="/master" element={<ClientLayout toggleAuthModal={toggleAuthModal}/>}>
-                                <Route path="location" element={<ClientDetailsPage/>}/>
+                            <Route path="/master" element={<MasterLayout/>}>
+                                <Route path="location" element={<MasterLocationPage/>}/>
                             </Route>
                             <Route path="*" element={<ErrorPage/>}/>
                         </Route>

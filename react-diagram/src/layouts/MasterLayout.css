@@ -1,0 +1,43 @@
+.masterLayout{
+    margin-top: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-direction: column;
+}
+
+.masterHeader{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    border-bottom: solid 1px #969696;
+}
+
+.masterHeader a{
+    text-decoration: none;
+    color: #000;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 30px 0;
+    width: 200px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.masterHeader a:first-child{
+    text-align: left;
+}
+
+.masterHeader a:last-child{
+    text-align: right;
+}
+
+.masterHeader a:hover{
+    color: #969696;
+    border-bottom: solid 1px #969696;
+}
+
+.masterHeader a.active{
+    border-bottom: solid 2px black;
+}

@@ -2,7 +2,8 @@ const express = require('express');
 const sequelize = require('../config/db.config');
 const { getAllMasters, createMaster, deleteMaster, getMasterById, updateMaster, uploadImages, handleImageUpload,
     addSalon,
-    removeSalon
+    removeSalon,
+    getMasterByUserId
 } = require('../controllers/masterController');
 const Master = require('../models/Master.js');
 const Occupation = require('../models/Occupation.js');
@@ -77,6 +78,7 @@ router.get('/', getAllMasters);
 router.post('/', createMaster);
 router.delete('/:id', deleteMaster);
 router.get('/:id', getMasterById);
+router.get('/userId/:userId', getMasterByUserId);
 router.put('/:id', updateMaster);
 router.post('/:masterId/salon', addSalon);
 router.delete('/:masterId/salon', removeSalon);
