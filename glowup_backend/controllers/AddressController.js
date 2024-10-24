@@ -1,7 +1,7 @@
 const {State, City, Salon, Master} = require('../models/Relations');
 
 const saveMasterAddress = async (req, res) => {
-    const { salonName, streetAddress, zipCode, cityName, stateName, master_id } = req.body;
+    const { name, address, zip_code, cityName, stateName, master_id } = req.body;
 
     try {
         let state = await State.findOne({ where: { name: stateName } });
@@ -17,9 +17,9 @@ const saveMasterAddress = async (req, res) => {
         const master = await Master.findByPk(master_id);
 
         const salon = await Salon.create({
-            name: salonName,
-            address: streetAddress,
-            zip_code: zipCode,
+            name: name,
+            address: address,
+            zip_code: zip_code,
             city_id: city.city_id
         });
 

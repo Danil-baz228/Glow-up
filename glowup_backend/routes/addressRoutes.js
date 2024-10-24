@@ -3,6 +3,6 @@ const saveMasterAddress = require('../controllers/addressController');
 
 const router = express.Router();
 
-router.post('/', saveMasterAddress);
+router.post('/save', saveMasterAddress);
 
 module.exports = router;

@@ -120,7 +120,7 @@ const MasterLocationPage = () => {
                 });
         } else {
             axios
-                .post(`http://localhost:5000/api/address/saveAddress`, addressData)
+                .post(`http://localhost:5000/api/addresses/save`, addressData)
                 .then((response) => {
                     setAddress(response.data.salon);
                     setIsModalOpen(false);
