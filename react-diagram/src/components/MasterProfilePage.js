@@ -1,17 +1,12 @@
-<<<<<<< Updated upstream:react-diagram/src/components/MasterProfilePage.js
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './css/MasterPage/MasterProfilePage.css'
-=======
-import React, { useState, useEffect } from 'react';
-import './ProfilePage.css'; 
->>>>>>> Stashed changes:client/src/components/ProfilePage.js
-import profilePhoto from 'C:/Users/user/Desktop/Master_Final/client/src/assets/profile-photo.png';
-import background from 'C:/Users/user/Desktop/Master_Final/client/src/assets/background.png';
-import Services from './Services';
-import About from './About';
-import img from 'C:/Users/user/Desktop/Master_Final/client/src/icons/free-icon-font-add-image-13727345.png';
-import ImageGrid from './ImageGrid';
-import Pagination from './Pagination';
+import profilePhoto from '../assets/profile-photo.png';
+import background from '../assets/background.png';
+import Services from './MasterServicesPage';
+import About from './MasterAbout';
+import img from '../icons/free-icon-font-add-image-13727345.png';
+import ImageGrid from './MasterImageGrid';
+import Pagination from './MasterPagination';
 
 const ProfilePage = () => {
   const [currentPage, setCurrentPage] = useState(1);

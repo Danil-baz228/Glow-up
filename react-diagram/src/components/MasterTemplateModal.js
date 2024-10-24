@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './css/MasterPage/MasterTemplateModal.css';
-import gallery from "../../../../../tempFile/icons/free-icon-font-add-image-13727345.png";
+import gallery from "../icons/free-icon-font-add-image-13727345.png";
 const TemplateModal = ({ isOpen, onClose }) => {
     const [selectedTemplate, setSelectedTemplate] = useState(null);
     const [images, setImages] = useState([]);

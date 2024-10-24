@@ -21,7 +21,9 @@ import createStore from "react-auth-kit/createStore";
 import SpecialistsSearchPage from './components/SpecialistsSearchPage';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import ProfilePage from './components/MasterProfilePage';
 
+  
 const store = createStore({
     authName: '_auth',
     authType: 'cookie',
@@ -30,15 +32,7 @@ const store = createStore({
 });
 
 // Компонент для прокрутки на верх
-const ScrollToTop = () => {
-    const {pathname} = useLocation();
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [pathname]);
-
-    return null;
-};
 
 const App = () => {
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -59,6 +53,7 @@ const App = () => {
                             <Route path={""} element={<HomePage toggleAuthModal={toggleAuthModal}/>}/> {}
                             <Route path="serviceCatalog" element={<ServiceCatalog/>}/>
                             <Route path="masters" element={<SpecialistsSearchPage/>}/>
+                            
                             <Route path="statistics" element={<Statistics/>}/>
                             <Route path="reviews" element={<Reviews/>}/>
                             <Route path="questionsAnswers" element={<QuestionsAnswers/>}/>

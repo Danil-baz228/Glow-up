@@ -1,10 +1,5 @@
-<<<<<<< Updated upstream:react-diagram/src/components/MasterPagination.js
-import React, { useState } from 'react';
-import './css/MasterPage/MasterPagination.css';
-=======
 import React from 'react';
-import './Pagination.css';
->>>>>>> Stashed changes:client/src/components/Pagination.js
+import './css/MasterPage/MasterPagination.css';
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 

@@ -1,12 +1,6 @@
-<<<<<<< Updated upstream:react-diagram/src/components/MasterServicesPage.js
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './css/MasterPage/MasterServicesPage.css';
-=======
-import React, { useState, useEffect } from 'react';
-import './Services.css'; // Подключение стилей
-import img from 'C:/Users/user/Desktop/Master_Final/client/src/icons/free-icon-font-add-image-13727345.png';
->>>>>>> Stashed changes:client/src/components/Services.js
-
+import img from '../icons/free-icon-font-add-image-13727345.png';
 const Services = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);  // Для первого окна
     const [isFourthModalOpen, setIsFourthModalOpen] = useState(false); // Для четвертого окна

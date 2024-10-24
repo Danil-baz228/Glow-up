@@ -1,16 +1,16 @@
 import React, { useState } from 'react'; 
 import './css/MasterPage/MasterAbout.css'; // Стили
-import post1 from "../../../../../tempFile/assets/aboutphoto1.png";
-import post12 from "../../../../../tempFile/assets/aboutphoto1.2.png";
-import pen from "../../../../../tempFile/icons/free-icon-font-pencil-3917376.png";
-import arrowDown from "../../../../../tempFile/icons/free-icon-font-arrow-down-3916787.png";
-import arrowUp from "../../../../../tempFile/icons/free-icon-font-arrow-up-3916795.png";
-import trash from "../../../../../tempFile/icons/free-icon-font-trash-empty-16769010.png";
-import post2 from "../../../../../tempFile/assets/post2.png";
-import post21 from "../../../../../tempFile/assets/post21.png";
-import post22 from "../../../../../tempFile/assets/post22.png";
-import post3 from "../../../../../tempFile/assets/post3.png";
-import TemplateModal from './TemplateModal';
+import post1 from "..//assets/aboutphoto1.png";
+import post12 from "../assets/aboutphoto1.2.png";
+import pen from "../icons/free-icon-font-pencil-3917376.png";
+import arrowDown from "../icons/free-icon-font-arrow-down-3916787.png";
+import arrowUp from "../icons/free-icon-font-arrow-up-3916795.png";
+import trash from "../icons/free-icon-font-trash-empty-16769010.png";
+import post2 from "../assets/post2.png";
+import post21 from "../assets/post21.png";
+import post22 from "../assets//post22.png";
+import post3 from "../assets/post3.png";
+import TemplateModal from './MasterTemplateModal';
 
 const About = () => {
     const [isTemplateModalOpen, setIsTemplateModalOpen] = useState(false);
