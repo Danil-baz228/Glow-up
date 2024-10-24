@@ -1,11 +1,18 @@
 import React from 'react';
+<<<<<<< Updated upstream:react-diagram/src/components/MasterImageGrid.js
 import './css/MasterPage/MasterImageGrid.css'
 import img1 from '../../../../../tempFile/assets/1.png';
 import img2 from '../../../../../tempFile/assets/2.png';
 import img3 from '../../../../../tempFile/assets/3.png';
+=======
+import './ImageGrid.css'; // Подключение стилей для сетки изображений
+import img1 from '../assets/1.png';
+import img2 from '../assets/2.png';
+import img3 from '../assets/3.png';
+>>>>>>> Stashed changes:client/src/components/ImageGrid.js
 
 // Список изображений и текстов для ImageGrid (не портфолио)
-const images = [
+const defaultImages = [
   { src: img1, text: 'Anti-Cellulite Treatments' },
   { src: img2, text: 'Microdermabrasion' },
   { src: img3, text: 'Skin Rejuvenation Treatments' },
@@ -24,10 +31,13 @@ const images = [
   { src: img1, text: 'Anti-Cellulite Treatments' },
 ];
 
-const ImageGrid = () => {
+const ImageGrid = ({ images = [] }) => {
+  // Объединяем переданные изображения и изображения по умолчанию
+  const allImages = [...images, ...defaultImages];
+
   return (
     <div className="grid-container">
-      {images.map((item, index) => (
+      {defaultImages.map((item, index) => (
         <div className="grid-item" key={index}>
           <img src={item.src} alt={item.text} />
           <div className="grid-text">{item.text}</div>
@@ -38,3 +48,4 @@ const ImageGrid = () => {
 };
 
 export default ImageGrid;
+

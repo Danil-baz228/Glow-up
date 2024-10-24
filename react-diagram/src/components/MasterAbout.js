@@ -29,8 +29,7 @@ const About = () => {
             id: 1,
             title: "Hello! It is about me",
             content: (
-                <>
-                    <p>I’m Olga Tsyganenko, a dedicated and certified Esthetician with over 10 years in the industry.
+                <> <p>I’m Olga Tsyganenko, a dedicated and certified Esthetician with over 10 years in the industry.
                          My passion is helping people look and feel their best by offering exceptional beauty services tailored to their individual needs. 
                         I believe that beauty is more than skin deep; it's about confidence, comfort, and self-expression</p>
                     <div className="image-gallery">
