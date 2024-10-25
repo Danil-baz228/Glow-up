@@ -1,129 +1,67 @@
-import React from 'react';
-import './css/MasterPage/MasterReviewsPage.css'; // Add your custom CSS styles here
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import './css/MasterPage/MasterReviewsPage.css';
 
-// Dummy data to represent reviews and statistics
-const reviewsData = [
-    {
-        id: 1,
-        name: "Anna Koval",
-        service: "Chemical Peels (Glycolic, Salicylic, TCA)",
-        rating: 5,
-        comment: "I recently had a chemical peel treatment, and I'm thrilled with the results! I chose a combination of glycolic, salicylic, and TCA peels to address my skin concerns, and the outcome has been fantastic. My skin feels smooth...",
-        images: ['path/to/image1.png', 'path/to/image2.png'], // Replace with actual paths to images
-    },
-    {
-        id: 2,
-        name: "Anna Koval",
-        service: "Chemical Peels (Glycolic, Salicylic, TCA)",
-        rating: 5,
-        comment: "Absolutely amazing experience! The service was professional and the results exceeded my expectations. Highly recommend! Truly the best in town...",
-        images: ['path/to/image3.png'],
-    },
-];
+const StarRating = ({ rating }) => (
+    <div className="starRating">
+        {[...Array(5)].map((_, i) => (
+            <span key={i} className={i < rating ? 'filledStar' : 'emptyStar'}>★</span>
+        ))}
+    </div>
+);
 
-const averageReviewStats = {
-    averageRating: 4.9,
-    totalReviews: 18,
-    starBreakdown: {
-        5: 15,
-        4: 2,
-        3: 1,
-        2: 0,
-        1: 0
-    },
-    qualityOfWork: 80,
-    levelOfService: 96,
-    comfortAtmosphere: 77,
-    hygieneSafety: 94,
-};
-
-const StarRating = ({ rating }) => {
-    return (
-        <div className="starRating">
-            {[...Array(5)].map((_, i) => (
-                <span key={i} className={i < rating ? 'filledStar' : 'emptyStar'}>
-                    ★
-                </span>
-            ))}
+const ReviewCard = ({ review }) => (
+    <div className="reviewCard">
+        <div className="reviewHeader">
+            <div className="reviewerName">{review.client.first_name} {review.client.last_name}</div>
+            <StarRating rating={review.rating} />
         </div>
-    );
-};
+        <div className="reviewComment">{review.comment}</div>
+        <div className="reviewDate">{new Date(review.date).toLocaleDateString()}</div>
+    </div>
+);
 
-const ReviewCard = ({ review }) => {
-    return (
-        <div className="reviewCard">
-            <div className="reviewHeader">
-                <div className="reviewerName">{review.name}</div>
-                <StarRating rating={review.rating} />
-            </div>
-            <div className="serviceName">{review.service}</div>
-            <div className="reviewComment">{review.comment}</div>
-            <div className="reviewImages">
-                {review.images.map((image, index) => (
-                    <img key={index} src={image} alt="Review" className="reviewImage" />
-                ))}
-                {review.images.length > 1 && <div className="moreImages">+{review.images.length - 1}</div>}
-            </div>
+const ReviewStats = ({ stats }) => (
+    <div className="reviewStats">
+        <div className="averageRating">
+            <span className="ratingNumber">{stats.averageRating.toFixed(1)}</span>
+            <StarRating rating={Math.round(stats.averageRating)} />
+            <span className="totalReviews">{stats.totalReviews} reviews</span>
         </div>
-    );
-};
-
-const ReviewStats = ({ stats }) => {
-    return (
-        <div className="reviewStats">
-            <div className="averageRating">
-                <span className="ratingNumber">{stats.averageRating}</span>
-                <StarRating rating={Math.round(stats.averageRating)} />
-                <span className="totalReviews">{stats.totalReviews} reviews</span>
-            </div>
-            <div className="ratingBreakdown">
-                {Object.keys(stats.starBreakdown).map((star, i) => (
-                    <div key={i} className="ratingRow">
-                        <span>{star} ★</span>
-                        <div className="ratingBar">
-                            <div style={{ width: `${(stats.starBreakdown[star] / stats.totalReviews) * 100}%` }}></div>
-                        </div>
-                        <span>{stats.starBreakdown[star]}</span>
-                    </div>
-                ))}
-            </div>
-            <div className="extraStats">
-                <div className="extraStat">
-                    <span>Quality of Work</span>
-                    <div className="progressBar">
-                        <div style={{ width: `${stats.qualityOfWork}%` }}></div>
-                    </div>
-                </div>
-                <div className="extraStat">
-                    <span>Level of Service</span>
-                    <div className="progressBar">
-                        <div style={{ width: `${stats.levelOfService}%` }}></div>
-                    </div>
-                </div>
-                <div className="extraStat">
-                    <span>Comfort and Atmosphere</span>
-                    <div className="progressBar">
-                        <div style={{ width: `${stats.comfortAtmosphere}%` }}></div>
-                    </div>
-                </div>
-                <div className="extraStat">
-                    <span>Hygiene and Safety</span>
-                    <div className="progressBar">
-                        <div style={{ width: `${stats.hygieneSafety}%` }}></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
+        {/* Остальная часть статистики, например, breakdown по звездам */}
+    </div>
+);
 
 const ReviewsPage = () => {
+    const [reviews, setReviews] = useState([]);
+    const [averageReviewStats, setAverageReviewStats] = useState({
+        averageRating: 0,
+        totalReviews: 0,
+    });
+
+    useEffect(() => {
+        // Получение данных отзывов
+        axios.get('http://localhost:5000/api/reviews')
+            .then(response => {
+                const data = response.data;
+                setReviews(data);
+
+                // Рассчитываем средний рейтинг и общее количество
+                const totalReviews = data.length;
+                const averageRating = data.reduce((sum, review) => sum + review.rating, 0) / totalReviews;
+                setAverageReviewStats({ averageRating, totalReviews });
+            })
+            .catch(error => {
+                console.error("Ошибка при загрузке отзывов: ", error);
+            });
+    }, []);
+
     return (
         <div className="reviewsPage">
             <ReviewStats stats={averageReviewStats} />
             <div className="reviewsList">
-                {reviewsData.map((review) => (
-                    <ReviewCard key={review.id} review={review} />
+                {reviews.map((review) => (
+                    <ReviewCard key={review.review_id} review={review} />
                 ))}
             </div>
         </div>
