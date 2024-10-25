@@ -25,6 +25,25 @@ const sendVerificationEmail = async (email, code) => {
     await transporter.sendMail(mailOptions);
 };
 
+const sendPasswordResetEmail = async (email, password) => {
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: "shumejko.sasha@gmail.com",
+            pass: 'vtsywmesziqxxnda'
+        }
+    });
+
+    const mailOptions = {
+        from: "shumejko.sasha@gmail.com",
+        to: email,
+        subject: 'GlowUp new password',
+        text: `Your new password is: ${password}. Please change it after logging in.`
+    };
+
+    await transporter.sendMail(mailOptions);
+}
+
 const register = async (req, res) => {
     try {
         const { email, password, role } = req.body;
@@ -128,8 +147,52 @@ const verifyEmail = async (req, res) => {
     }
 };
 
+const requestPasswordReset = async (req, res) => {
+    try {
+        const {email} = req.body;
+
+        const user = await User.findOne({where: {email}});
+        if (!user) {
+            return res.status(404).json({message: 'User not found'});
+        }
+
+        const resetCode = Math.floor(100000 + Math.random() * 900000);
+
+        await sendVerificationEmail(email, resetCode);
+
+        res.status(200).json({message: 'Password reset code sent successfully', resetCode});
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+}
+
+const resetPassword = async (req, res) => {
+    try {
+        const {email} = req.body;
+
+        const user = await User.findOne({where: {email}});
+        if (!user) {
+            return res.status(404).json({message: 'User not found'});
+        }
+
+        const tempPassword = Math.random().toString(36).slice(-8);
+
+        user.password = await bcrypt.hash(tempPassword, 10);
+
+        await sendPasswordResetEmail(email, tempPassword);
+
+        await user.save();
+
+        res.status(200).json({message: 'Password reset successfully'});
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+}
+
 module.exports = {
     register,
     login,
-    verifyEmail
+    verifyEmail,
+    requestPasswordReset,
+    resetPassword
 };
