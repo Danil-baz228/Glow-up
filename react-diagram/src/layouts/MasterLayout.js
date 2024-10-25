@@ -4,7 +4,7 @@ import axios from "axios";
 import { FaPencil } from "react-icons/fa6";
 import { NavLink, Outlet } from "react-router-dom";
 import './MasterLayout.css';
-import profilePhoto from './img/ProfilPhoto.png';
+import defaultProfilePhoto from './img/ProfilPhoto.png'; // Заглушка для аватарки
 import background from './img/backForProfile.png';
 
 const MasterLayout = () => {
@@ -27,7 +27,6 @@ const MasterLayout = () => {
                 setLastName(userResponse.data.last_name);
 
                 // Получаем данные мастера
-                // Используйте user_id для получения мастера
                 const masterResponse = await axios.get(`http://localhost:5000/api/masters/userId/${userResponse.data.user_id}`);
                 setCurrentMaster(masterResponse.data);
             } catch (error) {
@@ -45,7 +44,13 @@ const MasterLayout = () => {
             <div className="profile-header">
                 <div className="profile-background" style={{ backgroundImage: `url(${background})` }}>
                     <div className="profile-photo-container">
-                        <img src={profilePhoto} alt="Profile" className="profile-photo" />
+                        <img
+                            src={currentMaster && currentMaster.background_url
+                                ? `http://localhost:5000/images/${currentMaster.background_url}`
+                                : defaultProfilePhoto}
+                            alt="Profile"
+                            className="profile-photo"
+                        />
                     </div>
                 </div>
                 <div className="profile-info">
