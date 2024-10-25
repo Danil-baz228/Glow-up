@@ -7,19 +7,15 @@ const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         const masterId = req.params.id;
 
-        // Directory for the master (uploads/masters/{id})
         const uploadDir = path.join('uploads', 'masters', `${masterId}`);
 
-        // Check if the directory exists, if not — create it
         if (!fs.existsSync(uploadDir)) {
             fs.mkdirSync(uploadDir, { recursive: true });
         }
 
-        // Save files in the master's directory
         cb(null, uploadDir);
     },
     filename: (req, file, cb) => {
-        // Save files with unique names
         cb(null, Date.now() + '-' + file.originalname);
     }
 });

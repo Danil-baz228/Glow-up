@@ -1,4 +1,4 @@
-.specialists-container {
+.homepage-specialists-container {
   text-align: center;
   padding: 20px;
   font-family: 'Poppins', sans-serif;
@@ -6,27 +6,31 @@
   margin: 0 auto;
 }
 
-.specialists-title {
+.homepage-specialists-title {
   font-size: 28px;
   font-weight: 600;
   margin-bottom: 30px;
   color: #333;
 }
 
-.specialists-grid {
+.homepage-specialists-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Делаем сетку адаптивной */
+  grid-template-columns: repeat(3, 1fr);
   gap: 30px;
-  justify-items: center; /* Центрирование элементов внутри сетки */
+  justify-items: center;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.specialist-item {
+.homepage-specialists-item {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  max-width: 250px;
 }
 
-.specialist-avatar-container {
+.homepage-specialists-avatar-container {
   width: 120px;
   height: 120px;
   border-radius: 50%;
@@ -35,7 +39,7 @@
   margin-top: 28px;
 }
 
-.specialist-avatar-container::before {
+.homepage-specialists-avatar-container::before {
   content: '';
   position: absolute;
   top: -20px;
@@ -50,7 +54,7 @@
   transform: rotate(140deg);
 }
 
-.specialist-avatar-homepage {
+.homepage-specialists-avatar {
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -61,19 +65,19 @@
   background-color: #f0f0f0;
 }
 
-.specialist-image {
+.homepage-specialists-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.specialist-initials {
+.homepage-specialists-initials {
   font-size: 36px;
   color: #333;
   font-weight: bold;
 }
 
-.specialist-name {
+.homepage-specialists-name {
   font-size: 13px;
   font-weight: 500;
   background-color: #f0f9c0;
@@ -81,58 +85,61 @@
   border-radius: 15px;
   margin-top: 20px;
   font-family: 'Poppins', sans-serif;
-  font-weight: 600; /* Bold */
+  font-weight: 600;
 }
 
-.circle-male {
+.homepage-specialists-circle-male {
   color: #60a5fa;
 }
 
-.circle-female {
+.homepage-specialists-circle-female {
   color: #f472b6;
 }
 
-.circle-other {
+.homepage-specialists-circle-other {
   color: #d1ec53;
 }
 
-.circle-default {
+.homepage-specialists-circle-default {
   color: #d1d5db;
 }
 
-.circle-more {
+.homepage-specialists-circle-more {
   color: #d1ec53;
 }
 
-.more-specialists {
+.homepage-specialists-more {
   font-size: 28px;
   color: #7550ff;
   font-weight: bold;
 }
 
-/* Адаптация для экранов от 768px и ниже */
+
 @media (max-width: 768px) {
-  .specialists-grid {
+  .homepage-specialists-grid {
+    grid-template-columns: repeat(2, 1fr); 
     gap: 20px;
+    max-width: 600px;
   }
 
-  .specialist-item {
-    width: auto;
+  .homepage-specialists-item {
+    max-width: 200px;
   }
 }
 
-/* Адаптация для экранов от 480px и ниже */
 @media (max-width: 480px) {
-  .specialists-grid {
+  .homepage-specialists-grid {
+    grid-template-columns: 1fr;
     gap: 15px;
+    max-width: 300px;
   }
 
-  .specialist-avatar-container {
+  .homepage-specialists-avatar-container {
     width: 100px;
     height: 100px;
   }
 
-  .specialist-name {
+  .homepage-specialists-name {
     font-size: 12px;
     padding: 5px 25px;
   }

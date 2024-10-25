@@ -25,13 +25,13 @@ const Specialists = () => {
   const getCircleColor = (gender) => {
     switch (gender) {
       case 'male':
-        return 'circle-male';
+        return 'male';
       case 'female':
-        return 'circle-female';
+        return 'female';
       case 'other':
-        return 'circle-other';
+        return 'other';
       default:
-        return 'circle-default';
+        return 'default';
     }
   };
 
@@ -44,18 +44,18 @@ const Specialists = () => {
   };
   
   return (
-    <div className="specialists-container">
-      <h2 className="specialists-title">Specialists</h2>
-      <div className="specialists-grid">
+    <div className="homepage-specialists-container">
+      <h2 className="homepage-specialists-title">Specialists</h2>
+      <div className="homepage-specialists-grid">
         {masters.map((master, index) => (
-          <div key={index} className="specialist-item">
-            <div className={`specialist-avatar-container ${getCircleColor(master.gender)}`}>
-              <div className="specialist-avatar-homepage">
+          <div key={index} className="homepage-specialists-item">
+            <div className={`homepage-specialists-avatar-container homepage-specialists-circle-${getCircleColor(master.gender)}`}>
+              <div className="homepage-specialists-avatar">
                 {master.avatar_url ? (
                   <img
-                    src={getImagePath(master.avatar_url, master.master_id)}  // Используем master.master_id
+                    src={getImagePath(master.avatar_url, master.master_id)}
                     alt={`${master.first_name} ${master.last_name}`}
-                    className="specialist-image"
+                    className="homepage-specialists-image"
                     onError={(e) => {
                       console.error(`Failed to load image: ${e.target.src}`);
                       e.target.onerror = null;
@@ -66,26 +66,25 @@ const Specialists = () => {
                     }}
                   />
                 ) : (
-                  <div className="specialist-initials">
+                  <div className="homepage-specialists-initials">
                     {getInitials(master.first_name, master.last_name)}
                   </div>
                 )}
               </div>
             </div>
-            <div className="specialist-name">{master.first_name} {master.last_name}</div>
+            <div className="homepage-specialists-name">{master.first_name} {master.last_name}</div>
           </div>
         ))}
-        <div className="specialist-item">
-          <div className="specialist-avatar-container circle-more">
-            <div className="specialist-avatar-homepage">
-              <span className="more-specialists">+{totalMasters-5}</span>
+        <div className="homepage-specialists-item">
+          <div className="homepage-specialists-avatar-container homepage-specialists-circle-more">
+            <div className="homepage-specialists-avatar">
+              <span className="homepage-specialists-more">+{totalMasters-5}</span>
             </div>
           </div>
         </div>
       </div>
     </div>
   );
-  
 };
 
 export default Specialists;

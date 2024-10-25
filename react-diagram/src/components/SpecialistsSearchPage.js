@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './css/SpecialistsSearchPage/SpecialistsSearchPage.css';
+import MasterDetailsComponentSearch from './MasterDetailsComponentSearch';
 
 const SpecialistsSearchPage = () => {
   const [specialists, setSpecialists] = useState([]);
@@ -61,7 +62,7 @@ const SpecialistsSearchPage = () => {
 
   return (
     <div className="container">
-      <h1 className="title">All specialists</h1>
+      <h1 className="title">All Specialists</h1>
       
       <div className="search-container">
         <input 
@@ -83,8 +84,8 @@ const SpecialistsSearchPage = () => {
       </div>
 
       <div className="categories-container">
-        <h2 className="subtitle">Categories</h2>
-        <h3 className='subtitle'>select one or more categories</h3>
+        <h2 className="subtitle">Occupations</h2>
+        <h3 className='subtitle-1'>select one or more occupations</h3>
         <div className="categories-list">
           {categories.map((category) => (
             <button
@@ -98,56 +99,30 @@ const SpecialistsSearchPage = () => {
         </div>
       </div>
 
-      <div className="my-location-container">
-        <input 
-          type="text" 
-          placeholder="Location" 
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          className="location-input"
-        />
-        <button onClick={handleLocationSearch} className="my-location-button">
-          My location
-        </button>
-        {location && (
-          <button onClick={clearLocation} className="clear-button">
-            &times; {/* Символ крестика */}
-          </button>
-        )}
-      </div>
+{/* 
+<div className="my-location-container">
+  <input 
+    type="text" 
+    placeholder="Location" 
+    value={location}
+    onChange={(e) => setLocation(e.target.value)}
+    className="location-input"
+  />
+  <button onClick={handleLocationSearch} className="my-location-button">
+    My location
+  </button>
+  {location && (
+    <button onClick={clearLocation} className="clear-button">
+      &times;
+    </button>
+  )}
+</div>
+*/}
+
 
       <div className="specialists-grid">
         {specialists.map((specialist) => (
-          <div key={specialist.master_id} className="specialist-card">
-            <div className="specialist-header">
-              <div className="specialist-avatar">
-                {specialist.avatar_url ? (
-                  <img
-                    src={`/images/masters/${specialist.avatar_url}`}
-                    alt={`${specialist.first_name} ${specialist.last_name}`}
-                    className="avatar-image"
-                  />
-                ) : (
-                  <div className="avatar-initials">
-                    {specialist.first_name[0]}{specialist.last_name[0]}
-                  </div>
-                )}
-              </div>
-              <div className="specialist-info">
-                <h3 className="specialist-name">{specialist.first_name} {specialist.last_name}</h3>
-                <p className="specialist-occupation">
-                  {specialist.Occupation ? specialist.Occupation.name : 'Occupation not found'}
-                </p>
-              </div>
-            </div>
-            <div className="specialist-footer">
-              <div className="specialist-rating">
-                <span className="star-icon">★</span>
-                <span>{specialist.rating || 'No rating available'}</span>
-              </div>
-              <span className="specialist-price">${specialist.price || 'Price not available'}</span>
-            </div>
-          </div>
+          <MasterDetailsComponentSearch key={specialist.master_id} master={specialist} />
         ))}
       </div>
     </div>

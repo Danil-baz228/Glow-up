@@ -1,24 +1,27 @@
-/* Global container */
 .container {
   max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 20px;
+  margin: 0 auto; /* Центрирование контейнера */
+  padding: 130px 20px 40px; /* Отступы сверху, по бокам и снизу */
   font-family: 'Poppins', sans-serif;
   color: #333;
+  display: flex; /* Используйте Flexbox для центрирования */
+  flex-direction: column; /* Располагаем элементы по вертикали */
+  align-items: center; /* Центрирование по горизонтали */
+  justify-content: center; /* Центрирование по вертикали (при необходимости) */
+  text-align: center; /* Центрирование текста */
 }
 
 .title {
-  font-size: 36px;
-  font-weight: bold;
+  font-size: 60px;
+  font-weight: normal;
   margin-bottom: 40px;
-  text-align: center;
 }
 
-/* Центрирование контейнеров поиска и локации */
 .search-container,
 .my-location-container {
   position: relative;
   max-width: 500px;
+  width: 100%; /* Чтобы занимать полную ширину доступного пространства */
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -26,9 +29,9 @@
   text-align: center;
 }
 
-/* Поисковая строка */
-.search-input {
-  width: 100%;
+.search-input,
+.location-input {
+  width: 100%; /* Чтобы занимать полную ширину контейнера */
   padding: 15px 100px 15px 20px;
   border: 1px solid #e0e0e0;
   border-radius: 30px;
@@ -36,7 +39,8 @@
   outline: none;
 }
 
-.search-button {
+.search-button,
+.my-location-button {
   position: absolute;
   right: 0px;
   top: 50%;
@@ -47,44 +51,25 @@
   border: none;
   border-radius: 25px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 17px;
 }
 
-/* Локация */
-.location-input {
-  width: 100%;
-  padding: 15px 100px 15px 20px;
-  border: 1px solid #e0e0e0;
-  border-radius: 30px;
-  font-size: 16px;
-  outline: none;
-}
-
-.my-location-button {
-  position: absolute;
-  right: 0px;
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 15px 25px;
-  background-color: #7c5cff;
-  color: white;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-/* Categories */
 .categories-container {
   margin-bottom: 40px;
 }
 
 .subtitle {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 23px;
+  font-weight: normal;
   margin-bottom: 20px;
+  margin-top: 40px;
+}
+
+.subtitle-1 {
+  font-size: 18px;
+  font-weight: normal;
+  margin-bottom: 30px;
   margin-top: 10px;
-  text-align: center;
 }
 
 .categories-list {
@@ -98,12 +83,13 @@
   padding: 8px 15px;
   border-radius: 20px;
   border: 1px solid #e0e0e0;
-  background-color: #f7f7f7;
+  background-color: #dedede;
   cursor: pointer;
   font-size: 16px;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
+  color: #6b6b6b;
 }
 
 .category-button::after {
@@ -127,23 +113,13 @@
   content: "✓";
 }
 
-/* Specialists grid */
 .specialists-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: 1fr;
   gap: 30px;
   margin-top: 20px;
 }
 
-/* Specialists grid */
-.specialists-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 30px;
-  margin-top: 20px;
-}
-
-/* Specialist card */
 .specialist-card {
   padding: 20px;
   border-radius: 15px;
@@ -151,16 +127,15 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   background-color: white;
   transition: all 0.3s ease;
-  height: 200px; /* Ensure equal height for all cards */
+  height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  overflow: hidden; /* Prevent content from overflowing the card */
+  overflow: hidden;
 }
 
-/* Header specialist */
 .specialist-header {
   display: flex;
   flex-direction: column;
@@ -194,7 +169,6 @@
   border-radius: 50%;
 }
 
-/* Specialist info */
 .specialist-info {
   flex-grow: 1;
   display: flex;
@@ -204,7 +178,7 @@
 }
 
 .specialist-name {
-  font-weight: bold;
+  font-weight: normal;
   font-size: 16px;
   margin-bottom: 5px;
   white-space: nowrap;
@@ -221,19 +195,19 @@
   margin-bottom: 10px;
 }
 
-/* Specialist footer */
 .specialist-footer {
   display: flex;
   justify-content: space-between;
   width: 100%;
   font-size: 14px;
-  white-space: nowrap; /* Prevent text from wrapping to new line */
+  white-space: nowrap;
 }
 
-.specialist-rating, .specialist-price {
-  white-space: nowrap;  /* Prevent line breaks */
-  overflow: hidden;      /* Prevent overflowing */
-  text-overflow: ellipsis; /* Add ellipsis if text is too long */
+.specialist-rating,
+.specialist-price {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .specialist-rating {
@@ -247,12 +221,11 @@
 }
 
 .specialist-price {
-  font-weight: bold;
+  font-weight: normal;
   color: #333;
 }
 
-/* Fix long text overflowing from cards */
-.specialist-info h3, 
+.specialist-info h3,
 .specialist-info p {
   max-width: 100%;
   text-overflow: ellipsis;
@@ -262,19 +235,18 @@
 
 .clear-button {
   position: absolute;
-  right: 29%; /* Измените это значение, чтобы подвинуть крестик левее */
+  right: 29%;
   top: 50%;
   transform: translateY(-50%);
   background-color: transparent;
   border: none;
   cursor: pointer;
-  color: #999; /* Цвет крестика */
-  font-size: 20px; /* Размер крестика */
-  display: none; /* По умолчанию скрыть */
-  display: block;
+  color: #999;
+  font-size: 20px;
+  display: none;
 }
 
 .search-container:hover .clear-button,
 .my-location-container:hover .clear-button {
-  display: block; /* Показывать при наведении на контейнер */
+  display: block;
 }
