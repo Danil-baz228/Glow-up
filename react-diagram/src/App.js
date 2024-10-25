@@ -19,6 +19,8 @@ import ClientDiscountsPage from "./components/ClientDiscountsPage";
 import AuthProvider from 'react-auth-kit';
 import createStore from "react-auth-kit/createStore";
 import SpecialistsSearchPage from './components/SpecialistsSearchPage';
+import AppointmentPage from './components/AppointmentPage';
+import MasterDetailsComponentSearch from './components/MasterDetailsComponentSearch';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -64,6 +66,8 @@ const App = () => {
                             <Route path="questionsAnswers" element={<QuestionsAnswers/>}/>
                             <Route path="currentTopics" element={<AboutUs/>}/>
                             <Route path="additionalInfo" element={<AdditionalInfo/>}/>
+                            <Route path="/" element={<MasterDetailsComponentSearch />} />
+                            <Route path="/appointment" element={<AppointmentPage />} />
                             <Route path="/account" element={<ClientLayout toggleAuthModal={toggleAuthModal}/>}>
                                 <Route path="details" element={<ClientDetailsPage/>}/>
                                 <Route path="favorites" element={<ClientFavoritesPage/>}/>

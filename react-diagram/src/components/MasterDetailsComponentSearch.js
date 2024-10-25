@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./css/ClientPage/MasterDetailsComponentSearch.css";
 import navigationIcon from "./img/ClientPage/icon_navigation.png";
 import heartIcon from "./img/ClientPage/icon_heart.png";
@@ -6,6 +7,8 @@ import heartIcon from "./img/ClientPage/icon_heart.png";
 const defaultAvatarUrl = "https://example.com/default-avatar.png";
 
 const MasterDetailsComponentSearch = ({ master }) => {
+    const navigate = useNavigate();
+
     const roundedRating = useMemo(() => Math.round(master.avgRating), [master.avgRating]);
 
     const getInitials = (firstName, lastName) => {
@@ -17,6 +20,10 @@ const MasterDetailsComponentSearch = ({ master }) => {
     };
 
     const hasAvatar = master.avatar_url && master.avatar_url.trim() !== "";
+
+    const handleOpenClick = () => {
+        navigate('/appointment');
+    };
 
     return (
         <div className={"specialists-search-masterDetailsBox"}>
@@ -74,7 +81,10 @@ const MasterDetailsComponentSearch = ({ master }) => {
                 </div>
             </div>
             <div className="specialists-search-masterButtonBox">
-                <button className={master.gender === "male" ? "specialists-search-masterButtonMale" : "specialists-search-masterButtonFemale"}>
+                <button
+                  className={master.gender === "male" ? "specialists-search-masterButtonMale" : "specialists-search-masterButtonFemale"}
+                  onClick={handleOpenClick}
+                >
                     Open
                 </button>
             </div>
