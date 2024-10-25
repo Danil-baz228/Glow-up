@@ -52,7 +52,7 @@ const MasterLayout = () => {
                     <h2>
                         {currentMaster ? `${currentMaster.first_name} ${currentMaster.last_name}` : 'Загрузка...'}
                     </h2>
-
+                    <span>master</span>
                     <div className="profile-actions">
                         <button className="chat-button">My chats</button>
                         <button className="appointment-button">Appointments</button>
