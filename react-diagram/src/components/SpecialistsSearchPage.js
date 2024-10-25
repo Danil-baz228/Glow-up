@@ -78,7 +78,7 @@ const SpecialistsSearchPage = () => {
         </button>
         {searchTerm && (
           <button onClick={clearSearch} className="clear-button">
-            &times; {/* Символ крестика */}
+            &times;
           </button>
         )}
       </div>

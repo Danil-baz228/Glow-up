@@ -1,9 +1,9 @@
-import React, {useMemo} from 'react';
+import React, { useMemo } from 'react';
 import "./css/ClientPage/MasterDetailsComponent.css";
 import navigationIcon from "./img/ClientPage/icon_navigation.png";
 import heartIcon from "./img/ClientPage/icon_heart.png";
 
-const MasterDetailsComponent = ({master}) => {
+const MasterDetailsComponent = ({ master }) => {
     const roundedRating = useMemo(() => Math.round(master.avgRating), [master.avgRating]);
 
     return (
@@ -17,22 +17,13 @@ const MasterDetailsComponent = ({master}) => {
                     <div className="masterName">{master.first_name + " " + master.last_name}</div>
                     <div className="masterOccupation">{master.Occupation.name}</div>
                 </div>
-                <div className="masterCategories">
-                    {
-                        master.categories.slice(0, 4).map((category, index) => {
-                            return (
-                                <div key={index} className="masterCategory">{category.name}</div>
-                            );
-                        })
-                    }
-                </div>
             </div>
             <div className="masterAdditionalInfo">
                 <div className="masterRatingBox">
                     <div className="masterRating">{master.avgRating}</div>
                     <div className="starRatingBox">
                         <div className="starRating">
-                            {Array.from({length: 5}, (_, index) => (
+                            {Array.from({ length: 5 }, (_, index) => (
                                 <svg
                                     key={index}
                                     xmlns="http://www.w3.org/2000/svg"
@@ -49,10 +40,6 @@ const MasterDetailsComponent = ({master}) => {
                         </div>
                         <div className="reviewsCount">{master.reviewsCount + " reviews"}</div>
                     </div>
-                </div>
-                <div className="masterAddress">
-                    <img className={"navIcon"} src={navigationIcon} alt=""/>
-                    <div className="masterSalon">{master.Salon.City.name + ", " + master.Salon.address}</div>
                 </div>
             </div>
             <div className="masterButtonBox">

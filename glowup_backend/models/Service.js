@@ -1,5 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db.config');
+const Master = require('./Master');
+const Category = require('./Category');
 
 const Service = sequelize.define('Service', {
   service_id: {
@@ -13,12 +15,6 @@ const Service = sequelize.define('Service', {
     unique: true
   },
   description: {
-    type: DataTypes.STRING(280)
-  },
-  benefits: {
-    type: DataTypes.STRING(250)
-  },
-  contraindications: {
     type: DataTypes.STRING(280)
   },
   price: {
@@ -53,5 +49,8 @@ const Service = sequelize.define('Service', {
   timestamps: false,
   tableName: 'service'
 });
+
+Service.belongsTo(Master, { foreignKey: 'master_id' });
+Service.belongsTo(Category, { foreignKey: 'category_id' });
 
 module.exports = Service;
