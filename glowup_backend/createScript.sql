@@ -147,3 +147,12 @@ CREATE TABLE IF NOT EXISTS review (
     FOREIGN KEY (client_id) REFERENCES client(client_id),
     FOREIGN KEY (appointment_id) REFERENCES appointment(appointment_id)
 );
+
+CREATE TABLE IF NOT EXISTS portfolio(
+    portfolio_id INT PRIMARY KEY AUTO_INCREMENT,
+    headline VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    image_url VARCHAR(255) NOT NULL,
+    master_id INT NOT NULL,
+    FOREIGN KEY (master_id) REFERENCES master(master_id)
+);

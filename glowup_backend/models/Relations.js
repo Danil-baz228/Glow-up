@@ -11,6 +11,7 @@ const Client = require('./Client');
 const Category = require('./Category');
 const Review = require('./Review');
 const User = require('./User');
+const Portfolio = require('./Portfolio');
 // User
 
 User.hasOne(Client, {
@@ -146,6 +147,16 @@ Review.belongsTo(Appointment, {
     foreignKey: 'appointment_id'
 });
 
+// Portfolio
+
+Master.hasMany(Portfolio, {
+    foreignKey: 'master_id'
+});
+
+Portfolio.belongsTo(Master, {
+    foreignKey: 'master_id'
+});
+
 module.exports = {
     sequelize,
     Appointment,
@@ -159,5 +170,6 @@ module.exports = {
     Client,
     Category,
     Review,
-    User
+    User,
+    Portfolio
 };

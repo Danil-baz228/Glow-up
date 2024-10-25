@@ -24,6 +24,7 @@ const stateRoutes = require('./routes/stateRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const authRoutes = require('./routes/authRoutes');
 const addressRoutes = require('./routes/addressRoutes');
+const portfolioRoutes = require('./routes/portfolioRoutes');
 
 app.use(cors());
 app.use(express.json());
@@ -41,9 +42,9 @@ app.use('/api/sales', saleRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/states', stateRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/portfolios', portfolioRoutes);
 app.use('/api/addresses', addressRoutes);
 app.use('/auth', authRoutes);
-
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
