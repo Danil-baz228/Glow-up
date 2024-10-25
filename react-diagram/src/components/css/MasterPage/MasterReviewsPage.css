@@ -1,0 +1,156 @@
+.reviewsPage {
+    align-items: center;
+    padding: 40px 200px 100px;
+    font-family: Arial, sans-serif;
+}
+
+.reviewStats {
+
+    display: flex;
+    gap: 20px;
+    border: 1px solid #e0e0e0;
+    padding: 55px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.averageRating {
+    font-size: 32px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ratingNumber {
+    font-size: 48px;
+    color: #ff5678; /* Change to the appropriate color */
+}
+
+.totalReviews {
+    font-size: 16px;
+    color: #555;
+}
+
+.ratingBreakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.ratingRow {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.ratingBar {
+    width: 100px;
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+}
+
+.ratingBar div {
+    height: 100%;
+    background-color: #ff5678;
+}
+
+.extraStats {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.extraStat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.progressBar {
+    width: 100px;
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progressBar div {
+    height: 100%;
+    background-color: #ff5678;
+}
+
+.reviewsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.reviewCard {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 25px;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #F2F2F2;
+}
+
+.reviewHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.reviewerName {
+    font-weight: bold;
+}
+
+.starRating .filledStar {
+    color: #ff5678; /* Change to the appropriate color */
+}
+
+.starRating .emptyStar {
+    color: #e0e0e0;
+}
+
+.serviceName {
+    font-style: italic;
+    color: #555;
+}
+
+.reviewComment {
+    margin-top: 10px;
+    color: #333;
+}
+
+.reviewImages {
+    margin-top: 10px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.reviewImage {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.moreImages {
+    background-color: #f0f0f0;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
