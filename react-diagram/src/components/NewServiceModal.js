@@ -16,7 +16,10 @@ const NewServiceModal = ({ onClose, onAdd }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onAdd(formData); // Передаем введенные данные обратно в родительский компонент
+        onAdd({
+            ...formData,
+            price: parseFloat(formData.price) // преобразуем цену в число
+        });
     };
 
     return (
@@ -68,6 +71,8 @@ const NewServiceModal = ({ onClose, onAdd }) => {
                             value={formData.price}
                             onChange={handleChange}
                             required
+                            min="0"
+                            step="0.01"
                         />
                     </div>
                     <button type="submit" className="submitButton">Add to services</button>
