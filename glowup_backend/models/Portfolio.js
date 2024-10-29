@@ -33,8 +33,4 @@ const Portfolio = sequelize.define('Portfolio', {
     tableName: 'portfolio'
 });
 
-Portfolio.belongsTo(Master, {
-    foreignKey: 'master_id'
-});
-
 module.exports = Portfolio;
