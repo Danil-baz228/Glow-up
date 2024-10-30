@@ -23,6 +23,7 @@ const postRoutes = require('./routes/postRoutes');
 const stateRoutes = require('./routes/stateRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const authRoutes = require('./routes/authRoutes');
+const addressRoutes = require('./routes/addressRoutes');
 
 app.use(cors());
 app.use(express.json());
@@ -39,6 +40,15 @@ app.use('/api/masters', masterRoutes);
 app.use('/api/services', serviceRoutes);  
 app.use('/api/posts', postRoutes);       
 app.use('/api/appointments', appointmentRoutes);
+app.use('/api/cities', cityRoutes);
+app.use('/api/salons', salonRoutes);
+app.use('/api/reviews', reviewRoutes);
+app.use('/api/sales', saleRoutes);
+app.use('/api/posts', postRoutes);
+app.use('/api/states', stateRoutes);
+app.use('/api/categories', categoryRoutes);
+app.use('/api/addresses', addressRoutes);
+app.use('/auth', authRoutes);
 app.use('/api/reviews', reviewRoutes);    
 app.use('/api/sales', saleRoutes);    
 

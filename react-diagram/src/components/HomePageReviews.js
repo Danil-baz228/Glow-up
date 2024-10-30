@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './css/HomePage/HomePageReviews.css';
+import { useLanguage } from './LanguageContext'; // Importing the useLanguage hook
 
 const HomePageReviews = () => {
+  const { language } = useLanguage(); // Get the current language from the context
   const [reviews, setReviews] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const reviewsPerPage = 4;
@@ -19,7 +21,7 @@ const HomePageReviews = () => {
         if (!Array.isArray(data)) {
           throw new Error('Invalid response format: expected an array');
         }
-       
+
         setReviews(data);
       } catch (error) {
         console.error('Error fetching reviews:', error);
@@ -49,47 +51,60 @@ const HomePageReviews = () => {
     setCurrentPage((prevPage) => (prevPage + 1) % maxPages);
   };
 
-  return (
-    <div className="homepage-reviews-container">
-      <h2 className="homepage-reviews-title">Reviews</h2>
-      <div className="homepage-reviews-grid">
-        {reviews.length === 0 ? (
-          <p>No reviews available</p>
-        ) : (
-          reviews.slice(currentPage * reviewsPerPage, (currentPage + 1) * reviewsPerPage).map((review, index) => (
-            <div key={review.review_id} className="homepage-review-item-grid">
-              <div className={`homepage-review-avatar-container ${getCircleColor(index)}`}>
-                  <div className="homepage-review-avatar">
-                    <div className="homepage-review-initials">
-                      {getInitials(review.client.first_name, review.client.last_name)}
-                    </div>
-                  </div>
+  // Translations for the page
+  const translations = {
+    UA: {
+      title: "Відгуки",
+      noReviews: "Відгуків немає",
+      next: "Далі",
+    },
+    EN: {
+      title: "Reviews",
+      noReviews: "No reviews available",
+      next: "Next",
+    },
+  };
 
-              </div>
-              <div className="homepage-review-name">{review.client.first_name} {review.client.last_name}</div>
-              <div className="homepage-review-stars">{renderStars(review.rating)}</div>
-              <div className="homepage-review-comment">{review.comment}</div>
+  return (
+      <div className="homepage-reviews-container">
+        <h2 className="homepage-reviews-title">{translations[language].title}</h2>
+        <div className="homepage-reviews-grid">
+          {reviews.length === 0 ? (
+              <p>{translations[language].noReviews}</p>
+          ) : (
+              reviews.slice(currentPage * reviewsPerPage, (currentPage + 1) * reviewsPerPage).map((review, index) => (
+                  <div key={review.review_id} className="homepage-review-item-grid">
+                    <div className={`homepage-review-avatar-container ${getCircleColor(index)}`}>
+                      <div className="homepage-review-avatar">
+                        <div className="homepage-review-initials">
+                          {getInitials(review.client.first_name, review.client.last_name)}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="homepage-review-name">{review.client.first_name} {review.client.last_name}</div>
+                    <div className="homepage-review-stars">{renderStars(review.rating)}</div>
+                    <div className="homepage-review-comment">{review.comment}</div>
+                  </div>
+              ))
+          )}
+        </div>
+        {maxPages > 1 && (
+            <div className="homepage-review-navigation">
+              {[...Array(maxPages)].map((_, index) => (
+                  <span
+                      key={index}
+                      className={`homepage-nav-dot ${currentPage === index ? 'active' : ''}`}
+                      onClick={() => setCurrentPage(index)}
+                  />
+              ))}
+              <button className="homepage-next-button" onClick={handleNextPage}>
+                <div className="homepage-next-button-circle">
+                  <span className="homepage-next-button-arrow">{translations[language].next} ➜</span>
+                </div>
+              </button>
             </div>
-          ))
         )}
       </div>
-      {maxPages > 1 && (
-        <div className="homepage-review-navigation">
-          {[...Array(maxPages)].map((_, index) => (
-            <span
-              key={index}
-              className={`homepage-nav-dot ${currentPage === index ? 'active' : ''}`}
-              onClick={() => setCurrentPage(index)}
-            />
-          ))}
-          <button className="homepage-next-button" onClick={handleNextPage}>
-            <div className="homepage-next-button-circle">
-              <span className="homepage-next-button-arrow">➜</span>
-            </div>
-          </button>
-        </div>
-      )}
-    </div>
   );
 };
 

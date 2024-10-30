@@ -1,0 +1,104 @@
+.blog-page {
+    padding: 140px 120px;
+}
+
+.blog-header {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.blog-articles {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: minmax(200px, auto);
+    gap: 20px;
+    padding: 0 40px;
+}
+
+
+.blog-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.button-no-background {
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: 600;
+    color: #7550FF;
+    background-color: transparent;
+    border: 2px solid #7550FF;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button-no-background:hover {
+    background-color: #7550FF;
+    color: white;
+    transform: scale(1.05);
+}
+
+.blog-card-1, .blog-card-2 {
+    grid-column: span 3;
+}
+
+.blog-card-3, .blog-card-4, .blog-card-5 {
+    grid-column: span 2;
+}
+
+.blog-card-6, .blog-card-7 {
+    grid-column: span 3;
+}
+
+.blog-card img {
+    width: 100%;
+    height: auto;
+}
+
+.blog-content {
+    padding: 15px;
+}
+
+.article-subtitle {
+    font-size: 0.85em;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.article-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.blog-content p {
+    font-size: 1em;
+    margin-bottom: 20px;
+}
+
+.blog-content a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* Индивидуальная настройка для текста, чтобы заголовки были как на макете */
+.blog-card-1 .article-subtitle, .blog-card-2 .article-subtitle {
+    color: #333;
+    font-weight: bold;
+}
+
+.blog-card-3 .article-subtitle, .blog-card-4 .article-subtitle, .blog-card-5 .article-subtitle {
+    color: #999;
+    font-weight: normal;
+}
+
+.blog-card-6 .article-subtitle, .blog-card-7 .article-subtitle {
+    color: #666;
+    font-weight: normal;
+}

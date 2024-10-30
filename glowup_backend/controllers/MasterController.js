@@ -166,6 +166,19 @@ const removeSalon = async (req, res) => {
     }
 }
 
+const getMasterByUserId = async (req, res) => {
+    try {
+        const master = await Master.findOne({ where: { user_id: req.params.userId } });
+        if (!master) {
+            res.status(404).json({ message: 'Master not found' });
+        } else {
+            res.status(200).json(master);
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 module.exports = {
     getAllMasters,
     getMasterById,
@@ -175,5 +188,6 @@ module.exports = {
     uploadImages,
     handleImageUpload,
     addSalon,
-    removeSalon
+    removeSalon,
+    getMasterByUserId
 }

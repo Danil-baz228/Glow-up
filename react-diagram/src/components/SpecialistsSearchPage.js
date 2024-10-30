@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './css/SpecialistsSearchPage/SpecialistsSearchPage.css';
+import { useLanguage } from './LanguageContext'; // Importing the useLanguage hook
 import MasterDetailsComponentSearch from './MasterDetailsComponentSearch';
 
 const SpecialistsSearchPage = () => {
+  const { language } = useLanguage(); // Get the current language from the context
   const [specialists, setSpecialists] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -45,10 +47,10 @@ const SpecialistsSearchPage = () => {
   };
 
   const toggleCategory = (category) => {
-    setSelectedCategories(prev => 
-      prev.includes(category)
-        ? prev.filter(c => c !== category)
-        : [...prev, category]
+    setSelectedCategories(prev =>
+        prev.includes(category)
+            ? prev.filter(c => c !== category)
+            : [...prev, category]
     );
   };
 
@@ -58,6 +60,32 @@ const SpecialistsSearchPage = () => {
 
   const clearLocation = () => {
     setLocation('');
+  };
+
+  // Translations for the page
+  const translations = {
+    UA: {
+      title: "Всі спеціалісти",
+      searchPlaceholder: "Знайти спеціаліста за іменем",
+      categoriesTitle: "Категорії",
+      categoriesSubtitle: "Виберіть одну або кілька категорій",
+      locationPlaceholder: "Місцезнаходження",
+      myLocation: "Моя локація",
+      noRating: "Оцінка недоступна",
+      noPrice: "Ціна недоступна",
+      noReviews: "Ще немає відгуків",
+    },
+    EN: {
+      title: "All specialists",
+      searchPlaceholder: "Find a specialist by name",
+      categoriesTitle: "Categories",
+      categoriesSubtitle: "Select one or more categories",
+      locationPlaceholder: "Location",
+      myLocation: "My location",
+      noRating: "No rating available",
+      noPrice: "Price not available",
+      noReviews: "No reviews yet",
+    },
   };
 
   return (
@@ -80,8 +108,12 @@ const SpecialistsSearchPage = () => {
           <button onClick={clearSearch} className="clear-button">
             &times; {/* Символ крестика */}
           </button>
-        )}
-      </div>
+          {searchTerm && (
+              <button onClick={clearSearch} className="clear-button">
+                &times; {/* Символ крестика */}
+              </button>
+          )}
+        </div>
 
       <div className="categories-container">
         <h2 className="subtitle">Occupations</h2>
@@ -97,8 +129,6 @@ const SpecialistsSearchPage = () => {
             </button>
           ))}
         </div>
-      </div>
-
 {/* 
 <div className="my-location-container">
   <input 
@@ -125,7 +155,6 @@ const SpecialistsSearchPage = () => {
           <MasterDetailsComponentSearch key={specialist.master_id} master={specialist} />
         ))}
       </div>
-    </div>
   );
 };
 

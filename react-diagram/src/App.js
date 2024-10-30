@@ -19,10 +19,16 @@ import ClientDiscountsPage from "./components/ClientDiscountsPage";
 import AuthProvider from 'react-auth-kit';
 import createStore from "react-auth-kit/createStore";
 import SpecialistsSearchPage from './components/SpecialistsSearchPage';
+import MasterLocationPage from "./components/MasterLocationPage";
+import MasterServicePage from './components/MasterServicePage';
+import MasterPortfolioPage from './components/MasterPortfolioPage';
+import MasterReviewsPage from './components/MasterReviewsPage';
 import AppointmentPage from './components/AppointmentPage';
 import MasterDetailsComponentSearch from './components/MasterDetailsComponentSearch';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import MasterLayout from "./layouts/MasterLayout";
+import Blog from "./components/Blog";
 
 const store = createStore({
     authName: '_auth',
@@ -31,12 +37,18 @@ const store = createStore({
     cookieSecure: false
 });
 
+
+
+
+
 // Компонент для прокрутки на верх
 const ScrollToTop = () => {
-    const {pathname} = useLocation();
+    const { pathname } = useLocation();
 
     useEffect(() => {
-        window.scrollTo(0, 0);
+        if (!pathname.startsWith('/master') && !pathname.startsWith('/account')) {
+            window.scrollTo(0, 0);
+        }
     }, [pathname]);
 
     return null;
@@ -74,9 +86,17 @@ const App = () => {
                                 <Route path="history" element={<ClientHistoryPage/>}/>
                                 <Route path="discounts" element={<ClientDiscountsPage/>}/>
                             </Route>
+                            <Route path="/master" element={<MasterLayout/>}>
+                                <Route path="portfolio" element={<MasterPortfolioPage/>}/>
+                                <Route path="services" element={<MasterServicePage/>}/>
+                                <Route path="location" element={<MasterLocationPage/>}/>
+                                <Route path="reviews" element={<MasterReviewsPage/>}/>
+                            </Route>
+                            <Route path="blog" element={<Blog/>}/>
                             <Route path="*" element={<ErrorPage/>}/>
                         </Route>
                         <Route path="/login" element={<AuthPage/>}/>
+                        <Route path="/dev" element={<MasterLocationPage/>}/>
                     </Routes>
                 </LanguageProvider>
             </Router>

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './css/HomePage/Specialists.css';
+import { useLanguage } from './LanguageContext'; // Importing the useLanguage hook
 
 const Specialists = () => {
+  const { language } = useLanguage(); // Get the current language from the context
   const [masters, setMasters] = useState([]);
   const [totalMasters, setTotalMasters] = useState(0);
 
@@ -42,7 +44,19 @@ const Specialists = () => {
   const getImagePath = (avatarUrl, masterId) => {
     return avatarUrl ? `/images/masters/${masterId}/${avatarUrl}` : '';
   };
-  
+
+  // Translations for the page
+  const translations = {
+    UA: {
+      title: "Спеціалісти",
+      moreSpecialists: "",
+    },
+    EN: {
+      title: "Specialists",
+      moreSpecialists: "",
+    },
+  };
+
   return (
     <div className="homepage-specialists-container">
       <h2 className="homepage-specialists-title">Specialists</h2>
@@ -69,21 +83,19 @@ const Specialists = () => {
                   <div className="homepage-specialists-initials">
                     {getInitials(master.first_name, master.last_name)}
                   </div>
-                )}
+                </div>
+                <div className="specialist-name">{master.first_name} {master.last_name}</div>
               </div>
-            </div>
-            <div className="homepage-specialists-name">{master.first_name} {master.last_name}</div>
-          </div>
-        ))}
-        <div className="homepage-specialists-item">
-          <div className="homepage-specialists-avatar-container homepage-specialists-circle-more">
-            <div className="homepage-specialists-avatar">
-              <span className="homepage-specialists-more">+{totalMasters-5}</span>
+          ))}
+          <div className="specialist-item">
+            <div className="specialist-avatar-container circle-more">
+              <div className="specialist-avatar-homepage">
+                <span className="more-specialists">+{totalMasters - 5} {translations[language].moreSpecialists}</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
