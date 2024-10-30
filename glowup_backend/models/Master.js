@@ -1,6 +1,7 @@
 const { DataTypes, ENUM } = require('sequelize');
 const sequelize = require('../config/db.config');
 const Occupation = require('./Occupation');
+const Salon = require('./Salon');
 
 const Master = sequelize.define('Master', {
   master_id: {
@@ -53,6 +54,14 @@ const Master = sequelize.define('Master', {
       model: 'occupation',
       key: 'occupation_id'
     }
+  },
+  salon_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'salon',
+      key: 'salon_id'
+    }
   }
 }, {
   timestamps: false,
@@ -60,5 +69,6 @@ const Master = sequelize.define('Master', {
 });
 
 Master.belongsTo(Occupation, { foreignKey: 'occupation_id' });
+Master.belongsTo(Salon, { foreignKey: 'salon_id' });
 
 module.exports = Master;

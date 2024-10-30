@@ -23,6 +23,8 @@ import MasterLocationPage from "./components/MasterLocationPage";
 import MasterServicePage from './components/MasterServicePage';
 import MasterPortfolioPage from './components/MasterPortfolioPage';
 import MasterReviewsPage from './components/MasterReviewsPage';
+import AppointmentPage from './components/AppointmentPage';
+import MasterDetailsComponentSearch from './components/MasterDetailsComponentSearch';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import MasterLayout from "./layouts/MasterLayout";
@@ -76,6 +78,8 @@ const App = () => {
                             <Route path="questionsAnswers" element={<QuestionsAnswers/>}/>
                             <Route path="currentTopics" element={<AboutUs/>}/>
                             <Route path="additionalInfo" element={<AdditionalInfo/>}/>
+                            <Route path="/" element={<MasterDetailsComponentSearch />} />
+                            <Route path="/appointment" element={<AppointmentPage />} />
                             <Route path="/account" element={<ClientLayout toggleAuthModal={toggleAuthModal}/>}>
                                 <Route path="details" element={<ClientDetailsPage/>}/>
                                 <Route path="favorites" element={<ClientFavoritesPage/>}/>

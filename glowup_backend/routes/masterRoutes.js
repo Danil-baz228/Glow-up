@@ -5,6 +5,9 @@ const { getAllMasters, createMaster, deleteMaster, getMasterById, updateMaster, 
     removeSalon,
     getMasterByUserId
 } = require('../controllers/masterController');
+
+    removeSalon
+} = require('../controllers/MasterController');
 const Master = require('../models/Master.js');
 const Occupation = require('../models/Occupation.js');
 const { Op } = require('sequelize');
@@ -15,7 +18,6 @@ router.get('/search', async (req, res) => {
   try {
       const { term, categories, location } = req.query;
 
-      // Build the where clause for the search
       const whereClause = {};
 
       if (term) {
@@ -37,7 +39,6 @@ router.get('/search', async (req, res) => {
           }
       }
 
-      // Perform the search
       const masters = await Master.findAll({
           where: whereClause,
           include: [includeClause],

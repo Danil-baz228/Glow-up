@@ -28,11 +28,17 @@ const addressRoutes = require('./routes/addressRoutes');
 app.use(cors());
 app.use(express.json());
 
-app.use('/api/users', userRoutes);
-app.use('/api/clients', clientRoutes);
-app.use('/api/masters', masterRoutes);
+app.use('/auth', authRoutes);
+app.use('/api/users', userRoutes);     
+app.use('/api/states', stateRoutes);     
+app.use('/api/cities', cityRoutes);     
+app.use('/api/categories', categoryRoutes); 
 app.use('/api/occupations', occupationRoutes);
-app.use('/api/services', serviceRoutes);
+app.use('/api/salons', salonRoutes);     
+app.use('/api/clients', clientRoutes);     
+app.use('/api/masters', masterRoutes);     
+app.use('/api/services', serviceRoutes);  
+app.use('/api/posts', postRoutes);       
 app.use('/api/appointments', appointmentRoutes);
 app.use('/api/cities', cityRoutes);
 app.use('/api/salons', salonRoutes);
@@ -43,11 +49,12 @@ app.use('/api/states', stateRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/addresses', addressRoutes);
 app.use('/auth', authRoutes);
-
+app.use('/api/reviews', reviewRoutes);    
+app.use('/api/sales', saleRoutes);    
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-const sequelize = require('./config/db.config');  // Import Sequelize config
+const sequelize = require('./config/db.config');
 
 sequelize.authenticate()
   .then(() => {

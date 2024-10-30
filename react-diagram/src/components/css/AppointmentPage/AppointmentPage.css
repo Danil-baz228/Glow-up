@@ -1,0 +1,52 @@
+.appointment-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.form-section {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.image-section {
+  flex: 1;
+}
+
+.image-section img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.btn {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #ff5e5e;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #333;
+  color: white;
+}
