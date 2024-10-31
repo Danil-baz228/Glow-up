@@ -32,16 +32,19 @@ const upload = multer({
 const router = express.Router();
 
 router.get('/', getAllUsers);
-
 router.post('/', createUser);
-
 router.get('/:id', getUserById);
-
 router.put('/:id', updateUser);
-
 router.delete('/:id', deleteUser);
 
-router.post('/upload-avatar/:id', upload.single('avatar'), uploadAvatar);
-
+// Обработка загрузки аватара с обработкой ошибок
+router.post('/upload-avatar/:id', (req, res, next) => {
+    upload.single('avatar')(req, res, (error) => {
+        if (error) {
+            return res.status(400).json({ message: error.message });
+        }
+        next();
+    });
+}, uploadAvatar);
 
 module.exports = router;

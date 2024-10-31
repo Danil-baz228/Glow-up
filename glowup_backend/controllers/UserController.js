@@ -1,13 +1,18 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 
-const createUser = async (req, res) => { // TODO: secure password hashing
+const createUser = async (req, res) => {
     try {
         const { email, password, role } = req.body;
-        const newUser = await User.create({ email, password, role });
-        return newUser;
+
+        // Хеширование пароля перед сохранением
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newUser = await User.create({ email, password: hashedPassword, role });
+
+        // Возвращаем созданного пользователя
+        res.status(201).json(newUser);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: 'Error creating user: ' + error.message });
     }
 }
 
@@ -16,7 +21,7 @@ const getAllUsers = async (req, res) => {
         const users = await User.findAll();
         res.status(200).json(users);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: 'Error fetching users: ' + error.message });
     }
 }
 
@@ -24,9 +29,15 @@ const getUserById = async (req, res) => {
     try {
         const { id } = req.params;
         const user = await User.findByPk(id);
+
+        // Проверка, найден ли пользователь
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
         res.status(200).json(user);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: 'Error fetching user: ' + error.message });
     }
 }
 
@@ -36,6 +47,12 @@ const updateUser = async (req, res) => {
         const { email, password, role } = req.body;
         const user = await User.findByPk(id);
 
+        // Проверка, найден ли пользователь
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Обновление данных пользователя
         if (email) user.email = email;
         if (password) {
             const hashedPassword = await bcrypt.hash(password, 10);
@@ -46,7 +63,7 @@ const updateUser = async (req, res) => {
         await user.save();
         res.status(200).json(user);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: 'Error updating user: ' + error.message });
     }
 }
 
@@ -54,10 +71,16 @@ const deleteUser = async (req, res) => {
     try {
         const { id } = req.params;
         const user = await User.findByPk(id);
+
+        // Проверка, найден ли пользователь
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
         await user.destroy();
         res.status(200).json({ message: 'User deleted' });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: 'Error deleting user: ' + error.message });
     }
 }
 
@@ -78,6 +101,7 @@ const uploadAvatar = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
 
 module.exports = {
     createUser,

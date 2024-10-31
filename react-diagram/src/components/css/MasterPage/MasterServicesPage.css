@@ -18,7 +18,21 @@
     cursor: pointer;
     margin-bottom: 20px;
 }
+.deleteServiceButton {
+    background-color: #F2F2F2;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
 
+.deleteServiceButton:hover {
+    background-color: #d9363e; /* Темнее красный при наведении */
+}
 .addServiceButton:hover {
     background-color: #e0e0e0;
 }
@@ -57,6 +71,7 @@
 }
 
 .servicePrice {
+    padding: 15px;
     font-size: 16px;
     color: #333;
 }
