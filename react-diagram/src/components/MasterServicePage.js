@@ -29,16 +29,27 @@ const MasterServicesPage = () => {
                 benefits: newService.benefits,
                 contraindications: newService.contraindications,
                 price: parseFloat(newService.price),
-                duration: 60, // укажите продолжительность по умолчанию или добавьте ее в форму
-                image_url: "default.jpg", // замените на путь по умолчанию или добавьте это поле в форму
-                category_id: 1, // замените на актуальный category_id или добавьте это поле в форму
-                master_id: 1 // замените на актуальный master_id
+                duration: 60,
+                image_url: "default.jpg",
+                category_id: 1,
+                master_id: 1
             });
 
             setServices([...services, response.data]);
             setIsModalOpen(false);
         } catch (error) {
             console.log("Ошибка при добавлении новой услуги:", error);
+        }
+    };
+
+    // Удаление услуги с сервера
+    const handleDeleteService = async (serviceId) => {
+        try {
+            await axios.delete(`http://localhost:5000/api/services/${serviceId}`);
+            // Удаляем услугу из локального состояния после успешного удаления
+            setServices(services.filter(service => service.service_id !== serviceId));
+        } catch (error) {
+            console.log("Ошибка при удалении услуги:", error);
         }
     };
 
@@ -57,6 +68,9 @@ const MasterServicesPage = () => {
                             <div className="serviceName">{service.title}</div>
                         </div>
                         <div className="servicePrice">${service.price}</div>
+                        <button onClick={() => handleDeleteService(service.service_id)} className="deleteServiceButton">
+                            Delete
+                        </button>
                     </div>
                 ))}
             </div>
