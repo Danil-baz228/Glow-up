@@ -1,7 +1,7 @@
 const {createUser} = require('./UserController');
 const {createClient} = require('./ClientController');
 const {createMaster} = require('./MasterController');
-const {User, Client} = require('../models/Relations');
+const {User, Client, Master} = require('../models/Relations');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
@@ -83,7 +83,16 @@ const login = async (req, res) => {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        const client = await Client.findOne({ where: { user_id: user.user_id } });
+        let username = null;
+
+        if(user.role === 'client') {
+            const client = await Client.findOne({ where: { user_id: user.user_id } });
+            username = `${client.last_name} ${client.first_name}`;
+        } else if(user.role === 'master') {
+            const master = await Master.findOne({ where: { user_id: user.user_id } });
+            username = `${master.last_name} ${master.first_name}`;
+        }
+
 
         // Check if password is valid
         const validPassword = await bcrypt.compare(password, user.password);
@@ -104,7 +113,7 @@ const login = async (req, res) => {
             id: user.user_id,
             email: user.email,
             role: user.role,
-            username: client ? `${client.last_name} ${client.first_name}` : null
+            username: username
         });
     } catch (error) {
         res.status(500).json({ message: error.message });
