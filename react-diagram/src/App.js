@@ -22,6 +22,7 @@ import SpecialistsSearchPage from './components/SpecialistsSearchPage';
 import MasterLocationPage from "./components/MasterLocationPage";
 import MasterServicePage from './components/MasterServicePage';
 import MasterPortfolioPage from './components/MasterPortfolioPage';
+import MasterReviewsPage from './components/MasterReviewsPage';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import MasterLayout from "./layouts/MasterLayout";
@@ -34,12 +35,18 @@ const store = createStore({
     cookieSecure: false
 });
 
+
+
+
+
 // Компонент для прокрутки на верх
 const ScrollToTop = () => {
-    const {pathname} = useLocation();
+    const { pathname } = useLocation();
 
     useEffect(() => {
-        window.scrollTo(0, 0);
+        if (!pathname.startsWith('/master') && !pathname.startsWith('/account')) {
+            window.scrollTo(0, 0);
+        }
     }, [pathname]);
 
     return null;
@@ -79,6 +86,7 @@ const App = () => {
                                 <Route path="portfolio" element={<MasterPortfolioPage/>}/>
                                 <Route path="services" element={<MasterServicePage/>}/>
                                 <Route path="location" element={<MasterLocationPage/>}/>
+                                <Route path="reviews" element={<MasterReviewsPage/>}/>
                             </Route>
                             <Route path="blog" element={<Blog/>}/>
                             <Route path="*" element={<ErrorPage/>}/>

@@ -35,12 +35,12 @@ const Header = ({ toggleAuthModal, isScrolled }) => {
     const translations = {
         UA: {
             catalog: 'Каталог послуг',
-            masters: 'Майстри',
+            masters: 'Спеціалісти',
             aboutUs: 'Про нас',
         },
         EN: {
             catalog: 'Service Catalog',
-            masters: 'Masters',
+            masters: 'Specialists',
             aboutUs: 'About Us',
         },
     };

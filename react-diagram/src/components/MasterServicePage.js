@@ -1,56 +1,62 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from "axios";
 import "./css/MasterPage/MasterServicesPage.css";
-import ServiceDetailsComponent from "./ServiceDetailsComponent";
 import NewServiceModal from "./NewServiceModal";
 
-
 const MasterServicesPage = () => {
-    const [services, setServices] = useState([
-        { id: 1, name: "Facial Treatments (Anti-aging, Hydrating, De...", price: 70 },
-        { id: 2, name: "Microdermabrasion", price: 85 },
-        { id: 3, name: "Skin Rejuvenation Treatments", price: 90 },
-        { id: 4, name: "Anti-Cellulite Treatments", price: 120 },
-        { id: 5, name: "Eyebrow and Eyelash Tinting", price: 95 },
-        { id: 6, name: "Chemical Peels (Glycolic, Salicylic, TCA)", price: 105 },
-        { id: 7, name: "Microneedling", price: 75 },
-        { id: 8, name: "Botox and Fillers", price: 80 }
-    ]);
-    // для БД
-    /*
-    useEffect(() => {
-        if (currentClient) {
-            axios.get(`http://localhost:5000/api/clients/${currentClient.client_id}/services`)
-                .then((response) => {
-                    setServices(response.data);
-                    console.log(response.data);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        }
-    }, [currentClient]);
-    */
+    const [services, setServices] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handleAddService = (newService) => {
-        setServices([...services, { id: services.length + 1, name: newService.headline, price: newService.price }]);
-        setIsModalOpen(false);
+    // Получение списка услуг при загрузке компонента
+    useEffect(() => {
+        const fetchServices = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/api/services');
+                setServices(response.data);
+            } catch (error) {
+                console.log("Ошибка при получении услуг:", error);
+            }
+        };
+        fetchServices();
+    }, []);
+
+    // Добавление новой услуги на сервер
+    const handleAddService = async (newService) => {
+        try {
+            const response = await axios.post('http://localhost:5000/api/services', {
+                title: newService.headline,
+                description: newService.description,
+                benefits: newService.benefits,
+                contraindications: newService.contraindications,
+                price: parseFloat(newService.price),
+                duration: 60, // укажите продолжительность по умолчанию или добавьте ее в форму
+                image_url: "default.jpg", // замените на путь по умолчанию или добавьте это поле в форму
+                category_id: 1, // замените на актуальный category_id или добавьте это поле в форму
+                master_id: 1 // замените на актуальный master_id
+            });
+
+            setServices([...services, response.data]);
+            setIsModalOpen(false);
+        } catch (error) {
+            console.log("Ошибка при добавлении новой услуги:", error);
+        }
     };
 
     return (
         <div className="clientServicesPage">
             <button onClick={() => setIsModalOpen(true)} className="addServiceButton">Add new service +</button>
 
-            {isModalOpen && <NewServiceModal onClose={() => setIsModalOpen(false)} onAdd={handleAddService} />}
+            {isModalOpen && (
+                <NewServiceModal onClose={() => setIsModalOpen(false)} onAdd={handleAddService} />
+            )}
 
             <div className="serviceList">
                 {services.map((service) => (
-                    <div className="serviceCard" key={service.id}>
+                    <div className="serviceCard" key={service.service_id}>
                         <div className="serviceDetails">
-                            <div className="serviceName">{service.name}</div>
+                            <div className="serviceName">{service.title}</div>
                         </div>
                         <div className="servicePrice">${service.price}</div>
-                        <div className="addServiceIcon">+</div>
                     </div>
                 ))}
             </div>

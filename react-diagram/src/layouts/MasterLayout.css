@@ -7,6 +7,125 @@
     flex-direction: column;
 }
 
+
+.profile-header {
+    width: 75%;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    margin-bottom: 30px;
+}
+
+.profile-background {
+    width: 100%;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.profile-photo-container {
+    position: absolute;
+    bottom: -110px;
+    left: 20px;
+    border-radius: 50%;
+
+    overflow: hidden;
+}
+
+.profile-photo {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Информация о пользователе */
+.profile-info {
+    text-align: left;
+    padding: 20px;
+    margin-top: 0px;
+    margin-left:220px;
+}
+
+.profile-info h2 {
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+.profile-info span {
+    font-size: 16px;
+    color: #888;
+    margin-bottom: 10px;
+    display: block;
+}
+.profile-actions {
+    position: right;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 10px;
+    margin-left: 540px; /* отступ от правого края */
+    margin-top: -40px;
+}
+
+.profile-actions button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.chat-button, .appointment-button {
+    background-color: #000;
+    color: white;
+}
+
+.edit-button {
+    background-color: transparent;
+    color: black;
+    border: 1px solid black;
+}
+
+.edit-button:hover {
+    background-color: black;
+    color: white;
+}
+
+/* Навигация профиля - на всю ширину */
+.profile-navigation {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.profile-navigation nav {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.profile-navigation nav a {
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+
+.profile-navigation nav a:hover {
+    border-bottom: 2px solid #000;
+    padding-bottom: 8px;
+}
+
+
 .masterHeader{
     display: flex;
     justify-content: space-between;
