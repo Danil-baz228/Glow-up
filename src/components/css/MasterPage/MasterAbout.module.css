@@ -1,0 +1,337 @@
+.aboutContainer {
+    width: 80%;
+
+    margin: 0 auto;
+    font-family: 'Poppins';
+}
+
+.addAboutBtn {
+    padding: 12px 24px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 20px;
+    font-family: 'Poppins';
+    font-size: 14px;
+    margin-right:300px;
+    cursor: pointer;
+    text-align: center;
+   
+    display: block;
+    width:1200px;
+}
+
+.aboutSection {
+    background-color: #fff;
+    margin: 10px auto 20px;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+}
+
+h2 {
+    color: #222;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+p2 {
+    text-align: left;
+    display: block;
+    margin-bottom: 10px;
+
+}
+
+.imageGallery, .certificationsGallery {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between; 
+}
+
+.imageGallery img {
+    width: 100%;
+    max-width: 500px;
+    width: calc(50% - 20px);
+    height: 407px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    align-items: left;
+}
+
+.certificationsGallery img {
+    width: 100%;
+    width: calc(33.333% - 20px);
+    max-width: 370px;
+    height: 407px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.EquipmentGallery img {
+    width: 100%;
+    max-width: 1070px;
+  
+    height: 300px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.controls {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.controls button {
+    font-family: 'Poppins';
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+    background-color: transparent;
+    color: black;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.controls button:hover {
+    background-color: black;
+    color: white;
+}
+
+.icon {
+    width: 16px;
+    height: 16px;
+}
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* Modal Container */
+.modalContent {
+    background-color: white;
+    width: 50%;
+    max-width: 800px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    position: relative;
+    font-family: Arial, sans-serif;
+}
+
+/* Close Button */
+.closeButton {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Modal Header */
+.modalContent h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+/* Label Styles */
+.modalContent label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #666;
+    margin-top: 20px;
+    display: block;
+}
+
+/* Input Field */
+.modalContent input[type="text"],
+.modalContent textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    box-sizing: border-box;
+}
+
+/* Textarea */
+.modalContent textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Image Gallery */
+.imageGallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.imageGallery img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Edit Button */
+.modalContent button {
+    background-color: #333;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto 0;
+}
+
+.modalContent button:hover {
+    background-color: #555;
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modalContent {
+    background-color: white;
+    width: 80%;
+    max-width: 900px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.templateContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.templateSection {
+    flex: 1;
+    min-width: 200px;
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.templateSection:hover {
+    border-color: #aaa;
+}
+
+.templateSection h3 {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.templateSection img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.templateSection input[type="file"] {
+    margin-top: 10px;
+}
+
+.contactInfo {
+    background-color: #333;
+    color: white;
+    border-radius: 10px;
+    padding: 15px;
+    flex-basis: 100%;
+    text-align: center;
+}
+
+.contactInfo h3 {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.contactInfo p {
+    color: white;
+    font-size: 16px;
+}
+
+
+
+button:hover {
+    background-color: #000000;
+    color:white;
+}
+
+/* Стили для выделенных блоков по цветам */
+.templateSection:first-child {
+    background-color: #ff99cc; /* розовый */
+}
+
+.templateSection:nth-child(2) {
+    background-color: #99ccff; /* синий */
+}
+
+.templateSection:nth-child(3) {
+    background-color: #ccff99; /* зеленый */
+}
+
+.contactInfo {
+    background-color: #333; /* черный для информации о контакте */
+}

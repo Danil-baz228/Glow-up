@@ -1,0 +1,104 @@
+.about-container {
+    
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    padding: 20px;
+    min-height: 100vh;
+    color: #333;
+    background-image: url('../../img/AboutUs//background.png');
+    background-size: 80%; 
+    background-position: top center; 
+    background-repeat: no-repeat; 
+    padding-top: 200px;
+  }
+  
+  .about-section {
+    margin-bottom: 50px;
+  }
+  .main-logo{
+    width: 550px; 
+    height: 150px;
+  }
+  .logo-text {
+    font-size: 4em;
+    font-weight: bold;
+    background: linear-gradient(90deg, #A13AFE, #FF5EAB);
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  
+  .slogan {
+    font-size: 1.5em;
+    color: #A13AFE;
+    margin-bottom: 20px;
+    text-align: right;
+    padding-right: 700px;
+  }
+  
+  .about-text {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+   
+    text-align: left;
+    
+    line-height: 1.8;
+    font-size: 1em;
+  }
+  
+  .team-section {
+    margin-bottom: 50px;
+    margin-top: 30px;
+  }
+  
+  .team-section-logo {
+    margin-bottom: 50px;
+    text-align: center;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 30px;
+    justify-content: center;
+  }
+  
+  .team-member {
+    text-align: center;
+  }
+  
+  .team-photo {
+    border-radius: 50%; 
+    width: 150px;
+    height: 150px;
+    object-fit: cover; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .team-member p {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 1em;
+  }
+  .team-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .team-logo-img {
+    width: 150px; 
+    height: 150px;
+  }
+  
+  .team-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .team-row-img {
+    max-width: 80%; 
+    height: auto;
+    display: block;
+  }

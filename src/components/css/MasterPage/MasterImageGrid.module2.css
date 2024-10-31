@@ -1,0 +1,93 @@
+/* src/css/MasterPage/MasterImageGrid.css */
+.ImagegridContainer {
+  width: 80%;
+
+  margin: 0 auto;
+  font-family: 'Poppins';
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+.grid-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+/* Анимация увеличения при наведении на элемент */
+.grid-item:hover {
+  transform: scale(1.03);
+}
+
+/* Изображение в карточке */
+.grid-item img {
+  visibility: visible;
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+/* Увеличение изображения при наведении */
+.grid-item:hover img {
+  transform: scale(1.05);
+}
+
+/* Текст на изображении */
+.grid-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  color: white;
+  text-align: left;
+  font-size: 16px;
+  font-weight: bold;
+  background: rgba(0, 0, 0, 0.5);
+  transition: background 0.3s ease;
+}
+
+/* Изменение фона текста при наведении */
+.grid-item:hover .grid-text {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* Кнопка удаления */
+.delete-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Показать кнопку удаления, если элемент выбран */
+.grid-item.selected .delete-button {
+  opacity: 1;
+}
+
+/* Кнопка удаления при наведении */
+.delete-button:hover {
+  background-color: #ff4c4c;
+}
+
+/* При наведении на элемент показать кнопку удаления */
+.grid-item:hover .delete-button {
+  opacity: 1;
+}

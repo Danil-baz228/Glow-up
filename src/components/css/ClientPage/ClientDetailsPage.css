@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.clientDetailsPage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 110px 0;
+}
+
+.clientDetailsPage form{
+    width: 35%;
+    min-width: 350px;
+}
+
+.clientDetailsPage input {
+    padding: 15px 30px;
+    margin-bottom: 40px;
+    border-radius: 30px;
+    border: 0;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.clientDetailsPage input::placeholder {
+    color: #787878;
+}
+
+.clientDetailsPage input:focus {
+    outline: none;
+}
+
+.clientDetailsPage .password-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.clientDetailsPage .password-input-wrapper input {
+    flex: 1;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
+
+.clientDetailsPage form .clientDetailsFormButtons{
+    display: flex;
+    justify-content: center;
+}
+
+.clientDetailsPage form .clientDetailsFormButtons button {
+    padding: 15px 0;
+    width: 180px;
+    border: solid 1px black;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 20px;
+}
+
+.clientDetailsPage form .clientDetailsFormButtons button[type="reset"] {
+    background-color: #fff;
+    color: #000;
+}
+
+.clientDetailsPage form .clientDetailsFormButtons button[type="submit"] {
+    background-color: #000;
+    color: #fff;
+}
+
+.clientDetailsPage form .clientDetailsFormButtons button[type="reset"]:hover {
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+.clientDetailsPage form .clientDetailsFormButtons button[type="submit"]:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal {
+    background-color: white;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: fadeIn 3s ease-in-out;
+}
+
+.modal p {
+    color: green;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+@keyframes fadeInDetails {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    50%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+    }
+}
