@@ -72,7 +72,7 @@ const ProfilePage = () => {
         },
       });
       
-      // Обновляем состояние с новым фото
+      // Обновляем состояние с новым фото0
       const newPhoto = response.data.imagePath;
       setImages([newPhoto, ...images]);
       setIsModalOpen(false);
