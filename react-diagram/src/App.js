@@ -27,6 +27,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import MasterLayout from "./layouts/MasterLayout";
 import Blog from "./components/Blog";
+import MasterServiceSearchPage from './components/MasterServiceSearchPage';
+
 
 const store = createStore({
     authName: '_auth',
@@ -76,6 +78,7 @@ const App = () => {
                             <Route path="questionsAnswers" element={<QuestionsAnswers/>}/>
                             <Route path="currentTopics" element={<AboutUs/>}/>
                             <Route path="additionalInfo" element={<AdditionalInfo/>}/>
+                            <Route path="/masters/:masterId/services" element={<MasterServiceSearchPage />} />
                             <Route path="/account" element={<ClientLayout toggleAuthModal={toggleAuthModal}/>}>
                                 <Route path="details" element={<ClientDetailsPage/>}/>
                                 <Route path="favorites" element={<ClientFavoritesPage/>}/>

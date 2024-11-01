@@ -15,7 +15,6 @@ router.get('/search', async (req, res) => {
   try {
       const { term, categories, location } = req.query;
 
-      // Build the where clause for the search
       const whereClause = {};
 
       if (term) {
@@ -37,7 +36,6 @@ router.get('/search', async (req, res) => {
           }
       }
 
-      // Perform the search
       const masters = await Master.findAll({
           where: whereClause,
           include: [includeClause],

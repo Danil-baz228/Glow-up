@@ -1,0 +1,141 @@
+* {
+    margin-top: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.specialists-search-master-details-search-masterDetailsBox {
+    width: 1000px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    padding: 30px 20px;
+}
+
+.specialists-search-master-details-search-masterImageContainer {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.specialists-search-master-details-search-masterImage {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+.specialists-search-master-details-search-masterInitials {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #D9D9D9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+}
+
+.specialists-search-master-details-search-favoriteButton {
+    color: #e1e1e1;
+    border: 2px solid lightgray;
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+.specialists-search-master-details-search-favoriteButton img {
+    width: 30px;
+    height: 30px;
+}
+
+.specialists-search-master-details-search-masterInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.specialists-search-master-details-search-masterName {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.specialists-search-master-details-search-masterOccupation {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.specialists-search-master-details-search-masterAdditionalInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.specialists-search-master-details-search-masterRatingBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.specialists-search-master-details-search-masterRating {
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.specialists-search-master-details-search-reviewsCount {
+    color: black;
+    font-size: 14px;
+}
+
+.specialists-search-master-details-search-masterButtonBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.specialists-search-master-details-search-masterButtonMale {
+    padding: 15px 65px;
+    background-color: #5A3CFF;
+    color: white;
+    font-size: 18px;
+    border: 0;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.specialists-search-master-details-search-masterButtonMale:hover {
+    background-color: #5A3CFF;
+}
+
+.specialists-search-master-details-search-masterButtonFemale {
+    padding: 15px 65px;
+    background-color: #7550ff;
+    color: white;
+    font-size: 18px;
+    border: 0;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.specialists-search-master-details-search-masterButtonFemale:hover {
+    background-color: #5A3CFF;
+}

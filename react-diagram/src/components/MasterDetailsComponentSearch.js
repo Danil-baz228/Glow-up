@@ -1,11 +1,16 @@
 import React, { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLanguage } from './LanguageContext'; // Import useLanguage hook
 import "./css/SpecialistsSearchPage/MasterDetailsComponentSearch.css";
 import heartIcon from "./img/ClientPage/icon_heart.png";
 
 const MasterDetailsComponentSearch = ({ master, clientId }) => {
     const navigate = useNavigate();
     const [hasErrorLoadingImage, setHasErrorLoadingImage] = useState(false);
+    const { language } = useLanguage(); // Get current language
+
+    // Log master data for debugging
+    console.log(master);
 
     const roundedRating = useMemo(() => Math.round(master.avgRating), [master.avgRating]);
 
@@ -25,6 +30,18 @@ const MasterDetailsComponentSearch = ({ master, clientId }) => {
             navigate(`/masters/${master.master_id}/services`);
         } else {
             console.error("Client ID is not available.");
+        }
+    };
+
+    // Translations object
+    const translations = {
+        UA: {
+            openButton: "Відкрити",
+            reviewsCount: (count) => count > 0 ? `${count} відгуків` : "0 відгуків",
+        },
+        EN: {
+            openButton: "Open",
+            reviewsCount: (count) => count > 0 ? `${count} reviews` : "0 reviews",
         }
     };
 
@@ -74,7 +91,7 @@ const MasterDetailsComponentSearch = ({ master, clientId }) => {
                             ))}
                         </div>
                         <div className="specialists-search-master-details-search-reviewsCount">
-                            {master.reviewsCount > 0 ? `${master.reviewsCount} reviews` : "0 reviews"}
+                            {translations[language].reviewsCount(master.reviewsCount)}
                         </div>
                     </div>
                 </div>
@@ -84,43 +101,8 @@ const MasterDetailsComponentSearch = ({ master, clientId }) => {
                     className={master.gender === "male" ? "specialists-search-master-details-search-masterButtonMale" : "specialists-search-master-details-search-masterButtonFemale"}
                     onClick={handleOpenClick}
                 >
-                    Open
+                    {translations[language].openButton} {/* Use the translation */}
                 </button>
-            </div>
-
-            {/* Отзывы мастера */}
-            <div className="specialists-search-master-details-search-reviews">
-                <h2>Reviews:</h2>
-                {master.appointments && master.appointments.length > 0 ? (
-                    <div className="reviewsList">
-                        {master.appointments.map((appointment, index) => {
-                            const review = appointment.Review; // Получаем объект отзыва
-                            return review ? (
-                                <div key={index} className="reviewItem">
-                                    <div className="reviewRating">
-                                        {Array.from({ length: 5 }, (_, starIndex) => (
-                                            <svg
-                                                key={starIndex}
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="16"
-                                                height="16"
-                                                fill={starIndex < review.rating ? `#CCEA2E` : "#969696"}
-                                                stroke="#CCEA2E"
-                                                viewBox="0 0 24 24"
-                                            >
-                                                <path
-                                                    d="M12 .587l3.668 7.568L24 9.748l-6 5.857L19.336 24 12 19.847 4.664 24 6 15.605 0 9.748l8.332-1.593L12 .587z" />
-                                            </svg>
-                                        ))}
-                                    </div>
-                                    <div className="reviewComment">{review.comment || "No comment"}</div>
-                                </div>
-                            ) : null; // Если отзыва нет, ничего не отображаем
-                        })}
-                    </div>
-                ) : (
-                    <p>No reviews available.</p>
-                )}
             </div>
         </div>
     );

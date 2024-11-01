@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db.config');
+const Master = require('./Master');
 
 const Service = sequelize.define('Service', {
   service_id: {
@@ -53,5 +54,7 @@ const Service = sequelize.define('Service', {
   timestamps: false,
   tableName: 'service'
 });
+
+Service.belongsTo(Master, {foreignKey: 'master_id', as: 'master'});
 
 module.exports = Service;

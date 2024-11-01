@@ -15,9 +15,9 @@
 
 .specialists-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Делаем сетку адаптивной */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 30px;
-  justify-items: center; /* Центрирование элементов внутри сетки */
+  justify-items: center;
 }
 
 .specialist-item {
@@ -81,7 +81,7 @@
   border-radius: 15px;
   margin-top: 20px;
   font-family: 'Poppins', sans-serif;
-  font-weight: 600; /* Bold */
+  font-weight: 600;
 }
 
 .circle-male {
@@ -110,7 +110,6 @@
   font-weight: bold;
 }
 
-/* Адаптация для экранов от 768px и ниже */
 @media (max-width: 768px) {
   .specialists-grid {
     gap: 20px;
@@ -121,7 +120,6 @@
   }
 }
 
-/* Адаптация для экранов от 480px и ниже */
 @media (max-width: 480px) {
   .specialists-grid {
     gap: 15px;

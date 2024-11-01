@@ -100,7 +100,7 @@ const getAppointmentsForClient = async (req, res) => {
                 Master: {
                     first_name: appointment.Service.Master.first_name,
                     last_name: appointment.Service.Master.last_name,
-                    gender: appointment.Service.Master.gender, // Include master's gender
+                    gender: appointment.Service.Master.gender,
                     Occupation: {
                         name: appointment.Service.Master.Occupation.name
                     }

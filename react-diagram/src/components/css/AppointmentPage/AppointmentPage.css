@@ -1,0 +1,54 @@
+.appointment-page-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+ 
+.appointment-page-form-section {
+    flex: 1;
+    padding-right: 20px;
+}
+ 
+.appointment-page-image-section {
+    flex: 1;
+}
+ 
+.appointment-page-image-section img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+ 
+.appointment-page-form-group {
+    margin-bottom: 15px;
+}
+ 
+.appointment-page-form-group input, 
+.appointment-page-form-group select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+ 
+.appointment-page-btn {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+ 
+.appointment-page-btn-primary {
+    background-color: #ff5e5e;
+    color: white;
+}
+ 
+.appointment-page-btn-secondary {
+    background-color: #333;
+    color: white;
+}
+
